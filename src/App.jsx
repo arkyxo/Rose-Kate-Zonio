@@ -1529,6 +1529,7 @@ function App() {
   const [activeCategory, setActiveCategory] = useState("All");
   const [showAllProjects, setShowAllProjects] = useState(false);
   const [showTop, setShowTop] = useState(false);
+  const [activeId, setActiveId] = useState("");
   const [booting, setBooting] = useState(true);
   const [bootScreenMounted, setBootScreenMounted] = useState(true);
   const [bootBar, setBootBar] = useState(0);
@@ -1547,7 +1548,16 @@ function App() {
   }, []);
 
   useEffect(() => {
-    const onScroll = () => setShowTop(window.scrollY > 500);
+    const onScroll = () => {
+      setShowTop(window.scrollY > 500);
+      let current = "";
+      NAV_LINKS.forEach((link) => {
+        const el = document.getElementById(link.id);
+        if (el && el.getBoundingClientRect().top <= 120) current = link.id;
+      });
+      setActiveId(current);
+    };
+    onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
@@ -1721,49 +1731,75 @@ function App() {
         <nav className="max-w-6xl mx-auto px-5 sm:px-8 h-16 flex items-center justify-between">
           <button
             onClick={() => scrollToId("hero")}
-            className="font-display font-semibold text-lg tracking-tight flex items-center gap-2"
+            aria-label={`${PROFILE.name}, back to top`}
+            className={`font-display font-bold text-xl tracking-tight ${t.text} hover:text-red-400 transition-colors`}
           >
-            <span className={`h-2 w-2 rounded-full ${t.accentBg} animate-blink`} />
-            {PROFILE.name}<span className="text-red-400">.</span>
+            {PROFILE.name}
           </button>
 
-          <div className="hidden md:flex items-center gap-7 font-mono text-xs tracking-wide">
-            {NAV_LINKS.map((link) => (
-              <button
-                key={link.id}
-                onClick={() => scrollToId(link.id)}
-                className={`${t.textMuted} hover:text-red-400 transition-colors uppercase`}
-              >
-                {link.label}
-              </button>
-            ))}
+          <div className={`hidden md:flex items-center gap-1 rounded-full border ${t.border} p-1 font-mono text-[11px] tracking-wide uppercase`}>
+            {NAV_LINKS.map((link) => {
+              const active = activeId === link.id;
+              return (
+                <button
+                  key={link.id}
+                  onClick={() => scrollToId(link.id)}
+                  aria-current={active ? "true" : undefined}
+                  className={`rounded-full px-3.5 py-1.5 transition-colors ${
+                    active ? `${isDark ? "bg-slate-800" : "bg-slate-100"} ${t.accent}` : `${t.textMuted} ${isDark ? "hover:text-slate-100" : "hover:text-slate-900"}`
+                  }`}
+                >
+                  {link.label}
+                </button>
+              );
+            })}
           </div>
 
           <div className="flex items-center gap-2">
             <button
               aria-label="Toggle theme"
               onClick={() => setIsDark((d) => !d)}
-              className={`h-9 w-9 rounded-md border ${t.border} flex items-center justify-center hover:border-red-400 transition-colors`}
+              className={`h-9 w-9 rounded-full border ${t.border} flex items-center justify-center ${t.textMuted} hover:text-red-400 hover:border-red-400/60 transition-colors`}
             >
-              {isDark ? <Sun size={16} /> : <Moon size={16} />}
+              {isDark ? <Sun size={15} /> : <Moon size={15} />}
             </button>
             <button
               aria-label="Toggle menu"
+              aria-expanded={menuOpen}
               onClick={() => setMenuOpen((o) => !o)}
-              className={`md:hidden h-9 w-9 rounded-md border ${t.border} flex items-center justify-center`}
+              className={`md:hidden h-9 w-9 rounded-full flex items-center justify-center transition-colors ${
+                menuOpen ? "bg-red-400 text-slate-950" : `border ${t.border} ${t.textMuted}`
+              }`}
             >
-              {menuOpen ? <X size={16} /> : <Menu size={16} />}
+              {menuOpen ? <X size={15} /> : <Menu size={15} />}
             </button>
           </div>
         </nav>
 
         {menuOpen && (
-          <div className={`md:hidden border-t ${t.border} ${t.bg} px-5 py-4 flex flex-col gap-4 font-mono text-xs uppercase tracking-wide`}>
-            {NAV_LINKS.map((link) => (
-              <button key={link.id} onClick={() => scrollToId(link.id)} className={`text-left ${t.textMuted} hover:text-red-400`}>
-                {link.label}
-              </button>
-            ))}
+          <div className={`md:hidden border-t ${t.border} ${t.bg} px-5 pt-2 pb-5`}>
+            <ul className={`divide-y ${isDark ? "divide-slate-800" : "divide-slate-200"}`}>
+              {NAV_LINKS.map((link, i) => {
+                const active = activeId === link.id;
+                return (
+                  <li key={link.id}>
+                    <button
+                      onClick={() => scrollToId(link.id)}
+                      aria-current={active ? "true" : undefined}
+                      className="group w-full flex items-center gap-4 py-3.5 text-left"
+                    >
+                      <span className={`font-mono text-[10px] tracking-widest ${active ? t.accent : t.textFaint}`}>
+                        {String(i + 1).padStart(2, "0")}
+                      </span>
+                      <span className={`flex-1 font-display font-semibold text-lg tracking-tight ${active ? t.accent : t.text} group-hover:text-red-400 transition-colors`}>
+                        {link.label}
+                      </span>
+                      <ArrowRight size={15} className={`${active ? t.accent : t.textFaint} transition-transform group-hover:translate-x-0.5`} />
+                    </button>
+                  </li>
+                );
+              })}
+            </ul>
           </div>
         )}
       </header>
@@ -2308,13 +2344,27 @@ function App() {
       {skillsOpen && <SkillsArchive t={t} onClose={closeSkills} isDark={isDark} />}
       {resumesOpen && <ResumeArchive t={t} onClose={closeResumes} isDark={isDark} />}
 
-      {showTop && (
+      {showTop && !menuOpen && (
         <button
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
           aria-label="Back to top"
-          className={`fixed bottom-6 right-6 z-50 h-11 w-11 rounded-full bg-red-400 text-slate-950 flex items-center justify-center shadow-lg hover:bg-red-300 transition-colors`}
+          className={`group fixed bottom-6 right-6 z-50 h-12 w-12 rounded-full ${t.surfaceSolid} ${t.text} flex items-center justify-center transition-colors hover:text-red-400`}
         >
-          <ArrowUp size={18} />
+          <svg viewBox="0 0 48 48" className="absolute inset-0 h-full w-full -rotate-90" aria-hidden="true">
+            <circle cx="24" cy="24" r="22" fill="none" strokeWidth="2" className={isDark ? "stroke-slate-800" : "stroke-slate-200"} />
+            <circle
+              cx="24"
+              cy="24"
+              r="22"
+              fill="none"
+              strokeWidth="2"
+              strokeLinecap="round"
+              className="stroke-red-400"
+              strokeDasharray={2 * Math.PI * 22}
+              strokeDashoffset={2 * Math.PI * 22 * (1 - progress)}
+            />
+          </svg>
+          <ArrowUp size={16} className="relative transition-transform group-hover:-translate-y-0.5" />
         </button>
       )}
 
