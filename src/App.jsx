@@ -87,6 +87,7 @@ const X = makeIcon(<><path d="M18 6 6 18" /><path d="m6 6 12 12" /></>);
 const MapPin = makeIcon(<><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" /><circle cx="12" cy="10" r="3" /></>);
 const ImageIcon = makeIcon(<><rect width="18" height="18" x="3" y="3" rx="2" ry="2" /><circle cx="9" cy="9" r="2" /><path d="m21 15-3.1-3.1a2 2 0 0 0-2.83 0L6 21" /></>);
 const ArrowUpRight = makeIcon(<><path d="M7 7h10v10" /><path d="M7 17 17 7" /></>);
+const ArrowLeftRight = makeIcon(<><path d="M8 3 4 7l4 4" /><path d="M4 7h16" /><path d="m16 21 4-4-4-4" /><path d="M20 17H4" /></>);
 const ArrowRight = makeIcon(<><path d="M5 12h14" /><path d="m13 6 6 6-6 6" /></>);
 const User = makeIcon(<><circle cx="12" cy="8" r="5" /><path d="M20 21a8 8 0 0 0-16 0" /></>);
 const Trophy = makeIcon(<><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6" /><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18" /><path d="M4 22h16" /><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22" /><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22" /><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z" /></>);
@@ -424,7 +425,7 @@ const FEATURED_ACTIVITY = {
   title: "AppBuilders PH Hackathon",
   location: "Cyberzone, SM Makati",
   description:
-    "24 hours to build, ship, and demo with AI. My team built KuryenteWatch, a local-first household electricity app, during the remote Build Day and presented it on stage at Demo Day.",
+    "24 hours to build, ship, and demo with AI. My team built KuryenteWatch, a local-first household electricity app, during the remote Build Day and pitched it through a video.",
   image: hackathonGroup,
   inset: hackathonStage,
   links: [
@@ -460,7 +461,7 @@ const EXPERIENCE = [
     duration: "Oct 9 — 10, 2026",
     type: "Software · Competition",
     description:
-      "Built and demoed KuryenteWatch with my team in a 24-hour build — a local-first household electricity app (React PWA, Express, SQLite) that reads meter and appliance-label photos with OCR, estimates bills and appliance usage, flags unusual usage jumps, and answers questions through an Energy Assistant that runs on a local Ollama model or fully offline.",
+      "Built KuryenteWatch with my team in a 24-hour build and pitched it through a video — a local-first household electricity app (React PWA, Express, SQLite) that reads meter and appliance-label photos with OCR, estimates bills and appliance usage, flags unusual usage jumps, and answers questions through an Energy Assistant that runs on a local Ollama model or fully offline.",
   },
   {
     company: "GCash Hackathon",
@@ -815,6 +816,12 @@ function ActivityLink({ link, t, isDark }) {
 
 function LatestActivities({ t, isDark }) {
   const f = FEATURED_ACTIVITY;
+  const [swapped, setSwapped] = useState(false);
+  const photos = [
+    { src: f.image, alt: `${f.title} group photo`, position: "object-[center_75%]" },
+    { src: f.inset, alt: `${f.title} stage`, position: "object-center" },
+  ];
+  const [main, small] = swapped ? [photos[1], photos[0]] : photos;
   return (
     <section id="activities" className="max-w-6xl mx-auto px-5 sm:px-8 py-24">
       <SectionHeading eyebrow="04 · OUT IN THE COMMUNITY" title="Latest Activities" caption="What I've been building and where I've been." icon={Trophy} t={t} />
@@ -822,13 +829,20 @@ function LatestActivities({ t, isDark }) {
       <Reveal>
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           <div className="relative pb-10 pr-8 sm:pb-14 sm:pr-14">
-            <img src={f.image} alt={`${f.title} group photo`} className={`aspect-[4/3] w-full rounded-3xl object-cover object-[center_75%] border ${t.border}`} />
+            <img src={main.src} alt={main.alt} className={`aspect-[4/3] w-full rounded-3xl object-cover ${main.position} border ${t.border}`} />
             {f.inset && (
-              <img
-                src={f.inset}
-                alt={`${f.title} stage`}
-                className={`absolute bottom-0 right-0 aspect-[4/3] w-32 sm:w-44 rounded-2xl object-cover ring-4 ${isDark ? "ring-black" : "ring-slate-50"}`}
-              />
+              <button
+                type="button"
+                onClick={() => setSwapped((v) => !v)}
+                aria-label="Swap photos"
+                title="Swap photos"
+                className={`group absolute bottom-0 right-0 w-32 sm:w-44 overflow-hidden rounded-2xl ring-4 ${isDark ? "ring-black" : "ring-slate-50"} transition-transform hover:scale-[1.03] focus-visible:outline-none focus-visible:ring-red-400`}
+              >
+                <img src={small.src} alt={small.alt} className={`block aspect-[4/3] w-full object-cover ${small.position}`} />
+                <span className="absolute bottom-2 left-2 rounded-full bg-black/60 p-1.5 text-white transition-colors group-hover:bg-red-500">
+                  <ArrowLeftRight size={12} />
+                </span>
+              </button>
             )}
           </div>
 
