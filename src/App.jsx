@@ -37,6 +37,8 @@ import amaLogo from "./assets/ama-logo.png";
 import appBuildersLogo from "./assets/appbuildersph-logo.png";
 import fgwbLogo from "./assets/forgirlswhobuild-logo.png";
 import kuryenteThumb from "./assets/kuryentewatch.png";
+import hackathonStage from "./assets/appbuilders-hackathon-stage.jpg";
+import hackathonGroup from "./assets/appbuilders-hackathon-group.jpg";
 
 function makeIcon(paths) {
   return function Icon({ size = 24, className = "", ...props }) {
@@ -84,6 +86,7 @@ const Menu = makeIcon(<><line x1="4" x2="20" y1="12" y2="12" /><line x1="4" x2="
 const X = makeIcon(<><path d="M18 6 6 18" /><path d="m6 6 12 12" /></>);
 const MapPin = makeIcon(<><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" /><circle cx="12" cy="10" r="3" /></>);
 const ImageIcon = makeIcon(<><rect width="18" height="18" x="3" y="3" rx="2" ry="2" /><circle cx="9" cy="9" r="2" /><path d="m21 15-3.1-3.1a2 2 0 0 0-2.83 0L6 21" /></>);
+const ArrowUpRight = makeIcon(<><path d="M7 7h10v10" /><path d="M7 17 17 7" /></>);
 const ArrowRight = makeIcon(<><path d="M5 12h14" /><path d="m13 6 6 6-6 6" /></>);
 const User = makeIcon(<><circle cx="12" cy="8" r="5" /><path d="M20 21a8 8 0 0 0-16 0" /></>);
 const Trophy = makeIcon(<><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6" /><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18" /><path d="M4 22h16" /><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22" /><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22" /><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z" /></>);
@@ -129,8 +132,9 @@ const NAV_LINKS = [
   { id: "about", label: "About" },
   { id: "skills", label: "Skills" },
   { id: "labs", label: "Projects" },
-  { id: "certifications", label: "Certs" },
+  { id: "activities", label: "Activities" },
   { id: "experience", label: "Experience" },
+  { id: "certifications", label: "Certs" },
   { id: "github-activity", label: "GitHub" },
 ];
 
@@ -410,6 +414,24 @@ const CERTIFICATIONS = [
     skills: ["Cyber Threat Intelligence", "Threat Analysis", "Digital Defense"],
   },
 ];
+
+const HACKATHON_LINKEDIN = "https://lnkd.in/p/ghcHxX-M";
+const KURYENTE_GITHUB = "https://github.com/dioxaaa/Kuryente-Watch-AppBuilder-Hackaton";
+
+const FEATURED_ACTIVITY = {
+  label: "Latest",
+  date: "October 9 — 10, 2026",
+  title: "AppBuilders PH Hackathon",
+  location: "Cyberzone, SM Makati",
+  description:
+    "24 hours to build, ship, and demo with AI. My team built KuryenteWatch, a local-first household electricity app, during the remote Build Day and presented it on stage at Demo Day.",
+  image: hackathonGroup,
+  inset: hackathonStage,
+  links: [
+    { label: "Read my LinkedIn post", url: HACKATHON_LINKEDIN },
+    { label: "See the project on GitHub", url: KURYENTE_GITHUB },
+  ],
+};
 
 const EXPERIENCE_PATHWAYS = [
   { id: "hackathon", label: "Hackathon", caption: "Competitions & builds" },
@@ -777,6 +799,60 @@ function SectionHeading({ eyebrow, title, subtitle, caption, icon: Icon, t }) {
   );
 }
 
+function ActivityLink({ link, t, isDark }) {
+  return (
+    <a
+      href={link.url}
+      target="_blank"
+      rel="noreferrer"
+      className={`group inline-flex items-center gap-2 border-b pb-1.5 font-body text-sm font-medium ${t.text} ${isDark ? "border-neutral-600" : "border-slate-300"} hover:border-red-400 hover:text-red-400 transition-colors`}
+    >
+      {link.label}
+      <ArrowUpRight size={14} className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+    </a>
+  );
+}
+
+function LatestActivities({ t, isDark }) {
+  const f = FEATURED_ACTIVITY;
+  return (
+    <section id="activities" className="max-w-6xl mx-auto px-5 sm:px-8 py-24">
+      <SectionHeading eyebrow="04 · OUT IN THE COMMUNITY" title="Latest Activities" caption="What I've been building and where I've been." icon={Trophy} t={t} />
+
+      <Reveal>
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          <div className="relative pb-10 pr-8 sm:pb-14 sm:pr-14">
+            <img src={f.image} alt={`${f.title} group photo`} className={`aspect-[4/3] w-full rounded-3xl object-cover object-[center_75%] border ${t.border}`} />
+            {f.inset && (
+              <img
+                src={f.inset}
+                alt={`${f.title} stage`}
+                className={`absolute bottom-0 right-0 aspect-[4/3] w-32 sm:w-44 rounded-2xl object-cover ring-4 ${isDark ? "ring-black" : "ring-slate-50"}`}
+              />
+            )}
+          </div>
+
+          <div>
+            <p className={`font-mono text-xs tracking-wide ${t.textMuted}`}>
+              <span className={t.accent}>{f.label}</span> / {f.date}
+            </p>
+            <h3 className={`font-display font-bold text-3xl sm:text-4xl tracking-tight leading-tight ${t.text} mt-4`}>{f.title}</h3>
+            <p className={`inline-flex items-center gap-1.5 font-body font-semibold text-base ${t.accent} mt-3`}>
+              <MapPin size={15} /> {f.location}
+            </p>
+            <p className={`font-body text-base leading-relaxed ${t.textMuted} mt-5 max-w-lg`}>{f.description}</p>
+            <div className="flex flex-wrap gap-x-8 gap-y-4 mt-8">
+              {f.links.map((link) => (
+                <ActivityLink key={link.label} link={link} t={t} isDark={isDark} />
+              ))}
+            </div>
+          </div>
+        </div>
+      </Reveal>
+    </section>
+  );
+}
+
 const DOT_RADIUS_BY_LEVEL = [1.4, 2.2, 3, 3.8, 4.6];
 const DOT_COLOR_BY_LEVEL = ["#fecaca", "#fca5a5", "#f87171", "#dc2626", "#7f1d1d"];
 
@@ -874,7 +950,7 @@ function GithubActivity({ t, isDark }) {
       <Reveal>
         <div className="text-center mb-8 sm:mb-10">
           <p className={`inline-flex items-center gap-2 font-mono text-xs tracking-widest ${t.accent} mb-3`}>
-            <Github size={13} /> 06 · GITHUB
+            <Github size={13} /> 07 · GITHUB
           </p>
           <h2 className={`font-display text-3xl sm:text-4xl font-bold ${t.text}`}>Github Activity</h2>
           <p className={`font-body text-sm ${t.textFaint} mt-3`}>
@@ -2099,85 +2175,7 @@ function App() {
         </div>
       </section>
 
-      <section id="certifications" className={t.bg}>
-        <div className="max-w-6xl mx-auto px-5 sm:px-8 py-24">
-          <SectionHeading
-            eyebrow="04 · CREDENTIALS"
-            title="Certifications"
-            caption="Click Verify to confirm the credential."
-            icon={CheckCircle2}
-            t={t}
-          />
-          <div className={CERTIFICATIONS.length === 1 ? "max-w-xl mx-auto" : "grid md:grid-cols-2 gap-6"}>
-            {CERTIFICATIONS.map((cert, i) => {
-              const earned = !["In Progress", "Planned", "Upcoming"].includes(cert.status);
-              const StatusIcon = earned ? CheckCircle2 : Clock;
-              const pill = earned ? `bg-red-400/10 ${t.accent}` : "bg-amber-400/10 text-amber-500";
-              const notch = `absolute top-0 h-6 w-6 -translate-y-1/2 rounded-full border ${isDark ? "border-neutral-700" : "border-slate-300"} ${t.bg}`;
-              return (
-                <Reveal key={cert.name} delay={i * 80} className="h-full">
-                  <article className={`relative flex h-full flex-col overflow-hidden rounded-3xl border ${t.border} ${t.surface} transition-colors hover:border-red-400/40`}>
-                    <div className="flex-1 p-6 sm:p-8">
-                      <div className="flex items-start justify-between gap-4">
-                        <div className={`flex h-14 w-24 shrink-0 items-center justify-center rounded-xl border ${t.border} bg-white p-2.5`}>
-                          {cert.image ? (
-                            <img src={cert.image} alt={`${cert.name} badge`} className="max-h-full max-w-full object-contain" />
-                          ) : (
-                            <StatusIcon size={24} className="text-slate-400" />
-                          )}
-                        </div>
-                        <span className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 font-mono text-[10px] font-medium tracking-widest uppercase ${pill}`}>
-                          <StatusIcon size={11} /> {cert.status}
-                        </span>
-                      </div>
-
-                      <p className={`font-mono text-[10px] tracking-widest uppercase ${t.textFaint} mt-7`}>
-                        {[cert.group, cert.category].filter(Boolean).join(" · ")}
-                      </p>
-                      <h3 className={`font-display font-semibold text-xl sm:text-2xl tracking-tight leading-snug ${t.text} mt-2`}>{cert.name}</h3>
-                      <p className={`font-body text-sm ${t.textMuted} mt-1`}>{cert.org}</p>
-                      <p className={`font-body text-sm leading-relaxed ${t.textFaint} mt-5`}>
-                        {cert.skills.map((skill, si) => (
-                          <span key={skill}>
-                            <span className={`whitespace-nowrap ${t.textMuted}`}>
-                              {skill}
-                              {si < cert.skills.length - 1 && <span className={`ml-1 ${t.accent}`}>/</span>}
-                            </span>{" "}
-                          </span>
-                        ))}
-                      </p>
-                    </div>
-
-                    <div className={`relative border-t border-dashed ${isDark ? "border-neutral-700" : "border-slate-300"} px-6 sm:px-8 py-5 flex flex-wrap items-center justify-between gap-4`}>
-                      <span aria-hidden="true" className={`${notch} -left-3`} />
-                      <span aria-hidden="true" className={`${notch} -right-3`} />
-                      <div>
-                        <p className={`font-mono text-[10px] tracking-widest uppercase ${t.textFaint}`}>{earned ? "Issued" : "Status"}</p>
-                        <p className={`font-mono text-sm ${t.text} mt-1`}>{cert.date}</p>
-                        <p className={`font-mono text-[10px] tracking-wide ${t.textFaint} mt-1 ${cert.credentialId ? "" : "invisible"}`} aria-hidden={!cert.credentialId}>
-                          ID · {cert.credentialId || "—"}
-                        </p>
-                      </div>
-                      {hasLink(cert.verifyUrl) ? (
-                        <a
-                          href={cert.verifyUrl}
-                          target="_blank"
-                          rel="noreferrer"
-                          className={`inline-flex items-center gap-2 rounded-lg border border-red-400 px-4 py-2 font-mono text-xs ${t.accent} hover:bg-red-400/10 transition-colors`}
-                        >
-                          {cert.verifyLabel || "Verify"} <ExternalLink size={13} />
-                        </a>
-                      ) : (
-                        <span className={`font-mono text-xs ${t.textFaint}`}>Verification soon</span>
-                      )}
-                    </div>
-                  </article>
-                </Reveal>
-              );
-            })}
-          </div>
-        </div>
-      </section>
+      <LatestActivities t={t} isDark={isDark} />
 
       <section id="experience" className="max-w-6xl mx-auto px-5 sm:px-8 py-24">
         <SectionHeading
@@ -2315,6 +2313,86 @@ function App() {
                   </div>
                   </div>
                   </div>
+                </Reveal>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      <section id="certifications" className={t.bg}>
+        <div className="max-w-6xl mx-auto px-5 sm:px-8 py-24">
+          <SectionHeading
+            eyebrow="06 · CREDENTIALS"
+            title="Certifications"
+            caption="Click Verify to confirm the credential."
+            icon={CheckCircle2}
+            t={t}
+          />
+          <div className={CERTIFICATIONS.length === 1 ? "max-w-xl mx-auto" : "grid md:grid-cols-2 gap-6"}>
+            {CERTIFICATIONS.map((cert, i) => {
+              const earned = !["In Progress", "Planned", "Upcoming"].includes(cert.status);
+              const StatusIcon = earned ? CheckCircle2 : Clock;
+              const pill = earned ? `bg-red-400/10 ${t.accent}` : "bg-amber-400/10 text-amber-500";
+              const notch = `absolute top-0 h-6 w-6 -translate-y-1/2 rounded-full border ${isDark ? "border-neutral-700" : "border-slate-300"} ${t.bg}`;
+              return (
+                <Reveal key={cert.name} delay={i * 80} className="h-full">
+                  <article className={`relative flex h-full flex-col overflow-hidden rounded-3xl border ${t.border} ${t.surface} transition-colors hover:border-red-400/40`}>
+                    <div className="flex-1 p-6 sm:p-8">
+                      <div className="flex items-start justify-between gap-4">
+                        <div className={`flex h-14 w-24 shrink-0 items-center justify-center rounded-xl border ${t.border} bg-white p-2.5`}>
+                          {cert.image ? (
+                            <img src={cert.image} alt={`${cert.name} badge`} className="max-h-full max-w-full object-contain" />
+                          ) : (
+                            <StatusIcon size={24} className="text-slate-400" />
+                          )}
+                        </div>
+                        <span className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 font-mono text-[10px] font-medium tracking-widest uppercase ${pill}`}>
+                          <StatusIcon size={11} /> {cert.status}
+                        </span>
+                      </div>
+
+                      <p className={`font-mono text-[10px] tracking-widest uppercase ${t.textFaint} mt-7`}>
+                        {[cert.group, cert.category].filter(Boolean).join(" · ")}
+                      </p>
+                      <h3 className={`font-display font-semibold text-xl sm:text-2xl tracking-tight leading-snug ${t.text} mt-2`}>{cert.name}</h3>
+                      <p className={`font-body text-sm ${t.textMuted} mt-1`}>{cert.org}</p>
+                      <p className={`font-body text-sm leading-relaxed ${t.textFaint} mt-5`}>
+                        {cert.skills.map((skill, si) => (
+                          <span key={skill}>
+                            <span className={`whitespace-nowrap ${t.textMuted}`}>
+                              {skill}
+                              {si < cert.skills.length - 1 && <span className={`ml-1 ${t.accent}`}>/</span>}
+                            </span>{" "}
+                          </span>
+                        ))}
+                      </p>
+                    </div>
+
+                    <div className={`relative border-t border-dashed ${isDark ? "border-neutral-700" : "border-slate-300"} px-6 sm:px-8 py-5 flex flex-wrap items-center justify-between gap-4`}>
+                      <span aria-hidden="true" className={`${notch} -left-3`} />
+                      <span aria-hidden="true" className={`${notch} -right-3`} />
+                      <div>
+                        <p className={`font-mono text-[10px] tracking-widest uppercase ${t.textFaint}`}>{earned ? "Issued" : "Status"}</p>
+                        <p className={`font-mono text-sm ${t.text} mt-1`}>{cert.date}</p>
+                        <p className={`font-mono text-[10px] tracking-wide ${t.textFaint} mt-1 ${cert.credentialId ? "" : "invisible"}`} aria-hidden={!cert.credentialId}>
+                          ID · {cert.credentialId || "—"}
+                        </p>
+                      </div>
+                      {hasLink(cert.verifyUrl) ? (
+                        <a
+                          href={cert.verifyUrl}
+                          target="_blank"
+                          rel="noreferrer"
+                          className={`inline-flex items-center gap-2 rounded-lg border border-red-400 px-4 py-2 font-mono text-xs ${t.accent} hover:bg-red-400/10 transition-colors`}
+                        >
+                          {cert.verifyLabel || "Verify"} <ExternalLink size={13} />
+                        </a>
+                      ) : (
+                        <span className={`font-mono text-xs ${t.textFaint}`}>Verification soon</span>
+                      )}
+                    </div>
+                  </article>
                 </Reveal>
               );
             })}
