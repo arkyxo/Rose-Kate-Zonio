@@ -518,18 +518,18 @@ const HERO_SIDES = [
 
 const theme = {
   dark: {
-    bg: "bg-slate-950",
-    bgSoft: "bg-slate-900",
-    surface: "bg-slate-900/60",
-    surfaceSolid: "bg-slate-900",
-    border: "border-slate-800",
-    text: "text-slate-100",
-    textMuted: "text-slate-400",
-    textFaint: "text-slate-500",
+    bg: "bg-black",
+    bgSoft: "bg-neutral-900",
+    surface: "bg-neutral-900/60",
+    surfaceSolid: "bg-neutral-900",
+    border: "border-neutral-800",
+    text: "text-neutral-100",
+    textMuted: "text-neutral-400",
+    textFaint: "text-neutral-500",
     accent: "text-red-400",
     accentBg: "bg-red-400",
-    navBg: "bg-slate-950/80",
-    ring: "ring-slate-800",
+    navBg: "bg-black/70",
+    ring: "ring-neutral-800",
   },
   light: {
     bg: "bg-slate-50",
@@ -657,7 +657,7 @@ function NetworkCanvas({ isDark }) {
     function draw() {
       ctx.clearRect(0, 0, width, height);
       const lineColor = isDark ? "45, 212, 191" : "13, 148, 136";
-      const nodeColor = isDark ? "148, 163, 184" : "100, 116, 139";
+      const nodeColor = isDark ? "163, 163, 163" : "100, 116, 139";
       const packetColor = isDark ? "251, 191, 36" : "217, 119, 6";
 
       const edges = [];
@@ -847,7 +847,7 @@ function GithubActivity({ t, isDark }) {
   const topPad = 20;
   const width = weeks.length * cell;
   const height = topPad + 7 * cell;
-  const emptyFill = isDark ? "#1e293b" : "#e2e8f0";
+  const emptyFill = isDark ? "#262626" : "#e2e8f0";
 
   const monthLabels = [];
   let lastMonth = -1;
@@ -891,7 +891,7 @@ function GithubActivity({ t, isDark }) {
                 <img
                   src={asset_a1c55936}
                   alt={`${PROFILE.githubUsername} avatar`}
-                  className={`h-11 w-11 shrink-0 rounded-2xl object-cover ring-1 ${isDark ? "ring-slate-700" : "ring-slate-200"}`}
+                  className={`h-11 w-11 shrink-0 rounded-2xl object-cover ring-1 ${isDark ? "ring-neutral-700" : "ring-slate-200"}`}
                 />
                 <div className="min-w-0">
                   <p className={`font-display text-base sm:text-lg font-semibold leading-tight truncate ${t.text}`}>
@@ -916,10 +916,10 @@ function GithubActivity({ t, isDark }) {
               <div className="mt-6 animate-pulse space-y-4" aria-label="Loading contribution data">
                 <div className="grid grid-cols-3 gap-3">
                   {[0, 1, 2].map((i) => (
-                    <div key={i} className={`h-[74px] rounded-2xl ${isDark ? "bg-slate-800/60" : "bg-slate-100"}`} />
+                    <div key={i} className={`h-[74px] rounded-2xl ${isDark ? "bg-neutral-800/60" : "bg-slate-100"}`} />
                   ))}
                 </div>
-                <div className={`h-36 rounded-2xl ${isDark ? "bg-slate-800/60" : "bg-slate-100"}`} />
+                <div className={`h-36 rounded-2xl ${isDark ? "bg-neutral-800/60" : "bg-slate-100"}`} />
               </div>
             )}
 
@@ -939,7 +939,7 @@ function GithubActivity({ t, isDark }) {
                   {statTiles.map((s) => (
                     <div
                       key={s.label}
-                      className={`rounded-2xl border ${t.border} ${isDark ? "bg-slate-950/40" : "bg-slate-50/80"} px-3 py-3 sm:px-4 sm:py-4`}
+                      className={`rounded-2xl border ${t.border} ${isDark ? "bg-black/40" : "bg-slate-50/80"} px-3 py-3 sm:px-4 sm:py-4`}
                     >
                       <p className={`font-display text-xl sm:text-3xl font-bold leading-none ${t.text}`}>{s.value}</p>
                       <p className={`font-body text-[10px] sm:text-xs ${t.textFaint} mt-1.5 sm:mt-2 leading-tight`}>{s.label}</p>
@@ -947,7 +947,7 @@ function GithubActivity({ t, isDark }) {
                   ))}
                 </div>
 
-                <div className={`mt-4 rounded-2xl border ${t.border} ${isDark ? "bg-slate-950/40" : "bg-slate-50/80"} p-3 sm:p-5`}>
+                <div className={`mt-4 rounded-2xl border ${t.border} ${isDark ? "bg-black/40" : "bg-slate-50/80"} p-3 sm:p-5`}>
                   <div ref={scrollRef} className="overflow-x-auto pb-1">
                     <svg
                       viewBox={`0 0 ${width} ${height}`}
@@ -961,7 +961,7 @@ function GithubActivity({ t, isDark }) {
                           y={11}
                           fontSize="10"
                           fontFamily="Inter, system-ui, sans-serif"
-                          fill={isDark ? "#64748b" : "#94a3b8"}
+                          fill={isDark ? "#737373" : "#94a3b8"}
                         >
                           {m.label}
                         </text>
@@ -1136,7 +1136,7 @@ function ExperienceSplit({ t, isDark, openExp, setOpenExp }) {
                             }`}
                           >
                             <span className={`absolute left-0 top-2 bottom-2 w-0.5 rounded-full transition-colors ${current ? "bg-red-400" : "bg-transparent"}`} />
-                            <span className={`h-9 w-9 shrink-0 overflow-hidden rounded-lg border ${t.border} ${isDark ? "bg-slate-950/40" : "bg-white"} ${t.accent} flex items-center justify-center`}>
+                            <span className={`h-9 w-9 shrink-0 overflow-hidden rounded-lg border ${t.border} ${isDark ? "bg-black/40" : "bg-white"} ${t.accent} flex items-center justify-center`}>
                               {exp.logo ? (
                                 <img src={exp.logo} alt="" className="h-full w-full object-cover" />
                               ) : (
@@ -1262,7 +1262,7 @@ function EducationCard({ edu, t, isDark }) {
         </div>
         <span
           className={`inline-flex items-center gap-2 rounded-full px-3 py-1.5 font-mono text-[10px] font-medium tracking-widest ${
-            done ? `${isDark ? "bg-slate-800 text-slate-400" : "bg-slate-100 text-slate-500"}` : "bg-red-400/10 text-red-400"
+            done ? `${isDark ? "bg-neutral-800 text-neutral-400" : "bg-slate-100 text-slate-500"}` : "bg-red-400/10 text-red-400"
           }`}
         >
           <span className={`h-1.5 w-1.5 rounded-full ${done ? "bg-slate-500" : "bg-red-400 animate-blink"}`} />
@@ -1271,7 +1271,7 @@ function EducationCard({ edu, t, isDark }) {
       </div>
 
       <div className="relative mt-7">
-        <span className={`inline-block rounded-md px-2 py-0.5 font-mono text-[10px] tracking-widest ${isDark ? "bg-slate-800 text-slate-300" : "bg-slate-100 text-slate-600"}`}>
+        <span className={`inline-block rounded-md px-2 py-0.5 font-mono text-[10px] tracking-widest ${isDark ? "bg-neutral-800 text-neutral-300" : "bg-slate-100 text-slate-600"}`}>
           {edu.level.toUpperCase()}
         </span>
         <h3 className="font-display font-bold text-2xl sm:text-[1.7rem] tracking-tight leading-tight mt-3">{edu.program}</h3>
@@ -1294,7 +1294,7 @@ function EducationCard({ edu, t, isDark }) {
           {Array.from({ length: total }).map((_, i) => {
             const fill = Math.max(0, Math.min(1, elapsed - i)) * 100;
             return (
-              <div key={i} className={`h-1.5 flex-1 rounded-full overflow-hidden ${isDark ? "bg-slate-800" : "bg-slate-200"}`}>
+              <div key={i} className={`h-1.5 flex-1 rounded-full overflow-hidden ${isDark ? "bg-neutral-800" : "bg-slate-200"}`}>
                 <div className="h-full rounded-full bg-red-400" style={{ width: `${fill}%` }} />
               </div>
             );
@@ -1329,7 +1329,7 @@ function SkillTile({ item, t, isDark }) {
   return (
     <div className="flex flex-col items-center text-center gap-2.5" title={item.name}>
       <div className="relative">
-        <div className={`h-14 w-14 rounded-2xl border ${t.border} ${isDark ? "bg-slate-950/40" : "bg-slate-50"} flex items-center justify-center p-1.5 card-glow`}>
+        <div className={`h-14 w-14 rounded-2xl border ${t.border} ${isDark ? "bg-black/40" : "bg-slate-50"} flex items-center justify-center p-1.5 card-glow`}>
           {showImg ? (
             <div className="h-full w-full rounded-lg bg-white flex items-center justify-center p-1 shadow-sm">
               <img src={item.icon} alt={item.name} onError={() => setBroken(true)} className="h-full w-full object-contain" />
@@ -1489,7 +1489,7 @@ function ResumeArchive({ t, onClose, isDark }) {
                   <span
                     key={tag}
                     className={`font-mono text-[10px] px-2 py-1 rounded-md border ${t.border} ${
-                      isDark ? "bg-slate-950/40" : "bg-slate-50"
+                      isDark ? "bg-black/40" : "bg-slate-50"
                     } ${t.textMuted}`}
                   >
                     {tag}
@@ -1713,7 +1713,7 @@ function App() {
                 <span className="text-red-400 text-[0.35em] align-top ml-1">%</span>
               </p>
             </div>
-            <div className={`mt-6 sm:mt-8 h-[3px] w-full ${isDark ? "bg-slate-800" : "bg-slate-200"}`}>
+            <div className={`mt-6 sm:mt-8 h-[3px] w-full ${isDark ? "bg-neutral-800" : "bg-slate-200"}`}>
               <div className="h-full bg-red-400" style={{ width: `${bootPct}%` }} />
             </div>
           </div>
@@ -1746,7 +1746,7 @@ function App() {
                   onClick={() => scrollToId(link.id)}
                   aria-current={active ? "true" : undefined}
                   className={`rounded-full px-3.5 py-1.5 transition-colors ${
-                    active ? `${isDark ? "bg-slate-800" : "bg-slate-100"} ${t.accent}` : `${t.textMuted} ${isDark ? "hover:text-slate-100" : "hover:text-slate-900"}`
+                    active ? `${isDark ? "bg-neutral-800" : "bg-slate-100"} ${t.accent}` : `${t.textMuted} ${isDark ? "hover:text-neutral-100" : "hover:text-slate-900"}`
                   }`}
                 >
                   {link.label}
@@ -1778,7 +1778,7 @@ function App() {
 
         {menuOpen && (
           <div className={`md:hidden border-t ${t.border} ${t.bg} px-5 pt-2 pb-5`}>
-            <ul className={`divide-y ${isDark ? "divide-slate-800" : "divide-slate-200"}`}>
+            <ul className={`divide-y ${isDark ? "divide-neutral-800" : "divide-slate-200"}`}>
               {NAV_LINKS.map((link, i) => {
                 const active = activeId === link.id;
                 return (
@@ -1806,12 +1806,12 @@ function App() {
 
       <section id="hero" className="relative pt-16 flex items-center overflow-hidden" style={{ minHeight: "92vh" }}>
         <NetworkCanvas isDark={isDark} />
-        <div className={`absolute inset-0 ${isDark ? "bg-slate-950/70" : "bg-slate-50/80"}`} />
+        <div className={`absolute inset-0 ${isDark ? "bg-black/70" : "bg-slate-50/80"}`} />
 
         <div className="relative max-w-6xl mx-auto px-5 sm:px-8 py-16 sm:py-24 w-full">
           <h1 className="sr-only">Websites on One Side. Networks on the Other.</h1>
 
-          <div className={`grid grid-cols-1 md:grid-cols-2 border-y ${t.border} md:divide-x ${isDark ? "divide-slate-800" : "divide-slate-200"}`}>
+          <div className={`grid grid-cols-1 md:grid-cols-2 border-y ${t.border} md:divide-x ${isDark ? "divide-neutral-800" : "divide-slate-200"}`}>
             {HERO_SIDES.map((side, i) => (
               <Reveal key={side.id} delay={110 + i * 60} className="min-w-0">
                 <div className={`py-10 md:py-14 ${i === 0 ? "md:pr-12" : `border-t ${t.border} md:border-t-0 md:pl-12`}`}>
@@ -1887,7 +1887,7 @@ function App() {
               >
                 <span
                   className={`flex h-6 w-6 sm:h-8 sm:w-8 shrink-0 items-center justify-center rounded-full ${
-                    isDark ? "bg-slate-800" : "bg-slate-100"
+                    isDark ? "bg-neutral-800" : "bg-slate-100"
                   } ${t.accent}`}
                 >
                   <MapPin size={13} />
@@ -1909,7 +1909,7 @@ function App() {
               const hackathons = EXPERIENCE.filter((e) => e.pathway === "hackathon");
               return (
                 <div className="grid grid-cols-2 gap-3 sm:gap-4">
-                  <div className={`group relative overflow-hidden rounded-[28px] p-5 sm:p-7 min-h-[200px] sm:min-h-[240px] flex flex-col justify-end text-white transition-all duration-500 hover:-translate-y-1 hover:shadow-2xl hover:shadow-red-500/20 ${isDark ? "bg-slate-900 ring-1 ring-white/10" : "bg-slate-950"}`}>
+                  <div className={`group relative overflow-hidden rounded-[28px] p-5 sm:p-7 min-h-[200px] sm:min-h-[240px] flex flex-col justify-end text-white transition-all duration-500 hover:-translate-y-1 hover:shadow-2xl hover:shadow-red-500/20 ${isDark ? "bg-neutral-900 ring-1 ring-white/10" : "bg-slate-950"}`}>
                     <div className="relative">
                       <p className="font-display text-6xl sm:text-8xl font-bold leading-none tracking-tight">{ALL_PROJECTS.length}</p>
                       <p className="font-body text-sm sm:text-base font-medium mt-3 text-white">Projects</p>
@@ -1917,7 +1917,7 @@ function App() {
                     </div>
                   </div>
 
-                  <div className={`group relative overflow-hidden rounded-[28px] border ${t.border} p-5 sm:p-7 min-h-[200px] sm:min-h-[240px] flex flex-col justify-end transition-all duration-500 hover:-translate-y-1 hover:shadow-2xl hover:shadow-red-400/15 hover:border-red-400/40 ${isDark ? "bg-slate-900" : "bg-red-50"}`}>
+                  <div className={`group relative overflow-hidden rounded-[28px] border ${t.border} p-5 sm:p-7 min-h-[200px] sm:min-h-[240px] flex flex-col justify-end transition-all duration-500 hover:-translate-y-1 hover:shadow-2xl hover:shadow-red-400/15 hover:border-red-400/40 ${isDark ? "bg-neutral-900" : "bg-red-50"}`}>
                     <div className="relative">
                       <p className="font-display text-6xl sm:text-8xl font-bold leading-none tracking-tight">{hackathons.length}</p>
                       <p className="font-body text-sm sm:text-base font-medium mt-3">Hackathon</p>
@@ -1975,7 +1975,7 @@ function App() {
                     key={item.name + i}
                     title={item.name}
                     className={`h-16 w-16 shrink-0 rounded-2xl border ${t.border} ${
-                      isDark ? "bg-slate-950/40" : "bg-slate-50"
+                      isDark ? "bg-black/40" : "bg-slate-50"
                     } flex items-center justify-center p-2`}
                   >
                     <div className="h-full w-full rounded-lg bg-white flex items-center justify-center p-1.5 shadow-sm">
@@ -2065,7 +2065,7 @@ function App() {
                   <div className={`relative z-10 sm:row-start-1 ${flip ? "sm:col-start-1 sm:col-end-8" : "sm:col-start-6 sm:col-end-13 sm:text-right"}`}>
                     <p className={`font-mono text-xs tracking-wide ${t.accent}`}>{item.eyebrow}</p>
                     <h3 className={`font-display font-bold text-2xl sm:text-[28px] mt-1 ${t.text}`}>{item.title}</h3>
-                    <div className={`mt-5 rounded-lg border ${t.border} p-5 shadow-xl font-body text-sm leading-relaxed ${t.textMuted} ${isDark ? "bg-slate-800/95" : "bg-white"} text-left`}>
+                    <div className={`mt-5 rounded-lg border ${t.border} p-5 shadow-xl font-body text-sm leading-relaxed ${t.textMuted} ${isDark ? "bg-neutral-800/95" : "bg-white"} text-left`}>
                       {renderDescription(item.description, t)}
                     </div>
                     <ul className={`mt-4 flex flex-wrap gap-x-4 gap-y-1 font-mono text-xs ${t.textMuted} ${flip ? "" : "sm:justify-end"}`}>
@@ -2113,7 +2113,7 @@ function App() {
               const earned = !["In Progress", "Planned", "Upcoming"].includes(cert.status);
               const StatusIcon = earned ? CheckCircle2 : Clock;
               const pill = earned ? `bg-red-400/10 ${t.accent}` : "bg-amber-400/10 text-amber-500";
-              const notch = `absolute top-0 h-6 w-6 -translate-y-1/2 rounded-full border ${isDark ? "border-slate-700" : "border-slate-300"} ${t.bg}`;
+              const notch = `absolute top-0 h-6 w-6 -translate-y-1/2 rounded-full border ${isDark ? "border-neutral-700" : "border-slate-300"} ${t.bg}`;
               return (
                 <Reveal key={cert.name} delay={i * 80} className="h-full">
                   <article className={`relative flex h-full flex-col overflow-hidden rounded-3xl border ${t.border} ${t.surface} transition-colors hover:border-red-400/40`}>
@@ -2148,7 +2148,7 @@ function App() {
                       </p>
                     </div>
 
-                    <div className={`relative border-t border-dashed ${isDark ? "border-slate-700" : "border-slate-300"} px-6 sm:px-8 py-5 flex flex-wrap items-center justify-between gap-4`}>
+                    <div className={`relative border-t border-dashed ${isDark ? "border-neutral-700" : "border-slate-300"} px-6 sm:px-8 py-5 flex flex-wrap items-center justify-between gap-4`}>
                       <span aria-hidden="true" className={`${notch} -left-3`} />
                       <span aria-hidden="true" className={`${notch} -right-3`} />
                       <div>
@@ -2238,7 +2238,7 @@ function App() {
                       {entries.length === 0 && (
                         <div className="relative pl-9">
                           <span className="absolute left-0 top-4 flex h-6 w-6 items-center justify-center">
-                            <span className={`relative h-3 w-3 rounded-full border-2 border-red-400/50 ring-4 ${isDark ? "ring-slate-950 bg-slate-950" : "ring-slate-50 bg-slate-50"}`} />
+                            <span className={`relative h-3 w-3 rounded-full border-2 border-red-400/50 ring-4 ${isDark ? "ring-black bg-black" : "ring-slate-50 bg-slate-50"}`} />
                           </span>
                           <div className={`rounded-2xl border border-dashed ${t.border} p-4`}>
                             <p className={`font-mono text-xs ${t.textFaint}`}>Next stop — coming soon.</p>
@@ -2257,14 +2257,14 @@ function App() {
                               {latest && <span className="absolute inline-flex h-full w-full rounded-full bg-red-400/40 animate-ping" />}
                               <span
                                 className={`relative h-3 w-3 rounded-full ${t.accentBg} dot-glow-red ring-4 ${
-                                  isDark ? "ring-slate-950" : "ring-slate-50"
+                                  isDark ? "ring-black" : "ring-slate-50"
                                 }`}
                               />
                             </span>
 
                             <div className={`card-glow rounded-2xl border ${t.border} ${t.surface} p-4 hover:border-red-400/40`}>
                               <div className="flex items-center gap-3">
-                                <div className={`h-10 w-10 shrink-0 overflow-hidden rounded-xl border ${t.border} ${isDark ? "bg-slate-950/40" : "bg-slate-50"} ${t.accent} flex items-center justify-center`}>
+                                <div className={`h-10 w-10 shrink-0 overflow-hidden rounded-xl border ${t.border} ${isDark ? "bg-black/40" : "bg-slate-50"} ${t.accent} flex items-center justify-center`}>
                                   {exp.logo ? (
                                     <img src={exp.logo} alt={`${exp.company} logo`} className="h-full w-full object-cover" />
                                   ) : (
@@ -2351,7 +2351,7 @@ function App() {
           className={`group fixed bottom-6 right-6 z-50 h-12 w-12 rounded-full ${t.surfaceSolid} ${t.text} flex items-center justify-center transition-colors hover:text-red-400`}
         >
           <svg viewBox="0 0 48 48" className="absolute inset-0 h-full w-full -rotate-90" aria-hidden="true">
-            <circle cx="24" cy="24" r="22" fill="none" strokeWidth="2" className={isDark ? "stroke-slate-800" : "stroke-slate-200"} />
+            <circle cx="24" cy="24" r="22" fill="none" strokeWidth="2" className={isDark ? "stroke-neutral-800" : "stroke-slate-200"} />
             <circle
               cx="24"
               cy="24"
