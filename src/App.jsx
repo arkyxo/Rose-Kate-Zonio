@@ -2072,78 +2072,70 @@ function App() {
             icon={CheckCircle2}
             t={t}
           />
-          <div className={CERTIFICATIONS.length === 1 ? "max-w-3xl mx-auto" : "grid sm:grid-cols-2 gap-6"}>
+          <div className={CERTIFICATIONS.length === 1 ? "max-w-xl mx-auto" : "grid md:grid-cols-2 gap-6"}>
             {CERTIFICATIONS.map((cert, i) => {
               const earned = !["In Progress", "Planned", "Upcoming"].includes(cert.status);
               const StatusIcon = earned ? CheckCircle2 : Clock;
-              const pill = earned ? "bg-red-400/10 text-red-400" : "bg-amber-400/10 text-amber-500";
+              const pill = earned ? `bg-red-400/10 ${t.accent}` : "bg-amber-400/10 text-amber-500";
+              const notch = `absolute top-0 h-6 w-6 -translate-y-1/2 rounded-full border ${isDark ? "border-slate-700" : "border-slate-300"} ${t.bg}`;
               return (
                 <Reveal key={cert.name} delay={i * 80} className="h-full">
-                  <div className={`card-glow group relative h-full overflow-hidden rounded-3xl border ${t.border} ${t.surface} p-7 sm:p-9 hover:border-red-400/40`}>
-                    <span
-                      aria-hidden="true"
-                      className={`pointer-events-none select-none absolute -bottom-8 right-3 font-display font-bold leading-none text-[9rem] ${isDark ? "text-white/[0.035]" : "text-slate-900/[0.04]"}`}
-                    >
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
-
-                    <div className="relative flex flex-col sm:flex-row sm:items-start gap-6 sm:gap-8">
-                      <div className="shrink-0">
-                        {cert.image ? (
-                          <img src={cert.image} alt={`${cert.name} badge`} className="h-20 min-w-[5rem] w-auto max-w-[11rem] rounded-2xl bg-white object-contain p-3.5 shadow-lg shadow-black/10 ring-1 ring-black/5" />
-                        ) : (
-                          <div className={`h-20 w-20 rounded-2xl flex items-center justify-center ${pill}`}>
-                            <StatusIcon size={30} />
-                          </div>
-                        )}
+                  <article className={`relative flex h-full flex-col overflow-hidden rounded-3xl border ${t.border} ${t.surface} transition-colors hover:border-red-400/40`}>
+                    <div className="flex-1 p-6 sm:p-8">
+                      <div className="flex items-start justify-between gap-4">
+                        <div className={`flex h-14 w-24 shrink-0 items-center justify-center rounded-xl border ${t.border} bg-white p-2.5`}>
+                          {cert.image ? (
+                            <img src={cert.image} alt={`${cert.name} badge`} className="max-h-full max-w-full object-contain" />
+                          ) : (
+                            <StatusIcon size={24} className="text-slate-400" />
+                          )}
+                        </div>
+                        <span className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 font-mono text-[10px] font-medium tracking-widest uppercase ${pill}`}>
+                          <StatusIcon size={11} /> {cert.status}
+                        </span>
                       </div>
 
-                      <div className="min-w-0 flex-1">
-                        <div className="flex flex-wrap items-center gap-2">
-                          <span className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 font-mono text-[10px] font-medium tracking-widest uppercase ${pill}`}>
-                            <StatusIcon size={11} /> {cert.status}
-                          </span>
-                          <span className={`font-mono text-[10px] tracking-widest uppercase ${t.textFaint}`}>
-                            {[cert.group, cert.category].filter(Boolean).join(" · ")}
-                          </span>
-                        </div>
-
-                        <h3 className={`font-display font-bold text-2xl sm:text-3xl tracking-tight leading-tight ${t.text} mt-4`}>{cert.name}</h3>
-                        <p className={`font-body text-sm sm:text-base ${t.textMuted} mt-2`}>
-                          {cert.org} <span className={t.textFaint}>·</span> {cert.date}
-                        </p>
-
-                        <div className="flex flex-wrap gap-2 mt-6">
-                          {cert.skills.map((skill) => (
-                            <span
-                              key={skill}
-                              className={`font-body text-xs px-3 py-1.5 rounded-full ${isDark ? "bg-slate-800/80 text-slate-300" : "bg-slate-100 text-slate-600"}`}
-                            >
+                      <p className={`font-mono text-[10px] tracking-widest uppercase ${t.textFaint} mt-7`}>
+                        {[cert.group, cert.category].filter(Boolean).join(" · ")}
+                      </p>
+                      <h3 className={`font-display font-semibold text-xl sm:text-2xl tracking-tight leading-snug ${t.text} mt-2`}>{cert.name}</h3>
+                      <p className={`font-body text-sm ${t.textMuted} mt-1`}>{cert.org}</p>
+                      <p className={`font-body text-sm leading-relaxed ${t.textFaint} mt-5`}>
+                        {cert.skills.map((skill, si) => (
+                          <span key={skill}>
+                            <span className={`whitespace-nowrap ${t.textMuted}`}>
                               {skill}
-                            </span>
-                          ))}
-                        </div>
-
-                        {(hasLink(cert.verifyUrl) || cert.credentialId) && (
-                          <div className="flex flex-wrap items-center gap-x-5 gap-y-3 mt-8">
-                            {hasLink(cert.verifyUrl) && (
-                              <a
-                                href={cert.verifyUrl}
-                                target="_blank"
-                                rel="noreferrer"
-                                className="inline-flex items-center gap-2 rounded-full bg-red-400 px-5 py-2.5 font-mono text-xs font-medium text-slate-950 hover:bg-red-300 transition-colors"
-                              >
-                                {cert.verifyLabel || "Verify"} <ExternalLink size={13} />
-                              </a>
-                            )}
-                            {cert.credentialId && (
-                              <span className={`font-mono text-[11px] tracking-wide ${t.textFaint}`}>ID · {cert.credentialId}</span>
-                            )}
-                          </div>
-                        )}
-                      </div>
+                              {si < cert.skills.length - 1 && <span className={`ml-1 ${t.accent}`}>/</span>}
+                            </span>{" "}
+                          </span>
+                        ))}
+                      </p>
                     </div>
-                  </div>
+
+                    <div className={`relative border-t border-dashed ${isDark ? "border-slate-700" : "border-slate-300"} px-6 sm:px-8 py-5 flex flex-wrap items-center justify-between gap-4`}>
+                      <span aria-hidden="true" className={`${notch} -left-3`} />
+                      <span aria-hidden="true" className={`${notch} -right-3`} />
+                      <div>
+                        <p className={`font-mono text-[10px] tracking-widest uppercase ${t.textFaint}`}>{earned ? "Issued" : "Status"}</p>
+                        <p className={`font-mono text-sm ${t.text} mt-1`}>{cert.date}</p>
+                        <p className={`font-mono text-[10px] tracking-wide ${t.textFaint} mt-1 ${cert.credentialId ? "" : "invisible"}`} aria-hidden={!cert.credentialId}>
+                          ID · {cert.credentialId || "—"}
+                        </p>
+                      </div>
+                      {hasLink(cert.verifyUrl) ? (
+                        <a
+                          href={cert.verifyUrl}
+                          target="_blank"
+                          rel="noreferrer"
+                          className={`inline-flex items-center gap-2 rounded-lg border border-red-400 px-4 py-2 font-mono text-xs ${t.accent} hover:bg-red-400/10 transition-colors`}
+                        >
+                          {cert.verifyLabel || "Verify"} <ExternalLink size={13} />
+                        </a>
+                      ) : (
+                        <span className={`font-mono text-xs ${t.textFaint}`}>Verification soon</span>
+                      )}
+                    </div>
+                  </article>
                 </Reveal>
               );
             })}
