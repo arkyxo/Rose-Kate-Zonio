@@ -449,7 +449,7 @@ const EXPERIENCE = [
     pathway: "internship",
     position: "SOC Analyst Intern",
     logo: techbizLogo,
-    duration: "Oct 16 — Nov 27, 2026",
+    duration: "Oct - Nov (240 Hours)",
     type: "Networking & IT · Internship",
     description: "",
   },
@@ -526,7 +526,6 @@ const HERO_SIDES = [
     word: "Websites",
     tail: "on One Side.",
     label: "Software",
-    blurb: "Web apps, POS systems and PWAs, from interface to database.",
     count: WEB_APPS.length,
   },
   {
@@ -534,7 +533,6 @@ const HERO_SIDES = [
     word: "Networks",
     tail: "on the Other.",
     label: "Networking",
-    blurb: "Subnetting, VLANs, device monitoring and hands-on IT support.",
     count: LABS.length,
   },
 ];
@@ -1907,7 +1905,6 @@ function App() {
                       {side.tail}
                     </span>
                   </h2>
-                  <p className={`mt-5 max-w-sm font-body text-sm sm:text-base leading-relaxed ${t.textMuted}`}>{side.blurb}</p>
                   <button
                     onClick={() => { switchProjectTab(side.id); scrollToId("labs"); }}
                     className={`group mt-8 inline-flex items-center gap-2 font-mono text-xs uppercase tracking-widest ${t.text} transition-colors hover:text-red-400`}
@@ -1925,7 +1922,7 @@ function App() {
               <div className="flex flex-nowrap items-center gap-2 sm:gap-3">
                 <button
                   onClick={openResumes}
-                  className="inline-flex h-10 sm:h-11 shrink-0 items-center gap-1.5 sm:gap-2 whitespace-nowrap rounded-full bg-red-400 px-4 sm:px-6 font-body text-xs sm:text-sm font-semibold text-slate-950 shadow-lg shadow-red-400/30 transition-all duration-300 hover:-translate-y-0.5 hover:bg-red-300"
+                  className="inline-flex h-10 sm:h-11 shrink-0 items-center gap-1.5 sm:gap-2 whitespace-nowrap rounded-full border border-slate-200 bg-white px-4 sm:px-6 font-body text-xs sm:text-sm font-semibold text-slate-950 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:bg-slate-100"
                 >
                   <Download size={15} /> Resume
                 </button>
