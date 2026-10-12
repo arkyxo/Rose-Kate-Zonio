@@ -836,7 +836,7 @@ function LatestActivities({ t, isDark }) {
                 className={`group absolute bottom-0 right-0 w-32 sm:w-44 overflow-hidden rounded-2xl ring-4 ${isDark ? "ring-black" : "ring-slate-50"} transition-transform hover:scale-[1.03] focus-visible:outline-none focus-visible:ring-red-400`}
               >
                 <img src={small.src} alt={small.alt} className={`block aspect-[4/3] w-full object-cover ${small.position}`} />
-                <span className="absolute bottom-2 left-2 rounded-full bg-black/60 p-1.5 text-white transition-colors group-hover:bg-red-500">
+                <span className="absolute bottom-2 left-2 rounded-full bg-black/60 p-1.5 text-white transition-colors group-hover:text-red-400">
                   <ArrowLeftRight size={12} />
                 </span>
               </button>
@@ -1184,7 +1184,7 @@ function ExperienceSplit({ t, isDark, openExp, setOpenExp }) {
                 >
                   <div
                     className={`h-10 w-10 shrink-0 rounded-xl border flex items-center justify-center transition-colors ${
-                      isActive ? "border-red-400 bg-red-400 text-slate-950" : `border-red-400/30 bg-red-400/10 ${t.accent}`
+                      isActive ? `border-red-400 ${t.accent}` : `${t.border} ${t.textMuted}`
                     }`}
                   >
                     <PathIcon size={18} />
@@ -1219,7 +1219,7 @@ function ExperienceSplit({ t, isDark, openExp, setOpenExp }) {
                             onClick={() => pickEntry(path.id, idx)}
                             aria-current={current ? "true" : undefined}
                             className={`relative w-full text-left flex items-center gap-3 rounded-xl px-3 py-2.5 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-red-400/60 ${
-                              current ? (isDark ? "bg-red-400/10" : "bg-red-50") : isDark ? "hover:bg-white/5" : "hover:bg-slate-50"
+                              current ? (isDark ? "bg-neutral-900" : "bg-slate-100") : isDark ? "hover:bg-white/5" : "hover:bg-slate-50"
                             }`}
                           >
                             <span className={`absolute left-0 top-2 bottom-2 w-0.5 rounded-full transition-colors ${current ? "bg-red-400" : "bg-transparent"}`} />
@@ -1258,7 +1258,7 @@ function ExperienceSplit({ t, isDark, openExp, setOpenExp }) {
 
           <div className="relative flex flex-wrap items-center gap-3">
             {main && main === latest && (
-              <span className={`inline-flex items-center gap-2 rounded-full border px-3 py-1 font-mono text-[11px] tracking-[0.18em] uppercase ${!isDark ? "border-red-500/40 bg-red-500/10 text-red-600" : "border-red-400/40 bg-red-400/10 text-red-300"}`}>
+              <span className={`inline-flex items-center gap-2 rounded-full border px-3 py-1 font-mono text-[11px] tracking-[0.18em] uppercase ${!isDark ? "border-red-500/60 text-red-600" : "border-red-400/60 text-red-400"}`}>
                 Latest
               </span>
             )}
@@ -1345,7 +1345,7 @@ function EducationCard({ edu, t, isDark }) {
         </div>
         <span
           className={`inline-flex items-center gap-2 rounded-full px-3 py-1.5 font-mono text-[10px] font-medium tracking-widest ${
-            done ? `${isDark ? "bg-neutral-800 text-neutral-400" : "bg-slate-100 text-slate-500"}` : "bg-red-400/10 text-red-400"
+            done ? `${isDark ? "bg-neutral-800 text-neutral-400" : "bg-slate-100 text-slate-500"}` : "border border-red-400/60 text-red-400"
           }`}
         >
           {done ? "GRADUATED" : "IN PROGRESS"}
@@ -1849,7 +1849,7 @@ function App() {
               aria-expanded={menuOpen}
               onClick={() => setMenuOpen((o) => !o)}
               className={`md:hidden h-9 w-9 rounded-full flex items-center justify-center transition-colors ${
-                menuOpen ? "bg-red-400 text-slate-950" : `border ${t.border} ${t.textMuted}`
+                menuOpen ? `border border-red-400 ${t.accent}` : `border ${t.border} ${t.textMuted}`
               }`}
             >
               {menuOpen ? <X size={15} /> : <Menu size={15} />}
@@ -1974,7 +1974,7 @@ function App() {
                 </span>
                 <span className="font-body text-[11px] sm:text-sm font-medium leading-tight sm:whitespace-nowrap">{PROFILE.location}</span>
               </div>
-              <div className="inline-flex min-w-0 items-center gap-1.5 sm:gap-2.5 rounded-2xl sm:rounded-full border border-red-400/30 bg-red-400/10 py-1.5 px-3 sm:px-4 shadow-sm shadow-red-400/10 transition-all duration-300 hover:-translate-y-0.5 hover:border-red-400/50">
+              <div className="inline-flex min-w-0 items-center gap-1.5 sm:gap-2.5 rounded-2xl sm:rounded-full border border-red-400/60 py-1.5 px-3 sm:px-4 transition-all duration-300 hover:-translate-y-0.5 hover:border-red-400">
                 <span className={`font-body text-[11px] sm:text-sm font-medium leading-tight sm:whitespace-nowrap ${t.accent}`}>Looking for an internship</span>
               </div>
             </div>
@@ -1993,7 +1993,7 @@ function App() {
                     </div>
                   </div>
 
-                  <div className={`group relative overflow-hidden rounded-[28px] border ${t.border} p-5 sm:p-7 min-h-[200px] sm:min-h-[240px] flex flex-col justify-end transition-all duration-500 hover:-translate-y-1 hover:shadow-2xl hover:shadow-red-400/15 hover:border-red-400/40 ${isDark ? "bg-neutral-900" : "bg-red-50"}`}>
+                  <div className={`group relative overflow-hidden rounded-[28px] border ${t.border} p-5 sm:p-7 min-h-[200px] sm:min-h-[240px] flex flex-col justify-end transition-all duration-500 hover:-translate-y-1 hover:shadow-2xl hover:shadow-red-400/15 hover:border-red-400/40 ${isDark ? "bg-neutral-900" : "bg-white"}`}>
                     <div className="relative">
                       <p className="font-display text-6xl sm:text-8xl font-bold leading-none tracking-tight">{hackathons.length}</p>
                       <p className="font-body text-sm sm:text-base font-medium mt-3">Hackathon</p>
@@ -2206,7 +2206,7 @@ function App() {
                     aria-controls={`exp-path-${path.id}`}
                     className={`relative w-full text-left rounded-2xl border ${pathOpen ? "border-red-400/40" : t.border} ${t.surface} p-4 flex items-center gap-3 transition-colors hover:border-red-400/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-400/60`}
                   >
-                    <div className={`h-10 w-10 shrink-0 rounded-xl border border-red-400/30 bg-red-400/10 ${t.accent} flex items-center justify-center`}>
+                    <div className={`h-10 w-10 shrink-0 rounded-xl border flex items-center justify-center transition-colors ${pathOpen ? `border-red-400 ${t.accent}` : `${t.border} ${t.textMuted}`}`}>
                       <PathIcon size={18} />
                     </div>
                     <div className="min-w-0 flex-1">
@@ -2319,7 +2319,7 @@ function App() {
             {CERTIFICATIONS.map((cert, i) => {
               const earned = !["In Progress", "Planned", "Upcoming"].includes(cert.status);
               const StatusIcon = earned ? CheckCircle2 : Clock;
-              const pill = earned ? `bg-red-400/10 ${t.accent}` : "bg-amber-400/10 text-amber-500";
+              const pill = earned ? `border border-red-400/60 ${t.accent}` : "border border-amber-400/60 text-amber-500";
               const notch = `absolute top-0 h-6 w-6 -translate-y-1/2 rounded-full border ${isDark ? "border-neutral-700" : "border-slate-300"} ${t.bg}`;
               return (
                 <Reveal key={cert.name} delay={i * 80} className="h-full">
