@@ -768,7 +768,6 @@ function StatusTag({ status, styles }) {
   const s = styles[status] || styles[Object.keys(styles)[0]];
   return (
     <span className={`inline-flex items-center gap-1.5 font-mono text-xs tracking-wider ${s.text}`}>
-      <span className={`h-1.5 w-1.5 rounded-full ${s.dot}`} />
       {s.label}
     </span>
   );
@@ -1262,10 +1261,6 @@ function ExperienceSplit({ t, isDark, openExp, setOpenExp }) {
           <div className="relative flex flex-wrap items-center gap-3">
             {main && main === latest && (
               <span className={`inline-flex items-center gap-2 rounded-full border px-3 py-1 font-mono text-[11px] tracking-[0.18em] uppercase ${!isDark ? "border-red-500/40 bg-red-500/10 text-red-600" : "border-red-400/40 bg-red-400/10 text-red-300"}`}>
-                <span className="relative flex h-2 w-2">
-                  <span className="absolute inline-flex h-full w-full rounded-full bg-red-400/60 animate-ping" />
-                  <span className="relative h-2 w-2 rounded-full bg-red-400" />
-                </span>
                 Latest
               </span>
             )}
@@ -1355,7 +1350,6 @@ function EducationCard({ edu, t, isDark }) {
             done ? `${isDark ? "bg-neutral-800 text-neutral-400" : "bg-slate-100 text-slate-500"}` : "bg-red-400/10 text-red-400"
           }`}
         >
-          <span className={`h-1.5 w-1.5 rounded-full ${done ? "bg-slate-500" : "bg-red-400 animate-blink"}`} />
           {done ? "GRADUATED" : "IN PROGRESS"}
         </span>
       </div>
@@ -1771,8 +1765,7 @@ function App() {
         >
           <div className="flex items-center justify-between px-6 sm:px-12 pt-7 sm:pt-10">
             <p className="font-display font-semibold text-lg tracking-tight flex items-center gap-2">
-              <span className={`h-2 w-2 rounded-full ${t.accentBg} animate-blink`} />
-              RK<span className="text-red-400">.</span>
+              RK
             </p>
           </div>
 
@@ -1984,11 +1977,7 @@ function App() {
                 </span>
                 <span className="font-body text-[11px] sm:text-sm font-medium leading-tight sm:whitespace-nowrap">{PROFILE.location}</span>
               </div>
-              <div className="inline-flex min-w-0 items-center gap-1.5 sm:gap-2.5 rounded-2xl sm:rounded-full border border-red-400/30 bg-red-400/10 py-1.5 pl-2.5 sm:pl-3.5 pr-2.5 sm:pr-4 shadow-sm shadow-red-400/10 transition-all duration-300 hover:-translate-y-0.5 hover:border-red-400/50">
-                <span className="relative flex h-2 w-2 sm:h-2.5 sm:w-2.5 shrink-0">
-                  <span className="absolute inline-flex h-full w-full rounded-full bg-red-400/60 animate-ping" />
-                  <span className="relative h-full w-full rounded-full bg-red-400" />
-                </span>
+              <div className="inline-flex min-w-0 items-center gap-1.5 sm:gap-2.5 rounded-2xl sm:rounded-full border border-red-400/30 bg-red-400/10 py-1.5 px-3 sm:px-4 shadow-sm shadow-red-400/10 transition-all duration-300 hover:-translate-y-0.5 hover:border-red-400/50">
                 <span className={`font-body text-[11px] sm:text-sm font-medium leading-tight sm:whitespace-nowrap ${t.accent}`}>Looking for an internship</span>
               </div>
             </div>
@@ -2245,13 +2234,9 @@ function App() {
                   >
                   <div className="overflow-hidden">
                   <div className="relative pt-4 pb-1">
-                    <div className="absolute top-4 bottom-2 left-[11px] w-px bg-red-400/30" />
                     <div className="space-y-4">
                       {entries.length === 0 && (
-                        <div className="relative pl-9">
-                          <span className="absolute left-0 top-4 flex h-6 w-6 items-center justify-center">
-                            <span className={`relative h-3 w-3 rounded-full border-2 border-red-400/50 ring-4 ${isDark ? "ring-black bg-black" : "ring-slate-50 bg-slate-50"}`} />
-                          </span>
+                        <div>
                           <div className={`rounded-2xl border border-dashed ${t.border} p-4`}>
                             <p className={`font-mono text-xs ${t.textFaint}`}>Next stop — coming soon.</p>
                           </div>
@@ -2264,16 +2249,7 @@ function App() {
                         const RoleIcon = /software/i.test(exp.type) ? Code2 : /network/i.test(exp.type) ? Network : User;
                         const latest = EXPERIENCE.indexOf(exp) === 0;
                         return (
-                          <div key={key} className="relative pl-9">
-                            <span className="absolute left-0 top-5 flex h-6 w-6 items-center justify-center">
-                              {latest && <span className="absolute inline-flex h-full w-full rounded-full bg-red-400/40 animate-ping" />}
-                              <span
-                                className={`relative h-3 w-3 rounded-full ${t.accentBg} dot-glow-red ring-4 ${
-                                  isDark ? "ring-black" : "ring-slate-50"
-                                }`}
-                              />
-                            </span>
-
+                          <div key={key}>
                             <div className={`card-glow rounded-2xl border ${t.border} ${t.surface} p-4 hover:border-red-400/40`}>
                               <div className="flex items-center gap-3">
                                 <div className={`h-10 w-10 shrink-0 overflow-hidden rounded-xl border ${t.border} ${isDark ? "bg-black/40" : "bg-slate-50"} ${t.accent} flex items-center justify-center`}>
@@ -2289,7 +2265,6 @@ function App() {
                                   </span>
                                   {latest && (
                                     <span className={`inline-flex items-center gap-1.5 font-mono text-[11px] ${t.accent}`}>
-                                      <span className="h-1.5 w-1.5 rounded-full bg-red-400 dot-glow-red animate-pulse" />
                                       Latest
                                     </span>
                                   )}
