@@ -641,7 +641,7 @@ function NetworkCanvas({ isDark }) {
     let rafId;
 
     const NODE_COUNT_BASE = 42;
-    const MAX_DIST = 150;
+    const MAX_DIST = 170;
 
     function resize() {
       width = container.clientWidth;
@@ -656,13 +656,15 @@ function NetworkCanvas({ isDark }) {
 
     function init() {
       resize();
-      const count = width < 640 ? 20 : width < 1024 ? 30 : NODE_COUNT_BASE;
+      const count = isDark
+        ? Math.round(Math.min(NODE_COUNT_BASE * 1.6, Math.max(22, (width * height) / 22000)))
+        : Math.round(Math.min(NODE_COUNT_BASE * 0.7, Math.max(12, (width * height) / 50000)));
       nodes = Array.from({ length: count }, () => ({
         x: Math.random() * width,
         y: Math.random() * height,
         vx: (Math.random() - 0.5) * 0.25,
         vy: (Math.random() - 0.5) * 0.25,
-        r: Math.random() * 1.4 + 1.2,
+        r: Math.random() * 1.4 + 1.6,
       }));
       packets = [];
     }
@@ -677,7 +679,7 @@ function NetworkCanvas({ isDark }) {
 
     function draw() {
       ctx.clearRect(0, 0, width, height);
-      const lineColor = isDark ? "45, 212, 191" : "13, 148, 136";
+      const lineColor = isDark ? "45, 212, 191" : "100, 116, 139";
       const nodeColor = isDark ? "163, 163, 163" : "100, 116, 139";
       const packetColor = isDark ? "251, 191, 36" : "217, 119, 6";
 
@@ -696,9 +698,9 @@ function NetworkCanvas({ isDark }) {
           const dx = a.x - b.x, dy = a.y - b.y;
           const dist = Math.sqrt(dx * dx + dy * dy);
           if (dist < MAX_DIST) {
-            const opacity = (1 - dist / MAX_DIST) * 0.35;
+            const opacity = (1 - dist / MAX_DIST) * (isDark ? 0.75 : 0.45);
             ctx.strokeStyle = `rgba(${lineColor}, ${opacity})`;
-            ctx.lineWidth = 1;
+            ctx.lineWidth = isDark ? 1 : 0.75;
             ctx.beginPath();
             ctx.moveTo(a.x, a.y);
             ctx.lineTo(b.x, b.y);
@@ -708,7 +710,7 @@ function NetworkCanvas({ isDark }) {
         }
       }
 
-      if (!reduced) maybeSpawnPacket(edges);
+      if (!reduced && isDark) maybeSpawnPacket(edges);
 
       packets = packets.filter((p) => p.t <= 1);
       for (const p of packets) {
@@ -726,8 +728,8 @@ function NetworkCanvas({ isDark }) {
 
       for (const n of nodes) {
         ctx.beginPath();
-        ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(${nodeColor}, 0.55)`;
+        ctx.arc(n.x, n.y, isDark ? n.r : n.r * 0.8, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${nodeColor}, ${isDark ? 0.95 : 0.55})`;
         ctx.fill();
       }
     }
@@ -756,7 +758,7 @@ function NetworkCanvas({ isDark }) {
   }, [isDark]);
 
   return (
-    <div ref={containerRef} className="absolute inset-0 overflow-hidden">
+    <div ref={containerRef} aria-hidden="true" className="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
       <canvas ref={canvasRef} className="absolute inset-0" />
     </div>
   );
@@ -1751,7 +1753,8 @@ function App() {
   };
 
   return (
-    <div className={`min-h-screen ${t.bg} ${t.text} transition-colors duration-300`}>
+    <div className={`relative isolate min-h-screen ${t.bg} ${t.text} transition-colors duration-300`}>
+      <NetworkCanvas isDark={isDark} />
 
       {bootScreenMounted && (
         <div
@@ -1886,9 +1889,6 @@ function App() {
       </header>
 
       <section id="hero" className="relative pt-16 flex items-center overflow-hidden" style={{ minHeight: "92vh" }}>
-        <NetworkCanvas isDark={isDark} />
-        <div className={`absolute inset-0 ${isDark ? "bg-black/70" : "bg-slate-50/80"}`} />
-
         <div className="relative max-w-6xl mx-auto px-5 sm:px-8 py-16 sm:py-24 w-full">
           <h1 className="sr-only">Websites on One Side. Networks on the Other.</h1>
 
@@ -2026,7 +2026,7 @@ function App() {
         </div>
       </section>
 
-      <section id="skills" className={t.bg}>
+      <section id="skills">
         <div className="max-w-6xl mx-auto px-5 sm:px-8 py-24">
           <div className="text-center mb-10">
             <Reveal>
@@ -2306,7 +2306,7 @@ function App() {
         </div>
       </section>
 
-      <section id="certifications" className={t.bg}>
+      <section id="certifications">
         <div className="max-w-6xl mx-auto px-5 sm:px-8 py-24">
           <SectionHeading
             eyebrow="06 · CREDENTIALS"
