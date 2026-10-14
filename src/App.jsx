@@ -139,8 +139,8 @@ const RESUMES = RESUME_FILES;
 const NAV_LINKS = [
   { id: "about", label: "About" },
   { id: "skills", label: "Skills" },
-  { id: "labs", label: "Projects" },
   { id: "activities", label: "Activities" },
+  { id: "labs", label: "Projects" },
   { id: "experience", label: "Experience" },
   { id: "certifications", label: "Certs" },
   { id: "github-activity", label: "GitHub" },
@@ -392,6 +392,9 @@ const trackOf = (title) => {
   if (inSoftware && inNetwork) return "Both";
   return inSoftware ? "Software" : "Networking & IT";
 };
+const taglineOf = (p) => (p.eyebrow ? p.eyebrow.split(" · ")[0] : p.meta);
+const slugOf = (title) => title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+const PROJECT_BY_SLUG = Object.fromEntries(ALL_PROJECTS.map((p) => [slugOf(p.title), p]));
 
 const CERTIFICATIONS = [
   {
@@ -830,7 +833,7 @@ function LatestActivities({ t, isDark }) {
   const [main, small] = swapped ? [photos[1], photos[0]] : photos;
   return (
     <section id="activities" className="max-w-6xl mx-auto px-5 sm:px-8 py-24">
-      <SectionHeading eyebrow="04 · OUT IN THE COMMUNITY" title="Latest Activities" caption="What I've been building and where I've been." icon={Trophy} t={t} />
+      <SectionHeading eyebrow="03 · OUT IN THE COMMUNITY" title="Latest Activities" caption="What I've been building and where I've been." icon={Trophy} t={t} />
 
       <Reveal>
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
@@ -1480,52 +1483,142 @@ function ProjectArchive({ t, onClose }) {
 
   return (
     <div className={`fixed inset-0 z-[60] overflow-y-auto ${t.bg} ${t.text}`}>
-      <div className="max-w-6xl mx-auto px-5 sm:px-8 py-10 sm:py-14">
-        <button onClick={onClose} className={`inline-flex items-center gap-2 font-mono text-xs ${t.textMuted} hover:text-red-400 transition-colors`}>
+      <div className="max-w-3xl mx-auto px-5 sm:px-8 py-10 sm:py-14">
+        <button onClick={onClose} className={`inline-flex items-center gap-2 text-sm ${t.textMuted} hover:text-red-400 transition-colors`}>
           <ArrowRight size={14} className="rotate-180" /> Back to portfolio
         </button>
-        <h1 className="font-display font-bold text-4xl sm:text-6xl mt-12">Project Log</h1>
-        <p className={`font-mono text-sm ${t.accent} mt-3`}>Everything I've built, wired up, and shipped.</p>
+        <h1 className="font-display font-bold text-3xl sm:text-5xl mt-10">Project Log</h1>
+        <p className={`text-sm sm:text-base ${t.textMuted} mt-3`}>Everything I've built, wired up, and shipped.</p>
 
-        <table className="w-full text-left mt-12">
-          <thead>
-            <tr className={`font-mono text-xs uppercase tracking-wider ${t.textFaint} border-b ${t.border}`}>
-              <th className="py-3 pr-4 font-medium">Year</th>
-              <th className="py-3 pr-4 font-medium">Project</th>
-              <th className="py-3 pr-4 font-medium">Track</th>
-              <th className="py-3 pr-4 font-medium hidden sm:table-cell">Stack</th>
-              <th className="py-3 font-medium">Links</th>
-            </tr>
-          </thead>
-          <tbody>
-            {ALL_PROJECTS.map((p) => {
-              const track = trackOf(p.title);
-              const trackColor =
-                track === "Both" ? "text-amber-500" : track === "Software" ? "text-red-400" : "text-blue-400";
-              return (
-              <tr key={p.title} className={`border-b ${t.border} hover:bg-red-400/5 transition-colors align-top`}>
-                <td className={`py-4 pr-4 font-mono text-sm ${t.accent}`}>{yearOf(p)}</td>
-                <td className="py-4 pr-4 font-display font-semibold">{p.title}</td>
-                <td className={`py-4 pr-4 font-mono text-[11px] whitespace-nowrap ${trackColor}`}>{track}</td>
-                <td className={`py-4 pr-4 font-mono text-xs leading-relaxed ${t.textFaint} hidden sm:table-cell`}>{p.tags.join(" · ")}</td>
-                <td className="py-4">
-                  <div className={`flex items-center gap-3 ${t.textMuted}`}>
-                    {hasLink(p.github) && (
-                      <a href={p.github} target="_blank" rel="noreferrer" aria-label={`${p.title} on GitHub`} className="hover:text-red-400 transition-colors"><Github size={17} /></a>
-                    )}
-                    {hasLink(p.view) && (
-                      <a href={p.view} target="_blank" rel="noreferrer" aria-label={`${p.title} preview`} className="hover:text-red-400 transition-colors"><ExternalLink size={17} /></a>
-                    )}
-                    {p.privateDemo && (
-                      <span role="img" aria-disabled="true" aria-label={`${p.title} live demo unavailable, private project`} title="Live demo unavailable: private project" className="opacity-30 cursor-not-allowed"><ExternalLink size={17} /></span>
+        <ul className={`mt-10 border-t ${t.border}`}>
+          {ALL_PROJECTS.map((p) => (
+            <li key={p.title} className={`border-b ${t.border}`}>
+              <a href={`#${slugOf(p.title)}`} className="group flex items-center gap-4 sm:gap-5 py-4 sm:py-5">
+                <div className={`shrink-0 w-16 h-11 sm:w-20 sm:h-14 rounded-lg border ${t.border} overflow-hidden ${t.surfaceSolid}`}>
+                  {p.thumbnail && <img src={p.thumbnail} alt="" loading="lazy" className="h-full w-full object-cover" />}
+                </div>
+                <div className="min-w-0 flex-1">
+                  <div className="flex flex-wrap items-center gap-2">
+                    <span className="font-display font-semibold group-hover:text-red-400 transition-colors">{p.title}</span>
+                    {p.category && (
+                      <span className={`text-xs ${t.textFaint}`}>{p.category}</span>
                     )}
                   </div>
-                </td>
-              </tr>
-              );
-            })}
-          </tbody>
-        </table>
+                  <p className={`text-sm ${t.textMuted} mt-1 leading-snug`}>{taglineOf(p)}</p>
+                </div>
+                <span className={`hidden sm:block shrink-0 text-sm ${t.textFaint}`}>{trackOf(p.title)}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  );
+}
+
+function ProjectDetail({ t, project: p, onBack }) {
+  useEffect(() => {
+    const onKey = (e) => e.key === "Escape" && onBack();
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [onBack]);
+
+  const images = (p.gallery && p.gallery.length ? p.gallery : [p.thumbnail]).filter(Boolean);
+  const [slide, setSlide] = useState(0);
+  const idx = ALL_PROJECTS.indexOf(p);
+  const next = ALL_PROJECTS[(idx + 1) % ALL_PROJECTS.length];
+  const links = [
+    hasLink(p.view) && { label: /roblox\.com/.test(p.view) ? "Play on Roblox" : "Live demo", href: p.view },
+    hasLink(p.github) && { label: "GitHub", href: p.github },
+    hasLink(p.docs) && { label: "Docs", href: p.docs },
+  ].filter(Boolean);
+  const navBtn = `h-10 w-10 rounded-full border ${t.border} flex items-center justify-center transition-colors hover:border-red-400 hover:text-red-400 disabled:opacity-30 disabled:pointer-events-none`;
+
+  return (
+    <div className={`fixed inset-0 z-[60] overflow-y-auto ${t.bg} ${t.text}`}>
+      <div className="max-w-3xl mx-auto px-5 sm:px-8 py-10 sm:py-14">
+        <a href="#archive" className={`inline-flex items-center gap-2 text-sm ${t.textMuted} hover:text-red-400 transition-colors`}>
+          <ArrowRight size={14} className="rotate-180" /> All projects
+        </a>
+        <h1 className="font-display font-bold text-3xl sm:text-5xl mt-10">{p.title}</h1>
+        <p className={`mt-4 text-base sm:text-lg ${t.textMuted}`}>{taglineOf(p)}</p>
+
+        <div className={`mt-10 py-4 border-y ${t.border} flex flex-wrap items-center justify-between gap-4`}>
+          <div>
+            <p className="font-medium">{contextOf(p)}</p>
+            <p className={`text-sm ${t.textMuted}`}>
+              {trackOf(p.title)} · {yearOf(p)}
+            </p>
+          </div>
+          <div className="flex flex-wrap items-center gap-5 text-sm">
+            {links.map((l) => (
+              <a key={l.label} href={l.href} target="_blank" rel="noopener noreferrer" className={`inline-flex items-center gap-1 ${t.textMuted} hover:text-red-400 transition-colors`}>
+                {l.label} <ArrowUpRight size={14} />
+              </a>
+            ))}
+            {p.privateDemo && <span className={t.textFaint}>Live demo is private</span>}
+          </div>
+        </div>
+
+        {images.length > 0 && (
+          <>
+            <div className={`mt-8 rounded-2xl border ${t.border} overflow-hidden ${t.surfaceSolid}`}>
+              <img src={images[slide]} alt={`${p.title} screenshot ${slide + 1}`} className="w-full h-auto block" />
+            </div>
+            {images.length > 1 && (
+              <div className="mt-4 flex items-center justify-between">
+                <span className={`font-mono text-sm ${t.textFaint}`}>
+                  {slide + 1} / {images.length}
+                </span>
+                <div className="flex gap-2">
+                  <button aria-label="Previous image" disabled={slide === 0} onClick={() => setSlide((n) => n - 1)} className={navBtn}>
+                    <ArrowRight size={15} className="rotate-180" />
+                  </button>
+                  <button aria-label="Next image" disabled={slide === images.length - 1} onClick={() => setSlide((n) => n + 1)} className={navBtn}>
+                    <ArrowRight size={15} />
+                  </button>
+                </div>
+              </div>
+            )}
+          </>
+        )}
+
+        <section className="mt-12">
+          <h2 className="font-display font-semibold text-lg">Overview</h2>
+          <p className={`mt-3 leading-relaxed ${t.textMuted}`}>{renderDescription(p.description, t)}</p>
+        </section>
+
+        {p.highlights && p.highlights.length > 0 && (
+          <section className="mt-10">
+            <h2 className="font-display font-semibold text-lg">Highlights</h2>
+            <ul className="mt-3 space-y-2.5">
+              {p.highlights.map((h) => (
+                <li key={h} className={`flex gap-3 leading-relaxed ${t.textMuted}`}>
+                  <span className="mt-3 h-px w-3 shrink-0 bg-current" />
+                  <span>{h}</span>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
+
+        <section className="mt-10">
+          <h2 className="font-display font-semibold text-lg">Built with</h2>
+          <div className="mt-3 flex flex-wrap gap-2">
+            {p.tags.map((tag) => (
+              <span key={tag} className={`rounded-full border ${t.border} px-3 py-1 text-sm ${t.textMuted}`}>{tag}</span>
+            ))}
+          </div>
+        </section>
+
+        {next && next !== p && (
+          <a href={`#${slugOf(next.title)}`} className={`group mt-14 pt-6 border-t ${t.border} flex items-center justify-between gap-4`}>
+            <span className={`text-sm ${t.textFaint}`}>Next project</span>
+            <span className="inline-flex items-center gap-2 font-display font-semibold group-hover:text-red-400 transition-colors">
+              {next.title} <ArrowRight size={15} />
+            </span>
+          </a>
+        )}
       </div>
     </div>
   );
@@ -1862,13 +1955,19 @@ function App() {
   }, []);
 
   const [archiveOpen, setArchiveOpen] = useState(false);
+  const [projectSlug, setProjectSlug] = useState(null);
   useEffect(() => {
-    const sync = () => setArchiveOpen(window.location.hash === "#archive");
+    const sync = () => {
+      const h = window.location.hash.slice(1);
+      setArchiveOpen(h === "archive");
+      setProjectSlug(PROJECT_BY_SLUG[h] ? h : null);
+    };
     sync();
     window.addEventListener("hashchange", sync);
     return () => window.removeEventListener("hashchange", sync);
   }, []);
   const openArchive = () => { window.location.hash = "archive"; };
+  const closeProject = useCallback(() => { window.location.hash = "archive"; }, []);
   const closeArchive = useCallback(() => {
     window.history.replaceState(null, "", window.location.pathname + window.location.search);
     setArchiveOpen(false);
@@ -1895,8 +1994,8 @@ function App() {
     return () => window.removeEventListener("hashchange", sync);
   }, []);
   useEffect(() => {
-    document.body.style.overflow = resumesOpen || archiveOpen || skillsOpen ? "hidden" : "";
-  }, [resumesOpen, archiveOpen, skillsOpen]);
+    document.body.style.overflow = resumesOpen || archiveOpen || skillsOpen || projectSlug ? "hidden" : "";
+  }, [resumesOpen, archiveOpen, skillsOpen, projectSlug]);
   const openResumes = () => { window.location.hash = "resumes"; };
   const closeResumes = useCallback(() => {
     window.history.replaceState(null, "", window.location.pathname + window.location.search);
@@ -2249,10 +2348,12 @@ function App() {
         </div>
       </section>
 
+      <LatestActivities t={t} isDark={isDark} />
+
       <section id="labs" className="max-w-6xl mx-auto px-5 sm:px-8 py-24">
         <div className="text-center mb-10 sm:mb-14">
           <p className={`inline-flex items-center gap-2 font-mono text-xs tracking-widest ${t.accent} mb-3`}>
-            <Code2 size={13} /> {projectTab === "labs" ? "03 · NETWORKING & IT LOG" : "03 · SOFTWARE LOG"}
+            <Code2 size={13} /> {projectTab === "labs" ? "04 · NETWORKING & IT LOG" : "04 · SOFTWARE LOG"}
           </p>
           <div className="flex flex-wrap items-baseline justify-center gap-3">
             {[["webapps", "Software"], ["labs", "Networking & IT"]].map(([key, label], i) => (
@@ -2349,8 +2450,6 @@ function App() {
           </button>
         </div>
       </section>
-
-      <LatestActivities t={t} isDark={isDark} />
 
       <section id="experience" className="max-w-6xl mx-auto px-5 sm:px-8 py-24">
         <SectionHeading
@@ -2580,6 +2679,7 @@ function App() {
       </footer>
 
       {archiveOpen && <ProjectArchive t={t} onClose={closeArchive} />}
+      {projectSlug && <ProjectDetail key={projectSlug} t={t} project={PROJECT_BY_SLUG[projectSlug]} onBack={closeProject} />}
       {skillsOpen && <SkillsArchive t={t} onClose={closeSkills} isDark={isDark} />}
       {resumesOpen && <ResumeArchive t={t} onClose={closeResumes} isDark={isDark} />}
 
