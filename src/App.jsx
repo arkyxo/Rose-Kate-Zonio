@@ -1615,13 +1615,10 @@ function ResumeArchive({ t, onClose, isDark }) {
 const SIDEBAR_GROUPS = [
   {
     label: null,
-    items: [
-      { id: "hero", label: "Home", Icon: House },
-      { action: "resume", label: "Resume", Icon: Download, count: RESUMES.length },
-    ],
+    items: [{ id: "hero", label: "Home", Icon: House }],
   },
   {
-    label: "Explore",
+    label: "About Me",
     items: [
       { id: "about", label: "About", Icon: User },
       { id: "skills", label: "Skills", Icon: Layers, count: SKILL_TOTAL },
@@ -1629,12 +1626,19 @@ const SIDEBAR_GROUPS = [
     ],
   },
   {
-    label: "Portfolio",
+    label: "Work",
     items: [
       { id: "labs", label: "Projects", Icon: LayoutGrid, count: ALL_PROJECTS.length },
       { id: "experience", label: "Experience", Icon: Briefcase, count: EXPERIENCE.length },
       { id: "certifications", label: "Certs", Icon: Award, count: CERTIFICATIONS.length },
-      { id: "github-activity", label: "GitHub", Icon: Github },
+    ],
+  },
+  {
+    label: "Links",
+    items: [
+      { action: "resume", label: "Resume", Icon: Download, count: RESUMES.length },
+      { href: PROFILE.github, label: "GitHub", Icon: Github },
+      { href: PROFILE.linkedin, label: "LinkedIn", Icon: Linkedin },
     ],
   },
 ];
@@ -1680,16 +1684,16 @@ function Sidebar({ t, isDark, collapsed, onToggleCollapse, activeId, onNavigate,
           rel="noopener noreferrer"
           title={collapsed ? "Contact" : undefined}
           aria-label="Contact"
-          className={`flex items-center rounded-2xl border ${t.border} ${collapsed ? "h-11 justify-center" : "h-12 gap-3 px-4"} ${t.text} text-sm font-medium hover:border-red-400/60 hover:text-red-400 transition-colors`}
+          className={`flex items-center rounded-2xl border ${t.border} ${collapsed ? "h-11 justify-center" : "h-11 gap-3 px-4"} ${t.text} text-sm font-medium hover:border-red-400/60 hover:text-red-400 transition-colors`}
         >
           <Mail size={16} className="shrink-0" />
           {!collapsed && <span>Contact</span>}
         </a>
       </div>
 
-      <nav className={`flex-1 min-h-0 overflow-y-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden ${collapsed ? "mt-4 pb-3 px-3" : "mt-5 pb-4 px-4"}`}>
+      <nav className={`flex-1 min-h-0 overflow-y-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden ${collapsed ? "mt-4 pb-3 px-3" : "mt-4 pb-3 px-4"}`}>
         {SIDEBAR_GROUPS.map((group, gi) => (
-          <div key={group.label || gi} className={gi > 0 ? (collapsed ? "mt-3" : "mt-5") : ""}>
+          <div key={group.label || gi} className={gi > 0 ? (collapsed ? "mt-3" : "mt-4") : ""}>
             {group.label &&
               (collapsed ? (
                 <div className={`mx-auto mb-2 h-px w-6 ${isDark ? "bg-neutral-800" : "bg-slate-200"}`} />
@@ -1699,15 +1703,18 @@ function Sidebar({ t, isDark, collapsed, onToggleCollapse, activeId, onNavigate,
             <ul className="space-y-0.5">
               {group.items.map((item) => {
                 const active = item.id === "hero" ? !activeId : !!item.id && activeId === item.id;
-                const onClick = item.action === "resume" ? onOpenResumes : () => onNavigate(item.id);
+                const Tag = item.href ? "a" : "button";
+                const linkProps = item.href
+                  ? { href: item.href, target: "_blank", rel: "noopener noreferrer" }
+                  : { onClick: item.action === "resume" ? onOpenResumes : () => onNavigate(item.id) };
                 return (
                   <li key={item.label}>
-                    <button
-                      onClick={onClick}
+                    <Tag
+                      {...linkProps}
                       title={collapsed ? item.label : undefined}
                       aria-label={collapsed ? item.label : undefined}
                       aria-current={active ? "true" : undefined}
-                      className={`w-full h-10 flex items-center rounded-xl text-sm transition-colors ${collapsed ? "justify-center" : "gap-3 px-3"} ${
+                      className={`w-full h-9 flex items-center rounded-xl text-sm transition-colors ${collapsed ? "justify-center" : "gap-3 px-3"} ${
                         active ? `${activeBg} ${t.accent}` : `${t.textMuted} ${hoverBg} ${hoverText}`
                       }`}
                     >
@@ -1720,9 +1727,10 @@ function Sidebar({ t, isDark, collapsed, onToggleCollapse, activeId, onNavigate,
                               {String(item.count).padStart(2, "0")}
                             </span>
                           )}
+                          {item.href && <ArrowUpRight size={14} className={t.textFaint} />}
                         </>
                       )}
-                    </button>
+                    </Tag>
                   </li>
                 );
               })}
@@ -1731,18 +1739,12 @@ function Sidebar({ t, isDark, collapsed, onToggleCollapse, activeId, onNavigate,
         ))}
       </nav>
 
-      <div className={`shrink-0 border-t ${t.border} ${collapsed ? "py-4 flex flex-col items-center gap-2" : "px-5 py-4 flex items-center justify-between"}`}>
+      <div className={`shrink-0 border-t ${t.border} ${collapsed ? "py-3 flex flex-col items-center gap-2" : "px-5 py-3 flex items-center justify-between"}`}>
         {!collapsed && <span className={`font-mono text-[11px] tracking-wider ${t.textFaint}`}>GMT+8</span>}
         <div className={collapsed ? "flex flex-col gap-2" : "flex items-center gap-2"}>
           <button aria-label="Toggle theme" title="Toggle theme" onClick={onToggleTheme} className={iconBtn}>
             <Contrast size={15} />
           </button>
-          <a href={mailtoUrl} target="_blank" rel="noopener noreferrer" aria-label="Email" title="Email" className={iconBtn}>
-            <Mail size={15} />
-          </a>
-          <a href={PROFILE.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" title="LinkedIn" className={iconBtn}>
-            <Linkedin size={15} />
-          </a>
         </div>
       </div>
     </aside>
