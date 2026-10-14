@@ -94,6 +94,13 @@ const Trophy = makeIcon(<><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6" /><path d="M18 
 const Users = makeIcon(<><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M22 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /></>);
 const Wrench = makeIcon(<path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" />);
 
+const PanelLeft = makeIcon(<><rect width="18" height="18" x="3" y="3" rx="2" /><path d="M9 3v18" /></>);
+const Contrast = makeIcon(<><circle cx="12" cy="12" r="10" /><path d="M12 18a6 6 0 0 0 0-12v12z" /></>);
+const LayoutGrid = makeIcon(<><rect width="7" height="7" x="3" y="3" rx="1" /><rect width="7" height="7" x="14" y="3" rx="1" /><rect width="7" height="7" x="14" y="14" rx="1" /><rect width="7" height="7" x="3" y="14" rx="1" /></>);
+const Layers = makeIcon(<><path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z" /><path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65" /><path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65" /></>);
+const Award = makeIcon(<><circle cx="12" cy="8" r="6" /><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11" /></>);
+const House = makeIcon(<><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8" /><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /></>);
+
 const PROFILE = {
   name: "RK",
   role: "Software & Networking/IT",
@@ -1605,6 +1612,143 @@ function ResumeArchive({ t, onClose, isDark }) {
   );
 }
 
+const SIDEBAR_GROUPS = [
+  {
+    label: null,
+    items: [
+      { id: "hero", label: "Home", Icon: House },
+      { action: "resume", label: "Resume", Icon: Download, count: RESUMES.length },
+    ],
+  },
+  {
+    label: "Explore",
+    items: [
+      { id: "about", label: "About", Icon: User },
+      { id: "skills", label: "Skills", Icon: Layers, count: SKILL_TOTAL },
+      { id: "activities", label: "Activities", Icon: Trophy },
+    ],
+  },
+  {
+    label: "Portfolio",
+    items: [
+      { id: "labs", label: "Projects", Icon: LayoutGrid, count: ALL_PROJECTS.length },
+      { id: "experience", label: "Experience", Icon: Briefcase, count: EXPERIENCE.length },
+      { id: "certifications", label: "Certs", Icon: Award, count: CERTIFICATIONS.length },
+      { id: "github-activity", label: "GitHub", Icon: Github },
+    ],
+  },
+];
+
+function Sidebar({ t, isDark, collapsed, onToggleCollapse, activeId, onNavigate, onToggleTheme, onOpenResumes, mailtoUrl }) {
+  const hoverText = isDark ? "hover:text-neutral-100" : "hover:text-slate-900";
+  const hoverBg = isDark ? "hover:bg-white/5" : "hover:bg-slate-900/[0.04]";
+  const activeBg = isDark ? "bg-white/[0.06]" : "bg-slate-900/[0.05]";
+  const iconBtn = `h-9 w-9 shrink-0 rounded-full border ${t.border} flex items-center justify-center ${t.textMuted} hover:text-red-400 hover:border-red-400/60 transition-colors`;
+
+  return (
+    <aside
+      aria-label="Sidebar"
+      className={`hidden lg:flex fixed top-3 bottom-3 left-3 z-40 flex-col rounded-3xl border ${t.border} backdrop-blur-md ${t.navBg} transition-[width] duration-300 overflow-hidden ${
+        collapsed ? "w-[4.5rem]" : "w-64"
+      }`}
+    >
+      <div className={`h-16 shrink-0 flex items-center ${collapsed ? "justify-center" : "justify-between pl-6 pr-3"}`}>
+        {!collapsed && (
+          <button
+            onClick={() => onNavigate("hero")}
+            aria-label={`${PROFILE.name}, back to top`}
+            className={`font-display font-bold text-xl tracking-tight ${t.text} hover:text-red-400 transition-colors`}
+          >
+            {PROFILE.name}
+          </button>
+        )}
+        <button
+          onClick={onToggleCollapse}
+          aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
+          aria-expanded={!collapsed}
+          title={collapsed ? "Expand sidebar" : "Collapse sidebar"}
+          className={`h-9 w-9 rounded-xl flex items-center justify-center ${t.textMuted} ${hoverBg} hover:text-red-400 transition-colors`}
+        >
+          <PanelLeft size={17} />
+        </button>
+      </div>
+
+      <div className={collapsed ? "px-3" : "px-4"}>
+        <a
+          href={mailtoUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          title={collapsed ? "Contact" : undefined}
+          aria-label="Contact"
+          className={`flex items-center rounded-2xl border ${t.border} ${collapsed ? "h-11 justify-center" : "h-12 gap-3 px-4"} ${t.text} text-sm font-medium hover:border-red-400/60 hover:text-red-400 transition-colors`}
+        >
+          <Mail size={16} className="shrink-0" />
+          {!collapsed && <span>Contact</span>}
+        </a>
+      </div>
+
+      <nav className={`flex-1 min-h-0 overflow-y-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden ${collapsed ? "mt-4 pb-3 px-3" : "mt-5 pb-4 px-4"}`}>
+        {SIDEBAR_GROUPS.map((group, gi) => (
+          <div key={group.label || gi} className={gi > 0 ? (collapsed ? "mt-3" : "mt-5") : ""}>
+            {group.label &&
+              (collapsed ? (
+                <div className={`mx-auto mb-2 h-px w-6 ${isDark ? "bg-neutral-800" : "bg-slate-200"}`} />
+              ) : (
+                <p className={`px-3 mb-1.5 font-mono text-[10px] tracking-widest uppercase ${t.textFaint}`}>{group.label}</p>
+              ))}
+            <ul className="space-y-0.5">
+              {group.items.map((item) => {
+                const active = item.id === "hero" ? !activeId : !!item.id && activeId === item.id;
+                const onClick = item.action === "resume" ? onOpenResumes : () => onNavigate(item.id);
+                return (
+                  <li key={item.label}>
+                    <button
+                      onClick={onClick}
+                      title={collapsed ? item.label : undefined}
+                      aria-label={collapsed ? item.label : undefined}
+                      aria-current={active ? "true" : undefined}
+                      className={`w-full h-10 flex items-center rounded-xl text-sm transition-colors ${collapsed ? "justify-center" : "gap-3 px-3"} ${
+                        active ? `${activeBg} ${t.accent}` : `${t.textMuted} ${hoverBg} ${hoverText}`
+                      }`}
+                    >
+                      <item.Icon size={16} className="shrink-0" />
+                      {!collapsed && (
+                        <>
+                          <span className="flex-1 text-left font-medium">{item.label}</span>
+                          {item.count != null && (
+                            <span className={`font-mono text-[11px] ${active ? t.accent : t.textFaint}`}>
+                              {String(item.count).padStart(2, "0")}
+                            </span>
+                          )}
+                        </>
+                      )}
+                    </button>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        ))}
+      </nav>
+
+      <div className={`shrink-0 border-t ${t.border} ${collapsed ? "py-4 flex flex-col items-center gap-2" : "px-5 py-4 flex items-center justify-between"}`}>
+        {!collapsed && <span className={`font-mono text-[11px] tracking-wider ${t.textFaint}`}>GMT+8</span>}
+        <div className={collapsed ? "flex flex-col gap-2" : "flex items-center gap-2"}>
+          <button aria-label="Toggle theme" title="Toggle theme" onClick={onToggleTheme} className={iconBtn}>
+            <Contrast size={15} />
+          </button>
+          <a href={mailtoUrl} target="_blank" rel="noopener noreferrer" aria-label="Email" title="Email" className={iconBtn}>
+            <Mail size={15} />
+          </a>
+          <a href={PROFILE.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" title="LinkedIn" className={iconBtn}>
+            <Linkedin size={15} />
+          </a>
+        </div>
+      </div>
+    </aside>
+  );
+}
+
 function App() {
   const [isDark, setIsDark] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -1620,6 +1764,19 @@ function App() {
   const [bootPct, setBootPct] = useState(0);
   const [openPath, setOpenPath] = useState(() => EXPERIENCE[0]?.pathway || EXPERIENCE_PATHWAYS[0].id);
   const [openExp, setOpenExp] = useState(null);
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(() => {
+    try {
+      return localStorage.getItem("sidebar-collapsed") === "1";
+    } catch {
+      return false;
+    }
+  });
+
+  useEffect(() => {
+    try {
+      localStorage.setItem("sidebar-collapsed", sidebarCollapsed ? "1" : "0");
+    } catch {}
+  }, [sidebarCollapsed]);
 
   const t = isDark ? theme.dark : theme.light;
   const progress = useScrollProgress();
@@ -1753,7 +1910,11 @@ function App() {
   };
 
   return (
-    <div className={`relative isolate min-h-screen ${t.bg} ${t.text} transition-colors duration-300`}>
+    <div
+      className={`relative isolate min-h-screen ${t.bg} ${t.text} transition-[color,background-color,padding] duration-300 ${
+        sidebarCollapsed ? "lg:pl-[5.25rem]" : "lg:pl-[16.75rem]"
+      }`}
+    >
       <NetworkCanvas isDark={isDark} />
 
       {bootScreenMounted && (
@@ -1811,7 +1972,19 @@ function App() {
         />
       </div>
 
-      <header className={`fixed top-0 left-0 right-0 z-40 backdrop-blur-md ${t.navBg} border-b ${t.border}`}>
+      <Sidebar
+        t={t}
+        isDark={isDark}
+        collapsed={sidebarCollapsed}
+        onToggleCollapse={() => setSidebarCollapsed((c) => !c)}
+        activeId={activeId}
+        onNavigate={scrollToId}
+        onToggleTheme={() => setIsDark((d) => !d)}
+        onOpenResumes={openResumes}
+        mailtoUrl={mailtoUrl}
+      />
+
+      <header className={`lg:hidden fixed top-0 left-0 right-0 z-40 backdrop-blur-md ${t.navBg} border-b ${t.border}`}>
         <nav className="max-w-6xl mx-auto px-5 sm:px-8 h-16 flex items-center justify-between">
           <button
             onClick={() => scrollToId("hero")}
@@ -1888,7 +2061,7 @@ function App() {
         )}
       </header>
 
-      <section id="hero" className="relative pt-16 flex items-center overflow-hidden" style={{ minHeight: "92vh" }}>
+      <section id="hero" className="relative pt-16 lg:pt-0 flex items-center overflow-hidden" style={{ minHeight: "92vh" }}>
         <div className="relative max-w-6xl mx-auto px-5 sm:px-8 py-16 sm:py-24 w-full">
           <h1 className="sr-only">Websites on One Side. Networks on the Other.</h1>
 
