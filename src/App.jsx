@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef, useMemo, useCallback } from "react";
 import asset_a1c55936 from "./assets/asset-a1c55936.jpg";
-import asset_0900cf5c from "./assets/asset-0900cf5c.pdf";
-import asset_9c6f492b from "./assets/asset-9c6f492b.pdf";
+import cvPdf from "./assets/Rose_Kate_Zonio_CV.pdf";
 import asset_9fd9590f from "./assets/asset-9fd9590f.png";
 import asset_84111716 from "./assets/asset-84111716.png";
 import asset_96c75af1 from "./assets/asset-96c75af1.png";
@@ -22,7 +21,6 @@ import asset_56bd5b63 from "./assets/asset-56bd5b63.png";
 import asset_a8e20bfa from "./assets/asset-a8e20bfa.png";
 import asset_06a80c2f from "./assets/asset-06a80c2f.jpg";
 import asset_b2fc0f05 from "./assets/asset-b2fc0f05.jpg";
-import asset_f42ac97a from "./assets/asset-f42ac97a.jpg";
 import asset_3e6b708c from "./assets/asset-3e6b708c.jpg";
 import asset_9e429332 from "./assets/asset-9e429332.jpg";
 import asset_54b305ed from "./assets/asset-54b305ed.png";
@@ -36,7 +34,16 @@ import asset_5fd2cb0e from "./assets/asset-5fd2cb0e.png";
 import amaLogo from "./assets/ama-logo.png";
 import appBuildersLogo from "./assets/appbuildersph-logo.png";
 import fgwbLogo from "./assets/forgirlswhobuild-logo.png";
+import ciscoNetConnectLogo from "./assets/cisco-netconnect-pup-logo.jpg";
 import kuryenteThumb from "./assets/kuryentewatch.png";
+import cineDark1 from "./assets/cinelookup-dark-1.jpg";
+import cineDark2 from "./assets/cinelookup-dark-2.jpg";
+import cineDark3 from "./assets/cinelookup-dark-3.jpg";
+import cineDark4 from "./assets/cinelookup-dark-4.jpg";
+import cineLight1 from "./assets/cinelookup-light-1.jpg";
+import cineLight2 from "./assets/cinelookup-light-2.jpg";
+import cineLight3 from "./assets/cinelookup-light-3.jpg";
+import cineLight4 from "./assets/cinelookup-light-4.jpg";
 import hackathonStage from "./assets/appbuilders-hackathon-stage.jpg";
 import hackathonGroup from "./assets/appbuilders-hackathon-group.jpg";
 
@@ -67,7 +74,6 @@ const Github = makeIcon(<path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4
 const GithubIcon = Github;
 const Linkedin = makeIcon(<><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" /><rect width="4" height="12" x="2" y="9" /><circle cx="4" cy="4" r="2" /></>);
 const Download = makeIcon(<><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" y1="15" x2="12" y2="3" /></>);
-const Eye = makeIcon(<><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z" /><circle cx="12" cy="12" r="3" /></>);
 const Sun = makeIcon(<><circle cx="12" cy="12" r="4" /><path d="M12 2v2" /><path d="M12 20v2" /><path d="m4.93 4.93 1.41 1.41" /><path d="m17.66 17.66 1.41 1.41" /><path d="M2 12h2" /><path d="M20 12h2" /><path d="m6.34 17.66-1.41 1.41" /><path d="m19.07 4.93-1.41 1.41" /></>);
 const Moon = makeIcon(<path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />);
 const ArrowUp = makeIcon(<><path d="m5 12 7-7 7 7" /><path d="M12 19V5" /></>);
@@ -114,27 +120,7 @@ const PROFILE = {
 
 const hasLink = (u) => !!u && u !== "#";
 
-const RESUME_FILES = [
-  {
-    label: "Software CV",
-    eyebrow: "Software Engineering · Full-Stack · QA",
-    filename: "Rose_Kate_Zonio_Software_CV.pdf",
-    url: asset_0900cf5c,
-    blurb:
-      "Targets Software Engineering, Full-Stack Development, and QA internships. Leads with URSAC Simulation Academy, Salo Sa Antipolo, and CineLookUp.",
-    tags: ["Python", "JavaScript", "React", "Node.js", "Laravel", "Django", "MySQL", "Firebase"],
-  },
-  {
-    label: "Network CV",
-    eyebrow: "Network Administration · IT Support · Cybersecurity",
-    filename: "Rose_Kate_Zonio_Network_CV.pdf",
-    url: asset_9c6f492b,
-    blurb:
-      "Targets Network Administration, IT Support, and Cybersecurity internships. Leads with the Home Network Device Monitor and SPES IT support experience.",
-    tags: ["TCP/IP", "Subnetting", "DNS/DHCP", "VLANs", "Cisco Packet Tracer", "Network Security"],
-  },
-];
-const RESUMES = RESUME_FILES;
+const RESUME_URL = cvPdf;
 
 const NAV_LINKS = [
   { id: "about", label: "About" },
@@ -277,7 +263,7 @@ const WEB_APPS_LIST = [
     status: "Completed",
     description: [
       "A ",
-      { hl: "group academic project" },
+      { hl: "solo project" },
       " centered on ",
       { hl: "API integration" },
       " — pulling live movie listings, details, and search results from an external data source instead of a static database.",
@@ -285,13 +271,16 @@ const WEB_APPS_LIST = [
     highlights: [
       "Live movie data pulled from a third-party API",
       "Search and browse interface for exploring titles",
-      "Built and delivered as a team academic project",
+      "Watchlists, ratings and private lists synced to each user's account",
+      "Designed and built solo, end to end",
     ],
     tags: ["React", "Vite", "JavaScript", "HTML", "Firebase", "TMDb API"],
     github: "https://github.com/arkyxo/CineLookUp",
-    docs: "https://drive.google.com/file/d/1XKAlyra-MNK6gRcbQP-T2tMv4SkDx6T6/view?usp=drive_link",
     privateDemo: true,
-    thumbnail: asset_f42ac97a,
+    thumbnail: cineLight1,
+    thumbnailDark: cineDark1,
+    gallery: [cineLight1, cineLight2, cineLight3, cineLight4],
+    galleryDark: [cineDark1, cineDark2, cineDark3, cineDark4],
   },
   {
     title: "Salo Sa Antipolo",
@@ -318,7 +307,6 @@ const WEB_APPS_LIST = [
     ],
     tags: ["HTML", "CSS", "JavaScript", "Python", "React", "Firebase", "Tailwind"],
     github: "https://github.com/EngrPrenz/Salo-sa-SD",
-    docs: "#",
     privateDemo: true,
     thumbnail: asset_3e6b708c,
   },
@@ -392,6 +380,8 @@ const trackOf = (title) => {
   if (inSoftware && inNetwork) return "Both";
   return inSoftware ? "Software" : "Networking & IT";
 };
+const thumbFor = (p, isDark) => (isDark && p.thumbnailDark) || p.thumbnail;
+const galleryFor = (p, isDark) => (isDark && p.galleryDark) || p.gallery;
 const taglineOf = (p) => (p.eyebrow ? p.eyebrow.split(" · ")[0] : p.meta);
 const slugOf = (title) => title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 const PROJECT_BY_SLUG = Object.fromEntries(ALL_PROJECTS.map((p) => [slugOf(p.title), p]));
@@ -439,8 +429,8 @@ const FEATURED_ACTIVITY = {
   image: hackathonGroup,
   inset: hackathonStage,
   links: [
-    { label: "Read my LinkedIn post", url: HACKATHON_LINKEDIN },
-    { label: "See the project on GitHub", url: KURYENTE_GITHUB },
+    { label: "Read my LinkedIn post", short: "LinkedIn post", url: HACKATHON_LINKEDIN },
+    { label: "See the project on GitHub", short: "GitHub repo", url: KURYENTE_GITHUB },
   ],
 };
 
@@ -501,6 +491,15 @@ const EXPERIENCE = [
     duration: "Oct 2026 — Present",
     type: "Organization · Member",
     description: "Accepted into the For Girls Who Build community in October 2026.",
+  },
+  {
+    company: "Cisco NetConnect PUP – Manila",
+    pathway: "organization",
+    position: "Enterprise Networking Cadet",
+    logo: ciscoNetConnectLogo,
+    duration: "Oct 2026 — Present",
+    type: "Organization · Member",
+    description: "Accepted member of the organization, recognized for dedication and potential in networking and technology.",
   },
   {
     company: "Association of Concerned Computer Engineering Students (ACCESS)",
@@ -815,9 +814,16 @@ function ActivityLink({ link, t, isDark }) {
       href={link.url}
       target="_blank"
       rel="noreferrer"
-      className={`group inline-flex items-center gap-2 border-b pb-1.5 font-body text-sm font-medium ${t.text} ${isDark ? "border-neutral-600" : "border-slate-300"} hover:border-red-400 hover:text-red-400 transition-colors`}
+      className={`group inline-flex shrink-0 items-center gap-2 whitespace-nowrap border-b pb-1.5 font-body text-sm font-medium ${t.text} ${isDark ? "border-neutral-600" : "border-slate-300"} hover:border-red-400 hover:text-red-400 transition-colors`}
     >
-      {link.label}
+      {link.short ? (
+        <>
+          <span className="sm:hidden">{link.short}</span>
+          <span className="hidden sm:inline">{link.label}</span>
+        </>
+      ) : (
+        link.label
+      )}
       <ArrowUpRight size={14} className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
     </a>
   );
@@ -864,7 +870,7 @@ function LatestActivities({ t, isDark }) {
               <MapPin size={15} /> {f.location}
             </p>
             <p className={`font-body text-base leading-relaxed ${t.textMuted} mt-5 max-w-lg`}>{f.description}</p>
-            <div className="flex flex-wrap gap-x-8 gap-y-4 mt-8">
+            <div className="flex flex-nowrap items-center gap-x-6 sm:gap-x-8 mt-8">
               {f.links.map((link) => (
                 <ActivityLink key={link.label} link={link} t={t} isDark={isDark} />
               ))}
@@ -1474,7 +1480,7 @@ function SkillsArchive({ t, onClose, isDark }) {
   );
 }
 
-function ProjectArchive({ t, onClose }) {
+function ProjectArchive({ t, isDark, onClose }) {
   useEffect(() => {
     const onKey = (e) => e.key === "Escape" && onClose();
     window.addEventListener("keydown", onKey);
@@ -1495,7 +1501,7 @@ function ProjectArchive({ t, onClose }) {
             <li key={p.title} className={`border-b ${t.border}`}>
               <a href={`#${slugOf(p.title)}`} className="group flex items-center gap-4 sm:gap-5 py-4 sm:py-5">
                 <div className={`shrink-0 w-16 h-11 sm:w-20 sm:h-14 rounded-lg border ${t.border} overflow-hidden ${t.surfaceSolid}`}>
-                  {p.thumbnail && <img src={p.thumbnail} alt="" loading="lazy" className="h-full w-full object-cover" />}
+                  {p.thumbnail && <img src={thumbFor(p, isDark)} alt="" loading="lazy" className="h-full w-full object-cover" />}
                 </div>
                 <div className="min-w-0 flex-1">
                   <div className="flex flex-wrap items-center gap-2">
@@ -1513,21 +1519,21 @@ function ProjectArchive({ t, onClose }) {
   );
 }
 
-function ProjectDetail({ t, project: p, onBack }) {
+function ProjectDetail({ t, isDark, project: p, onBack }) {
   useEffect(() => {
     const onKey = (e) => e.key === "Escape" && onBack();
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [onBack]);
 
-  const images = (p.gallery && p.gallery.length ? p.gallery : [p.thumbnail]).filter(Boolean);
+  const gallery = galleryFor(p, isDark);
+  const images = (gallery && gallery.length ? gallery : [thumbFor(p, isDark)]).filter(Boolean);
   const [slide, setSlide] = useState(0);
   const idx = ALL_PROJECTS.indexOf(p);
   const next = ALL_PROJECTS[(idx + 1) % ALL_PROJECTS.length];
   const links = [
     hasLink(p.view) && { label: /roblox\.com/.test(p.view) ? "Play on Roblox" : "Live demo", href: p.view },
     hasLink(p.github) && { label: "GitHub", href: p.github },
-    hasLink(p.docs) && { label: "Docs", href: p.docs },
   ].filter(Boolean);
   const navBtn = `h-10 w-10 rounded-full border ${t.border} flex items-center justify-center transition-colors hover:border-red-400 hover:text-red-400 disabled:opacity-30 disabled:pointer-events-none`;
 
@@ -1621,87 +1627,6 @@ function ProjectDetail({ t, project: p, onBack }) {
   );
 }
 
-function ResumeArchive({ t, onClose, isDark }) {
-  const [files, setFiles] = useState(RESUME_FILES);
-
-  useEffect(() => {
-    const onKey = (e) => e.key === "Escape" && onClose();
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [onClose]);
-
-  useEffect(() => {
-    const created = [];
-    const withBlobs = RESUME_FILES.map((r) => {
-      try {
-        const [header, base64] = r.url.split(",");
-        const mime = header.match(/:(.*?);/)[1];
-        const binary = atob(base64);
-        const bytes = new Uint8Array(binary.length);
-        for (let i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
-        const blobUrl = URL.createObjectURL(new Blob([bytes], { type: mime }));
-        created.push(blobUrl);
-        return { ...r, viewUrl: blobUrl };
-      } catch {
-        return { ...r, viewUrl: r.url };
-      }
-    });
-    setFiles(withBlobs);
-    return () => created.forEach((u) => URL.revokeObjectURL(u));
-  }, []);
-
-  return (
-    <div className={`fixed inset-0 z-[60] overflow-y-auto ${t.bg} ${t.text}`}>
-      <div className="max-w-4xl mx-auto px-5 sm:px-8 py-10 sm:py-14">
-        <button onClick={onClose} className={`inline-flex items-center gap-2 font-mono text-xs ${t.textMuted} hover:text-red-400 transition-colors`}>
-          <ArrowRight size={14} className="rotate-180" /> Back to portfolio
-        </button>
-        <h1 className="font-display font-bold text-4xl sm:text-6xl mt-12">Resumes</h1>
-        <p className={`font-mono text-sm ${t.accent} mt-3`}>Two versions, tailored to what I'm applying for.</p>
-
-        <div className="grid sm:grid-cols-2 gap-6 mt-12">
-          {files.map((r) => (
-            <div key={r.label} className={`h-full flex flex-col rounded-2xl border ${t.border} ${t.surface} p-6 card-glow`}>
-              <p className={`font-mono text-[10px] tracking-widest uppercase ${t.accent}`}>{r.eyebrow}</p>
-              <h3 className={`font-display font-bold text-xl mt-2 ${t.text}`}>{r.label}</h3>
-              <p className={`font-body text-sm leading-relaxed ${t.textMuted} mt-3 flex-1`}>{r.blurb}</p>
-              <div className="flex flex-wrap gap-1.5 mt-4">
-                {r.tags.map((tag) => (
-                  <span
-                    key={tag}
-                    className={`font-mono text-[10px] px-2 py-1 rounded-md border ${t.border} ${
-                      isDark ? "bg-black/40" : "bg-slate-50"
-                    } ${t.textMuted}`}
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
-              <div className="flex gap-2.5 mt-6">
-                <a
-                  href={r.viewUrl || r.url}
-                  target="_blank"
-                  rel="noreferrer"
-                  className={`flex-1 inline-flex items-center justify-center gap-2 rounded-lg border ${t.border} px-4 py-2.5 font-mono text-xs ${t.textMuted} hover:${t.accent} hover:border-red-400/50 transition-colors`}
-                >
-                  View <Eye size={14} />
-                </a>
-                <a
-                  href={r.viewUrl || r.url}
-                  download={r.filename}
-                  className={`flex-1 inline-flex items-center justify-center gap-2 rounded-lg border border-red-400 px-4 py-2.5 font-mono text-xs ${t.accent} hover:bg-red-400/10 transition-colors`}
-                >
-                  Download <Download size={14} />
-                </a>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-}
-
 const SIDEBAR_GROUPS = [
   {
     label: null,
@@ -1726,14 +1651,15 @@ const SIDEBAR_GROUPS = [
   {
     label: "Links",
     items: [
-      { action: "resume", label: "Resume", Icon: Download, count: RESUMES.length },
+      { href: RESUME_URL, label: "Resume", Icon: Download },
       { href: PROFILE.github, label: "GitHub", Icon: Github },
       { href: PROFILE.linkedin, label: "LinkedIn", Icon: Linkedin },
     ],
   },
 ];
 
-function Sidebar({ t, isDark, collapsed, onToggleCollapse, activeId, onNavigate, onToggleTheme, onOpenResumes, mailtoUrl }) {
+function Sidebar({ t, isDark, collapsed: collapsedPref, onToggleCollapse, activeId, onNavigate, onToggleTheme, mailtoUrl, mobile = false, open = false, onClose }) {
+  const collapsed = !mobile && collapsedPref;
   const hoverText = isDark ? "hover:text-neutral-100" : "hover:text-slate-900";
   const hoverBg = isDark ? "hover:bg-white/5" : "hover:bg-slate-900/[0.04]";
   const activeBg = isDark ? "bg-white/[0.06]" : "bg-slate-900/[0.05]";
@@ -1741,10 +1667,17 @@ function Sidebar({ t, isDark, collapsed, onToggleCollapse, activeId, onNavigate,
 
   return (
     <aside
-      aria-label="Sidebar"
-      className={`hidden lg:flex fixed top-3 bottom-3 left-3 z-40 flex-col rounded-3xl border ${t.border} backdrop-blur-md ${t.navBg} transition-[width] duration-300 overflow-hidden ${
-        collapsed ? "w-[4.5rem]" : "w-64"
-      }`}
+      aria-label={mobile ? "Menu" : "Sidebar"}
+      {...(mobile && !open ? { inert: "", "aria-hidden": true } : {})}
+      className={
+        mobile
+          ? `lg:hidden fixed top-3 bottom-3 right-3 z-[55] flex flex-col w-64 max-w-[calc(100vw-1.5rem)] rounded-3xl border ${t.border} backdrop-blur-md ${t.navBg} overflow-hidden transition-transform duration-300 ${
+              open ? "translate-x-0" : "translate-x-[calc(100%+1rem)]"
+            }`
+          : `hidden lg:flex fixed top-3 bottom-3 left-3 z-40 flex-col rounded-3xl border ${t.border} backdrop-blur-md ${t.navBg} transition-[width] duration-300 overflow-hidden ${
+              collapsed ? "w-[4.5rem]" : "w-64"
+            }`
+      }
     >
       <div className={`h-16 shrink-0 flex items-center ${collapsed ? "justify-center" : "justify-between pl-6 pr-3"}`}>
         {!collapsed && (
@@ -1756,15 +1689,25 @@ function Sidebar({ t, isDark, collapsed, onToggleCollapse, activeId, onNavigate,
             {PROFILE.name}
           </button>
         )}
-        <button
-          onClick={onToggleCollapse}
-          aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
-          aria-expanded={!collapsed}
-          title={collapsed ? "Expand sidebar" : "Collapse sidebar"}
-          className={`h-9 w-9 rounded-xl flex items-center justify-center ${t.textMuted} ${hoverBg} hover:text-red-400 transition-colors`}
-        >
-          <PanelLeft size={17} />
-        </button>
+        {mobile ? (
+          <button
+            onClick={onClose}
+            aria-label="Close menu"
+            className={`h-9 w-9 rounded-xl flex items-center justify-center ${t.textMuted} ${hoverBg} hover:text-red-400 transition-colors`}
+          >
+            <X size={17} />
+          </button>
+        ) : (
+          <button
+            onClick={onToggleCollapse}
+            aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
+            aria-expanded={!collapsed}
+            title={collapsed ? "Expand sidebar" : "Collapse sidebar"}
+            className={`h-9 w-9 rounded-xl flex items-center justify-center ${t.textMuted} ${hoverBg} hover:text-red-400 transition-colors`}
+          >
+            <PanelLeft size={17} />
+          </button>
+        )}
       </div>
 
       <div className={collapsed ? "px-3" : "px-4"}>
@@ -1796,7 +1739,7 @@ function Sidebar({ t, isDark, collapsed, onToggleCollapse, activeId, onNavigate,
                 const Tag = item.href ? "a" : "button";
                 const linkProps = item.href
                   ? { href: item.href, target: "_blank", rel: "noopener noreferrer" }
-                  : { onClick: item.action === "resume" ? onOpenResumes : () => onNavigate(item.id) };
+                  : { onClick: () => onNavigate(item.id) };
                 return (
                   <li key={item.label}>
                     <Tag
@@ -1842,7 +1785,7 @@ function Sidebar({ t, isDark, collapsed, onToggleCollapse, activeId, onNavigate,
 }
 
 function App() {
-  const [isDark, setIsDark] = useState(false);
+  const [isDark, setIsDark] = useState(true);
   const [menuOpen, setMenuOpen] = useState(false);
   const [projectTab, setProjectTab] = useState("webapps");
   const [projectSearch, setProjectSearch] = useState("");
@@ -1983,21 +1926,16 @@ function App() {
     setSkillsOpen(false);
   }, []);
 
-  const [resumesOpen, setResumesOpen] = useState(false);
   useEffect(() => {
-    const sync = () => setResumesOpen(window.location.hash === "#resumes");
-    sync();
-    window.addEventListener("hashchange", sync);
-    return () => window.removeEventListener("hashchange", sync);
-  }, []);
+    document.body.style.overflow = menuOpen || archiveOpen || skillsOpen || projectSlug ? "hidden" : "";
+  }, [menuOpen, archiveOpen, skillsOpen, projectSlug]);
   useEffect(() => {
-    document.body.style.overflow = resumesOpen || archiveOpen || skillsOpen || projectSlug ? "hidden" : "";
-  }, [resumesOpen, archiveOpen, skillsOpen, projectSlug]);
-  const openResumes = () => { window.location.hash = "resumes"; };
-  const closeResumes = useCallback(() => {
-    window.history.replaceState(null, "", window.location.pathname + window.location.search);
-    setResumesOpen(false);
-  }, []);
+    if (!menuOpen) return;
+    const onKey = (e) => e.key === "Escape" && setMenuOpen(false);
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [menuOpen]);
+  const openResumes = () => window.open(RESUME_URL, "_blank", "noopener");
   const featured = (projectTab === "labs" ? LABS : WEB_APPS).slice(0, 3);
   const [revealed, setRevealed] = useState({});
   const toggleReveal = (title) => setRevealed((r) => ({ ...r, [title]: !r[title] }));
@@ -2078,7 +2016,23 @@ function App() {
         activeId={activeId}
         onNavigate={scrollToId}
         onToggleTheme={() => setIsDark((d) => !d)}
-        onOpenResumes={openResumes}
+        mailtoUrl={mailtoUrl}
+      />
+
+      <div
+        aria-hidden="true"
+        onClick={() => setMenuOpen(false)}
+        className={`lg:hidden fixed inset-0 z-50 bg-black/50 transition-opacity duration-300 ${menuOpen ? "opacity-100" : "opacity-0 pointer-events-none"}`}
+      />
+      <Sidebar
+        mobile
+        open={menuOpen}
+        onClose={() => setMenuOpen(false)}
+        t={t}
+        isDark={isDark}
+        activeId={activeId}
+        onNavigate={scrollToId}
+        onToggleTheme={() => setIsDark((d) => !d)}
         mailtoUrl={mailtoUrl}
       />
 
@@ -2092,24 +2046,6 @@ function App() {
             {PROFILE.name}
           </button>
 
-          <div className={`hidden md:flex items-center gap-1 rounded-full border ${t.border} p-1 font-mono text-[11px] tracking-wide uppercase`}>
-            {NAV_LINKS.map((link) => {
-              const active = activeId === link.id;
-              return (
-                <button
-                  key={link.id}
-                  onClick={() => scrollToId(link.id)}
-                  aria-current={active ? "true" : undefined}
-                  className={`rounded-full px-3.5 py-1.5 transition-colors ${
-                    active ? `${isDark ? "bg-neutral-800" : "bg-slate-100"} ${t.accent}` : `${t.textMuted} ${isDark ? "hover:text-neutral-100" : "hover:text-slate-900"}`
-                  }`}
-                >
-                  {link.label}
-                </button>
-              );
-            })}
-          </div>
-
           <div className="flex items-center gap-2">
             <button
               aria-label="Toggle theme"
@@ -2122,7 +2058,7 @@ function App() {
               aria-label="Toggle menu"
               aria-expanded={menuOpen}
               onClick={() => setMenuOpen((o) => !o)}
-              className={`md:hidden h-9 w-9 rounded-full flex items-center justify-center transition-colors ${
+              className={`h-9 w-9 rounded-full flex items-center justify-center transition-colors ${
                 menuOpen ? `border border-red-400 ${t.accent}` : `border ${t.border} ${t.textMuted}`
               }`}
             >
@@ -2130,33 +2066,6 @@ function App() {
             </button>
           </div>
         </nav>
-
-        {menuOpen && (
-          <div className={`md:hidden border-t ${t.border} ${t.bg} px-5 pt-2 pb-5`}>
-            <ul className={`divide-y ${isDark ? "divide-neutral-800" : "divide-slate-200"}`}>
-              {NAV_LINKS.map((link, i) => {
-                const active = activeId === link.id;
-                return (
-                  <li key={link.id}>
-                    <button
-                      onClick={() => scrollToId(link.id)}
-                      aria-current={active ? "true" : undefined}
-                      className="group w-full flex items-center gap-4 py-3.5 text-left"
-                    >
-                      <span className={`font-mono text-[10px] tracking-widest ${active ? t.accent : t.textFaint}`}>
-                        {String(i + 1).padStart(2, "0")}
-                      </span>
-                      <span className={`flex-1 font-display font-semibold text-lg tracking-tight ${active ? t.accent : t.text} group-hover:text-red-400 transition-colors`}>
-                        {link.label}
-                      </span>
-                      <ArrowRight size={15} className={`${active ? t.accent : t.textFaint} transition-transform group-hover:translate-x-0.5`} />
-                    </button>
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
-        )}
       </header>
 
       <section id="hero" className="relative pt-16 lg:pt-0 flex items-center overflow-hidden" style={{ minHeight: "92vh" }}>
@@ -2287,9 +2196,9 @@ function App() {
               <span className={`font-mono text-xs tracking-widest ${t.textFaint} hidden sm:inline`}>EDUCATION</span>
             </div>
           </Reveal>
-          <div className="grid sm:grid-cols-2 gap-6">
+          <div className="-mx-5 -my-4 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 py-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:mx-0 sm:my-0 sm:grid sm:grid-cols-2 sm:gap-6 sm:overflow-visible sm:p-0">
             {EDUCATION.map((edu, i) => (
-              <Reveal key={edu.program} delay={i * 100}>
+              <Reveal key={edu.program} delay={i * 100} className="w-[85%] shrink-0 snap-center sm:w-auto">
                 <EducationCard edu={edu} t={t} isDark={isDark} />
               </Reveal>
             ))}
@@ -2385,7 +2294,7 @@ function App() {
                       {item.thumbnail ? (
                         <>
                           <img
-                            src={item.thumbnail}
+                            src={thumbFor(item, isDark)}
                             alt={`${item.title} preview`}
                             loading="lazy"
                             decoding="async"
@@ -2614,16 +2523,6 @@ function App() {
                       </p>
                       <h3 className={`font-display font-semibold text-xl sm:text-2xl tracking-tight leading-snug ${t.text} mt-2`}>{cert.name}</h3>
                       <p className={`font-body text-sm ${t.textMuted} mt-1`}>{cert.org}</p>
-                      <p className={`font-body text-sm leading-relaxed ${t.textFaint} mt-5`}>
-                        {cert.skills.map((skill, si) => (
-                          <span key={skill}>
-                            <span className={`whitespace-nowrap ${t.textMuted}`}>
-                              {skill}
-                              {si < cert.skills.length - 1 && <span className={`ml-1 ${t.accent}`}>/</span>}
-                            </span>{" "}
-                          </span>
-                        ))}
-                      </p>
                     </div>
 
                     <div className={`relative border-t border-dashed ${isDark ? "border-neutral-700" : "border-slate-300"} px-6 sm:px-8 py-5 flex flex-wrap items-center justify-between gap-4`}>
@@ -2675,10 +2574,9 @@ function App() {
         </div>
       </footer>
 
-      {archiveOpen && <ProjectArchive t={t} onClose={closeArchive} />}
-      {projectSlug && <ProjectDetail key={projectSlug} t={t} project={PROJECT_BY_SLUG[projectSlug]} onBack={closeProject} />}
+      {archiveOpen && <ProjectArchive t={t} isDark={isDark} onClose={closeArchive} />}
+      {projectSlug && <ProjectDetail key={projectSlug} t={t} isDark={isDark} project={PROJECT_BY_SLUG[projectSlug]} onBack={closeProject} />}
       {skillsOpen && <SkillsArchive t={t} onClose={closeSkills} isDark={isDark} />}
-      {resumesOpen && <ResumeArchive t={t} onClose={closeResumes} isDark={isDark} />}
 
       {showTop && !menuOpen && (
         <button
