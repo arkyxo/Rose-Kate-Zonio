@@ -272,7 +272,7 @@ const WEB_APPS_LIST = [
   {
     title: "CineLookUp",
     eyebrow: "Movie Browsing App",
-    meta: "Group Project · Academic · Apr 2024",
+    meta: "Independent Project · Apr 2024",
     category: "Academic",
     status: "Completed",
     description: [
@@ -296,7 +296,7 @@ const WEB_APPS_LIST = [
   {
     title: "Salo Sa Antipolo",
     eyebrow: "Restaurant POS System",
-    meta: "Client Project · Jan 2026",
+    meta: "Academic / Client Project · Jan 2026",
     category: "Freelance",
     status: "Completed",
     description: [
@@ -1500,9 +1500,6 @@ function ProjectArchive({ t, onClose }) {
                 <div className="min-w-0 flex-1">
                   <div className="flex flex-wrap items-center gap-2">
                     <span className="font-display font-semibold group-hover:text-red-400 transition-colors">{p.title}</span>
-                    {p.category && (
-                      <span className={`text-xs ${t.textFaint}`}>{p.category}</span>
-                    )}
                   </div>
                   <p className={`text-sm ${t.textMuted} mt-1 leading-snug`}>{taglineOf(p)}</p>
                 </div>
