@@ -1,51 +1,6 @@
 import React, { useState, useEffect, useRef, useMemo, useCallback } from "react";
-import asset_a1c55936 from "./assets/asset-a1c55936.jpg";
+import { img, useRemoteImages } from "./images.js";
 import cvPdf from "./assets/Rose_Kate_Zonio_CV.pdf";
-import asset_9fd9590f from "./assets/asset-9fd9590f.png";
-import asset_84111716 from "./assets/asset-84111716.png";
-import asset_96c75af1 from "./assets/asset-96c75af1.png";
-import asset_b5acca38 from "./assets/asset-b5acca38.png";
-import asset_12b1b727 from "./assets/asset-12b1b727.png";
-import asset_2567e649 from "./assets/asset-2567e649.png";
-import asset_dc866c64 from "./assets/asset-dc866c64.png";
-import asset_e9ee8d5e from "./assets/asset-e9ee8d5e.png";
-import asset_44876619 from "./assets/asset-44876619.png";
-import asset_3c66e1fc from "./assets/asset-3c66e1fc.png";
-import asset_247d2abe from "./assets/asset-247d2abe.png";
-import asset_83b2b79f from "./assets/asset-83b2b79f.png";
-import asset_b5f6c886 from "./assets/asset-b5f6c886.png";
-import asset_b1aa8886 from "./assets/asset-b1aa8886.png";
-import asset_c5fca167 from "./assets/asset-c5fca167.png";
-import asset_5994d1fb from "./assets/asset-5994d1fb.png";
-import asset_56bd5b63 from "./assets/asset-56bd5b63.png";
-import asset_a8e20bfa from "./assets/asset-a8e20bfa.png";
-import asset_06a80c2f from "./assets/asset-06a80c2f.jpg";
-import asset_b2fc0f05 from "./assets/asset-b2fc0f05.jpg";
-import asset_3e6b708c from "./assets/asset-3e6b708c.jpg";
-import asset_9e429332 from "./assets/asset-9e429332.jpg";
-import asset_54b305ed from "./assets/asset-54b305ed.png";
-import asset_4ce99605 from "./assets/asset-4ce99605.png";
-import asset_11af5d6e from "./assets/asset-11af5d6e.png";
-import techbizLogo from "./assets/techbizacademy-logo.png";
-import asset_77ad849f from "./assets/asset-77ad849f.png";
-import asset_39871438 from "./assets/asset-39871438.png";
-import asset_96851f8e from "./assets/asset-96851f8e.png";
-import asset_5fd2cb0e from "./assets/asset-5fd2cb0e.png";
-import amaLogo from "./assets/ama-logo.png";
-import appBuildersLogo from "./assets/appbuildersph-logo.png";
-import fgwbLogo from "./assets/forgirlswhobuild-logo.png";
-import ciscoNetConnectLogo from "./assets/cisco-netconnect-pup-logo.jpg";
-import kuryenteThumb from "./assets/kuryentewatch.png";
-import cineDark1 from "./assets/cinelookup-dark-1.jpg";
-import cineDark2 from "./assets/cinelookup-dark-2.jpg";
-import cineDark3 from "./assets/cinelookup-dark-3.jpg";
-import cineDark4 from "./assets/cinelookup-dark-4.jpg";
-import cineLight1 from "./assets/cinelookup-light-1.jpg";
-import cineLight2 from "./assets/cinelookup-light-2.jpg";
-import cineLight3 from "./assets/cinelookup-light-3.jpg";
-import cineLight4 from "./assets/cinelookup-light-4.jpg";
-import hackathonStage from "./assets/appbuilders-hackathon-stage.jpg";
-import hackathonGroup from "./assets/appbuilders-hackathon-group.jpg";
 
 function makeIcon(paths) {
   return function Icon({ size = 24, className = "", ...props }) {
@@ -112,6 +67,7 @@ const PROFILE = {
   role: "Software & Networking/IT",
   subrole: "Computer Engineering · Software & Networking/IT",
   email: "rkzonio1@gmail.com",
+  photo: "asset-a1c55936",
   github: "https://github.com/arkyxo",
   githubUsername: "arkyxo",
   linkedin: "https://www.linkedin.com/in/rkzonio/",
@@ -145,23 +101,23 @@ const SKILLS = [
     blurb: "Full-stack web, Python, Lua, databases",
     icon: Code2,
     items: [
-      { name: "JavaScript", level: "working", abbr: "JS" , icon: asset_9fd9590f },
-      { name: "HTML", level: "working", abbr: "HTML" , icon: asset_84111716 },
-      { name: "CSS", level: "working", abbr: "CSS" , icon: asset_96c75af1 },
-      { name: "React", level: "working", abbr: "JSX" , icon: asset_b5acca38 },
-      { name: "Tailwind CSS", level: "working", abbr: "TW" , icon: asset_12b1b727 },
-      { name: "Python", level: "working", abbr: "PY" , icon: asset_2567e649 },
-      { name: "Lua (Roblox)", level: "working", abbr: "LUA" , icon: asset_dc866c64 },
-      { name: "Git", level: "working", abbr: "GIT", icon: asset_e9ee8d5e },
-      { name: "GitHub", level: "working", abbr: "GH", icon: asset_44876619 },
-      { name: "VS Code", level: "working", abbr: "VS", icon: asset_3c66e1fc },
-      { name: "Microsoft SQL Server", level: "basic", abbr: "MS", icon: asset_247d2abe },
-      { name: "Firebase / Firestore", level: "basic", abbr: "FB" , icon: asset_83b2b79f },
-      { name: "SQL", level: "basic", abbr: "SQL" , icon: asset_b5f6c886 },
-      { name: "MySQL", level: "basic", abbr: "My" , icon: asset_b1aa8886 },
-      { name: "PostgreSQL", level: "learning", abbr: "PG" , icon: asset_c5fca167 },
-      { name: "R", level: "learning", abbr: "R" , icon: asset_5994d1fb },
-      { name: "Docker", level: "learning", abbr: "DKR" , icon: asset_56bd5b63 },
+      { name: "JavaScript", level: "working", abbr: "JS" , icon: "asset-9fd9590f" },
+      { name: "HTML", level: "working", abbr: "HTML" , icon: "asset-84111716" },
+      { name: "CSS", level: "working", abbr: "CSS" , icon: "asset-96c75af1" },
+      { name: "React", level: "working", abbr: "JSX" , icon: "asset-b5acca38" },
+      { name: "Tailwind CSS", level: "working", abbr: "TW" , icon: "asset-12b1b727" },
+      { name: "Python", level: "working", abbr: "PY" , icon: "asset-2567e649" },
+      { name: "Lua (Roblox)", level: "working", abbr: "LUA" , icon: "asset-dc866c64" },
+      { name: "Git", level: "working", abbr: "GIT", icon: "asset-e9ee8d5e" },
+      { name: "GitHub", level: "working", abbr: "GH", icon: "asset-44876619" },
+      { name: "VS Code", level: "working", abbr: "VS", icon: "asset-3c66e1fc" },
+      { name: "Microsoft SQL Server", level: "basic", abbr: "MS", icon: "asset-247d2abe" },
+      { name: "Firebase / Firestore", level: "basic", abbr: "FB" , icon: "asset-83b2b79f" },
+      { name: "SQL", level: "basic", abbr: "SQL" , icon: "asset-b5f6c886" },
+      { name: "MySQL", level: "basic", abbr: "My" , icon: "asset-b1aa8886" },
+      { name: "PostgreSQL", level: "learning", abbr: "PG" , icon: "asset-c5fca167" },
+      { name: "R", level: "learning", abbr: "R" , icon: "asset-5994d1fb" },
+      { name: "Docker", level: "learning", abbr: "DKR" , icon: "asset-56bd5b63" },
       { name: "Vite", level: "working", abbr: "VITE", icon: "https://cdn.simpleicons.org/vite" },
       { name: "Node.js", level: "basic", abbr: "NODE", icon: "https://cdn.simpleicons.org/nodedotjs" },
       { name: "Express", level: "basic", abbr: "EXP", icon: "https://cdn.simpleicons.org/express" },
@@ -177,7 +133,7 @@ const SKILLS = [
     blurb: "Subnetting, VLANs, monitoring, IT support",
     icon: Network,
     items: [
-      { name: "Cisco Packet Tracer", level: "working", abbr: "CPT", icon: asset_a8e20bfa },
+      { name: "Cisco Packet Tracer", level: "working", abbr: "CPT", icon: "asset-a8e20bfa" },
       { name: "Subnetting / VLSM", level: "working", abbr: "VLSM" },
       { name: "Python Network Scripting", level: "working", abbr: "PY" },
       { name: "Hardware & Software Troubleshooting", level: "working", abbr: "H/S" },
@@ -215,7 +171,7 @@ const RFID_PROJECT = {
   ],
   tags: ["VB.NET", "SQL", "RFID", "Hardware Integration"],
   github: "https://github.com/EngrPrenz/Robinson-s-Mall-RFID-Parking-System",
-  thumbnail: asset_06a80c2f,
+  thumbnail: "asset-06a80c2f",
 };
 
 const LAB_CATEGORIES = ["All", "Monitoring", "Hardware"];
@@ -241,7 +197,7 @@ const LABS = [
     ],
     tags: ["Python", "SQLite", "Ping Sweep", "Telegram/Discord Alerts"],
     github: "https://github.com/arkyxo/home-network-monitor",
-    thumbnail: asset_b2fc0f05,
+    thumbnail: "asset-b2fc0f05",
   },
   { ...RFID_PROJECT, category: "Hardware" },
 ];
@@ -277,10 +233,10 @@ const WEB_APPS_LIST = [
     tags: ["React", "Vite", "JavaScript", "HTML", "Firebase", "TMDb API"],
     github: "https://github.com/arkyxo/CineLookUp",
     privateDemo: true,
-    thumbnail: cineLight1,
-    thumbnailDark: cineDark1,
-    gallery: [cineLight1, cineLight2, cineLight3, cineLight4],
-    galleryDark: [cineDark1, cineDark2, cineDark3, cineDark4],
+    thumbnail: "cinelookup-light-1",
+    thumbnailDark: "cinelookup-dark-1",
+    gallery: ["cinelookup-light-1", "cinelookup-light-2", "cinelookup-light-3", "cinelookup-light-4"],
+    galleryDark: ["cinelookup-dark-1", "cinelookup-dark-2", "cinelookup-dark-3", "cinelookup-dark-4"],
   },
   {
     title: "Salo Sa Antipolo",
@@ -308,7 +264,7 @@ const WEB_APPS_LIST = [
     tags: ["HTML", "CSS", "JavaScript", "Python", "React", "Firebase", "Tailwind"],
     github: "https://github.com/EngrPrenz/Salo-sa-SD",
     privateDemo: true,
-    thumbnail: asset_3e6b708c,
+    thumbnail: "asset-3e6b708c",
   },
   {
     title: "URSAC Simulation Academy",
@@ -330,7 +286,7 @@ const WEB_APPS_LIST = [
     tags: ["Lua", "Roblox Studio", "Game Design"],
     github: null,
     view: "https://www.roblox.com/games/133137084199842/URSAC-Simulator-Academy",
-    thumbnail: asset_9e429332,
+    thumbnail: "asset-9e429332",
   },
   {
     title: "KuryenteWatch",
@@ -356,7 +312,7 @@ const WEB_APPS_LIST = [
     tags: ["React", "Vite", "Node.js", "Express", "SQLite", "PWA", "Ollama"],
     github: "https://github.com/dioxaaa/Kuryente-Watch-AppBuilder-Hackaton",
     view: "https://dist-web-ddfpdfbm.devinapps.com",
-    thumbnail: kuryenteThumb,
+    thumbnail: "kuryentewatch",
   },
 ];
 
@@ -388,7 +344,7 @@ const PROJECT_BY_SLUG = Object.fromEntries(ALL_PROJECTS.map((p) => [slugOf(p.tit
 
 const CERTIFICATIONS = [
   {
-    image: asset_54b305ed,
+    image: "asset-54b305ed",
     name: "Network Security",
     org: "Google",
     group: "Networking & IT",
@@ -403,7 +359,7 @@ const CERTIFICATIONS = [
     certificateUrl: "https://coursera.org/verify/specialization/YIFFE8OFQH60",
   },
   {
-    image: amaLogo,
+    image: "ama-logo",
     name: "Cyber Threat Intelligence Analysis (CTIA) Level III",
     org: "AMA University · TESDA-recognized · 92-hour training",
     group: "Networking & IT",
@@ -426,8 +382,8 @@ const FEATURED_ACTIVITY = {
   location: "Cyberzone, SM Makati",
   description:
     "24 hours to build, ship, and demo with AI. My team built KuryenteWatch, a local-first household electricity app, during the remote Build Day and pitched it through a video.",
-  image: hackathonGroup,
-  inset: hackathonStage,
+  image: "appbuilders-hackathon-group",
+  inset: "appbuilders-hackathon-stage",
   links: [
     { label: "Read my LinkedIn post", short: "LinkedIn post", url: HACKATHON_LINKEDIN },
     { label: "See the project on GitHub", short: "GitHub repo", url: KURYENTE_GITHUB },
@@ -448,7 +404,7 @@ const EXPERIENCE = [
     company: "TechBizAcademy",
     pathway: "internship",
     position: "SOC Analyst Intern",
-    logo: techbizLogo,
+    logo: "techbizacademy-logo",
     duration: "Oct - Nov (240 Hours)",
     type: "Networking & IT · Internship",
     description: "",
@@ -457,7 +413,7 @@ const EXPERIENCE = [
     company: "AppBuilders PH Hackathon",
     pathway: "hackathon",
     position: "Hackathon",
-    logo: appBuildersLogo,
+    logo: "appbuildersph-logo",
     duration: "Oct 9 — 10, 2026",
     type: "Software · Competition",
     description:
@@ -467,7 +423,7 @@ const EXPERIENCE = [
     company: "GCash Hackathon",
     pathway: "hackathon",
     position: "Hackathon",
-    logo: asset_4ce99605,
+    logo: "asset-4ce99605",
     duration: "Sept 2026",
     type: "Software · Competition",
     description:
@@ -477,7 +433,7 @@ const EXPERIENCE = [
     company: "Special Program for Employment of Students (DOLE)",
     pathway: "work",
     position: "SPES",
-    logo: asset_11af5d6e,
+    logo: "asset-11af5d6e",
     duration: "May 2026",
     type: "Networking & IT · Government Program",
     description:
@@ -487,7 +443,7 @@ const EXPERIENCE = [
     company: "For Girls Who Build",
     pathway: "organization",
     position: "Member",
-    logo: fgwbLogo,
+    logo: "forgirlswhobuild-logo",
     duration: "Oct 2026 — Present",
     type: "Organization · Member",
     description: "Accepted into the For Girls Who Build community in October 2026.",
@@ -496,7 +452,7 @@ const EXPERIENCE = [
     company: "Cisco NetConnect PUP – Manila",
     pathway: "organization",
     position: "Enterprise Networking Cadet",
-    logo: ciscoNetConnectLogo,
+    logo: "cisco-netconnect-pup-logo",
     duration: "Oct 2026 — Present",
     type: "Organization · Member",
     description: "Accepted member of the organization, recognized for dedication and potential in networking and technology.",
@@ -505,7 +461,7 @@ const EXPERIENCE = [
     company: "Association of Concerned Computer Engineering Students (ACCESS)",
     pathway: "organization",
     position: "Technical Team",
-    logo: asset_77ad849f,
+    logo: "asset-77ad849f",
     duration: "2023 — 2024",
     type: "Organization · Member",
     description: "Supported the technical operations and activities of the organization.",
@@ -518,14 +474,14 @@ const EDUCATION = [
     program: "BS in Computer Engineering",
     institution: "University of Rizal System — Antipolo Campus",
     duration: "2023 — 2027",
-    logo: asset_39871438,
+    logo: "asset-39871438",
   },
   {
     level: "Senior High School",
     program: "General Academic Strand (GAS)",
     institution: "San Juan National High School",
     duration: "2021 — 2023",
-    logo: asset_96851f8e,
+    logo: "asset-96851f8e",
   },
 ];
 
@@ -844,7 +800,7 @@ function LatestActivities({ t, isDark }) {
       <Reveal>
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           <div className="relative pb-10 pr-8 sm:pb-14 sm:pr-14">
-            <img src={main.src} alt={main.alt} className={`aspect-[4/3] w-full rounded-3xl object-cover ${main.position} border ${t.border}`} />
+            <img src={img(main.src)} alt={main.alt} className={`aspect-[4/3] w-full rounded-3xl object-cover ${main.position} border ${t.border}`} />
             {f.inset && (
               <button
                 type="button"
@@ -853,7 +809,7 @@ function LatestActivities({ t, isDark }) {
                 title="Swap photos"
                 className={`group absolute bottom-0 right-0 w-32 sm:w-44 overflow-hidden rounded-2xl ring-4 ${isDark ? "ring-black" : "ring-slate-50"} transition-transform hover:scale-[1.03] focus-visible:outline-none focus-visible:ring-red-400`}
               >
-                <img src={small.src} alt={small.alt} className={`block aspect-[4/3] w-full object-cover ${small.position}`} />
+                <img src={img(small.src)} alt={small.alt} className={`block aspect-[4/3] w-full object-cover ${small.position}`} />
                 <span className="absolute bottom-2 left-2 rounded-full bg-black/60 p-1.5 text-white transition-colors group-hover:text-red-400">
                   <ArrowLeftRight size={12} />
                 </span>
@@ -994,7 +950,7 @@ function GithubActivity({ t, isDark }) {
             <div className="flex items-center justify-between gap-4">
               <div className="flex min-w-0 items-center gap-3">
                 <img
-                  src={asset_a1c55936}
+                  src={img(PROFILE.photo)}
                   alt={`${PROFILE.githubUsername} avatar`}
                   className={`h-11 w-11 shrink-0 rounded-2xl object-cover ring-1 ${isDark ? "ring-neutral-700" : "ring-slate-200"}`}
                 />
@@ -1243,7 +1199,7 @@ function ExperienceSplit({ t, isDark, openExp, setOpenExp }) {
                             <span className={`absolute left-0 top-2 bottom-2 w-0.5 rounded-full transition-colors ${current ? "bg-red-400" : "bg-transparent"}`} />
                             <span className={`h-9 w-9 shrink-0 overflow-hidden rounded-lg border ${t.border} ${isDark ? "bg-black/40" : "bg-white"} ${t.accent} flex items-center justify-center`}>
                               {exp.logo ? (
-                                <img src={exp.logo} alt="" className="h-full w-full object-cover" />
+                                <img src={img(exp.logo)} alt="" className="h-full w-full object-cover" />
                               ) : (
                                 <PathIcon size={14} />
                               )}
@@ -1299,7 +1255,7 @@ function ExperienceSplit({ t, isDark, openExp, setOpenExp }) {
             <div key={detailsKey} className="bento-swap-in relative mt-6">
               <div className={`h-16 w-16 lg:h-20 lg:w-20 overflow-hidden rounded-2xl border flex items-center justify-center ${!isDark ? "border-slate-200 bg-slate-50" : "border-white/10 bg-white/5"}`}>
                 {main.logo ? (
-                  <img src={main.logo} alt={`${main.company} logo`} className="h-full w-full object-cover" />
+                  <img src={img(main.logo)} alt={`${main.company} logo`} className="h-full w-full object-cover" />
                 ) : (
                   <ActiveIcon size={28} />
                 )}
@@ -1356,7 +1312,7 @@ function EducationCard({ edu, t, isDark }) {
       <div className="relative flex items-start justify-between gap-4">
         <div className="h-20 w-20 shrink-0 rounded-2xl bg-white shadow-lg shadow-black/10 ring-1 ring-black/5 flex items-center justify-center overflow-hidden p-2">
           {edu.logo ? (
-            <img src={edu.logo} alt={edu.institution} className="h-full w-full object-contain" />
+            <img src={img(edu.logo)} alt={edu.institution} className="h-full w-full object-contain" />
           ) : (
             <span className="font-mono text-base font-bold tracking-wider text-red-500">{initialsOf(edu.institution)}</span>
           )}
@@ -1410,7 +1366,7 @@ const pickSkills = (names) => names.map((n) => ALL_SKILL_ITEMS.find((i) => i.nam
 
 const AI_TOOLING = [
   { name: "Claude", abbr: "CL", icon: "https://cdn.simpleicons.org/claude" },
-  { name: "ChatGPT", abbr: "GPT", icon: asset_5fd2cb0e },
+  { name: "ChatGPT", abbr: "GPT", icon: "asset-5fd2cb0e" },
   { name: "Gemini", abbr: "GEM", icon: "https://cdn.simpleicons.org/googlegemini" },
 ];
 
@@ -1423,6 +1379,24 @@ const SKILL_GROUPS = [
 ];
 const SKILL_TOTAL = SKILL_GROUPS.reduce((n, g) => n + g.items.length, 0);
 
+const IMAGE_FIELDS = ["icon", "thumbnail", "thumbnailDark", "gallery", "galleryDark", "image", "inset", "logo"];
+export const IMAGE_SLOTS = (() => {
+  const slots = { [PROFILE.photo]: ["Profile photo"] };
+  const sources = [...ALL_SKILL_ITEMS, ...AI_TOOLING, ...ALL_PROJECTS, ...CERTIFICATIONS, FEATURED_ACTIVITY, ...EXPERIENCE, ...EDUCATION];
+  for (const item of sources) {
+    const name = item.name || item.title || item.company || item.institution || "Item";
+    for (const field of IMAGE_FIELDS) {
+      const keys = [].concat(item[field] || []).filter((k) => typeof k === "string" && /^[a-z0-9][a-z0-9-]*$/.test(k));
+      keys.forEach((key, i) => {
+        const label = `${name} · ${field}${keys.length > 1 ? ` ${i + 1}` : ""}`;
+        slots[key] = slots[key] || [];
+        if (!slots[key].includes(label)) slots[key].push(label);
+      });
+    }
+  }
+  return slots;
+})();
+
 function SkillTile({ item, t, isDark }) {
   const [broken, setBroken] = useState(false);
   const showImg = item.icon && !broken;
@@ -1432,7 +1406,7 @@ function SkillTile({ item, t, isDark }) {
         <div className={`h-14 w-14 rounded-2xl border ${t.border} ${isDark ? "bg-black/40" : "bg-slate-50"} flex items-center justify-center p-1.5 card-glow`}>
           {showImg ? (
             <div className="h-full w-full rounded-lg bg-white flex items-center justify-center p-1 shadow-sm">
-              <img src={item.icon} alt={item.name} onError={() => setBroken(true)} className="h-full w-full object-contain" />
+              <img src={img(item.icon)} alt={item.name} onError={() => setBroken(true)} className="h-full w-full object-contain" />
             </div>
           ) : (
             <span className={`font-mono text-[11px] font-bold tracking-wider ${t.accent}`}>{item.abbr}</span>
@@ -1501,7 +1475,7 @@ function ProjectArchive({ t, isDark, onClose }) {
             <li key={p.title} className={`border-b ${t.border}`}>
               <a href={`#${slugOf(p.title)}`} className="group flex items-center gap-4 sm:gap-5 py-4 sm:py-5">
                 <div className={`shrink-0 w-16 h-11 sm:w-20 sm:h-14 rounded-lg border ${t.border} overflow-hidden ${t.surfaceSolid}`}>
-                  {p.thumbnail && <img src={thumbFor(p, isDark)} alt="" loading="lazy" className="h-full w-full object-cover" />}
+                  {p.thumbnail && <img src={img(thumbFor(p, isDark))} alt="" loading="lazy" className="h-full w-full object-cover" />}
                 </div>
                 <div className="min-w-0 flex-1">
                   <div className="flex flex-wrap items-center gap-2">
@@ -1566,7 +1540,7 @@ function ProjectDetail({ t, isDark, project: p, onBack }) {
         {images.length > 0 && (
           <>
             <div className={`mt-8 rounded-2xl border ${t.border} overflow-hidden ${t.surfaceSolid}`}>
-              <img src={images[slide]} alt={`${p.title} screenshot ${slide + 1}`} className="w-full h-auto block" />
+              <img src={img(images[slide])} alt={`${p.title} screenshot ${slide + 1}`} className="w-full h-auto block" />
             </div>
             {images.length > 1 && (
               <div className="mt-4 flex items-center justify-between">
@@ -1786,6 +1760,7 @@ function Sidebar({ t, isDark, collapsed: collapsedPref, onToggleCollapse, active
 
 function App() {
   const [isDark, setIsDark] = useState(true);
+  useRemoteImages();
   const [menuOpen, setMenuOpen] = useState(false);
   const [projectTab, setProjectTab] = useState("webapps");
   const [projectSearch, setProjectSearch] = useState("");
@@ -2235,7 +2210,7 @@ function App() {
                     } flex items-center justify-center p-2`}
                   >
                     <div className="h-full w-full rounded-lg bg-white flex items-center justify-center p-1.5 shadow-sm">
-                      <img src={item.icon} alt={item.name} className="h-full w-full object-contain" />
+                      <img src={img(item.icon)} alt={item.name} className="h-full w-full object-contain" />
                     </div>
                   </div>
                 ))}
@@ -2294,7 +2269,7 @@ function App() {
                       {item.thumbnail ? (
                         <>
                           <img
-                            src={thumbFor(item, isDark)}
+                            src={img(thumbFor(item, isDark))}
                             alt={`${item.title} preview`}
                             loading="lazy"
                             decoding="async"
@@ -2323,7 +2298,7 @@ function App() {
                   <div className={`relative z-10 sm:row-start-1 ${flip ? "sm:col-start-1 sm:col-end-8" : "sm:col-start-6 sm:col-end-13 sm:text-right"}`}>
                     <p className={`font-mono text-xs tracking-wide ${t.accent}`}>{item.eyebrow}</p>
                     <h3 className={`font-display font-bold text-2xl sm:text-[28px] mt-1 ${t.text}`}>{item.title}</h3>
-                    <div className={`mt-5 rounded-lg border ${t.border} p-5 shadow-xl font-body text-sm leading-relaxed ${t.textMuted} ${isDark ? "bg-neutral-800/95" : "bg-white"} text-left`}>
+                    <div className={`hidden lg:block mt-5 rounded-lg border ${t.border} p-5 shadow-xl font-body text-sm leading-relaxed ${t.textMuted} ${isDark ? "bg-neutral-800/95" : "bg-white"} text-left`}>
                       {renderDescription(item.description, t)}
                     </div>
                     <ul className={`mt-4 flex flex-wrap gap-x-4 gap-y-1 font-mono text-xs ${t.textMuted} ${flip ? "" : "sm:justify-end"}`}>
@@ -2431,7 +2406,7 @@ function App() {
                               <div className="flex items-center gap-3">
                                 <div className={`h-10 w-10 shrink-0 overflow-hidden rounded-xl border ${t.border} ${isDark ? "bg-black/40" : "bg-slate-50"} ${t.accent} flex items-center justify-center`}>
                                   {exp.logo ? (
-                                    <img src={exp.logo} alt={`${exp.company} logo`} className="h-full w-full object-cover" />
+                                    <img src={img(exp.logo)} alt={`${exp.company} logo`} className="h-full w-full object-cover" />
                                   ) : (
                                     <RoleIcon size={16} />
                                   )}
@@ -2508,7 +2483,7 @@ function App() {
                       <div className="flex items-start justify-between gap-4">
                         <div className={`flex h-14 w-24 shrink-0 items-center justify-center rounded-xl border ${t.border} bg-white p-2.5`}>
                           {cert.image ? (
-                            <img src={cert.image} alt={`${cert.name} badge`} className="max-h-full max-w-full object-contain" />
+                            <img src={img(cert.image)} alt={`${cert.name} badge`} className="max-h-full max-w-full object-contain" />
                           ) : (
                             <StatusIcon size={24} className="text-slate-400" />
                           )}
