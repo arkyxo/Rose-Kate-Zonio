@@ -1402,38 +1402,157 @@ const ABOUT_ME = [
   "At the end of the day, I'm just someone with a curious mind and a lot of dreams. I'm a future tech professional, a former Wattpad author, a casual cuber, a jazz lover, a plant lover, and a filmmaker at heart. I may be taking the engineering path for now, but a part of me will always be drawn to stories, cameras, and the magic of bringing an idea to life. I'm still figuring things out, learning as I go, and discovering the many things I could become. And honestly, I think that's one of the most exciting parts of being me.",
 ];
 
-function PhotoTile({ photo, t, isDark }) {
-  const [broken, setBroken] = useState(false);
+// Fanned, swipeable photo stack in a 16:9 holder. Swipe, drag, click, tap a dot, or use arrow keys.
+const STACK_X = [0, 48, 72, 84];
+const SWIPE_THRESHOLD = 40;
+
+function StackCard({ photo, offset, dragging, isDark, onBroken, broken }) {
+  const abs = Math.abs(offset);
   const src = img(photo.image);
   const show = src && !broken;
+  const active = offset === 0;
+  const dir = offset < 0 ? -1 : 1;
+  const x = STACK_X[Math.min(abs, STACK_X.length - 1)] * dir;
+  const visible = abs <= 3;
+
   return (
-    <figure
-      className={`group relative aspect-[4/5] overflow-hidden rounded-xl ${
-        show ? `border ${t.border}` : `border border-dashed ${t.border} ${isDark ? "bg-white/[0.02]" : "bg-slate-50"}`
-      }`}
+    <div
+      data-offset={offset}
+      aria-hidden={!active}
+      className="absolute left-1/2 top-1/2 h-[84%] aspect-[4/5] select-none"
+      style={{
+        transform: `translate(-50%, -50%) translateX(calc(${x}% + var(--drag, 0px))) translateY(${abs * 2}%) rotate(${offset * 5}deg) scale(${1 - abs * 0.07})`,
+        zIndex: 10 - abs,
+        opacity: visible ? 1 : 0,
+        pointerEvents: visible ? "auto" : "none",
+        transition: dragging ? "opacity 300ms ease" : "transform 520ms cubic-bezier(0.22, 1, 0.36, 1), opacity 300ms ease",
+        cursor: active ? "grab" : "pointer",
+      }}
     >
-      {show ? (
-        <img
-          src={src}
-          alt={photo.caption}
-          loading="lazy"
-          onError={() => setBroken(true)}
-          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-        />
-      ) : (
-        <div className={`absolute inset-0 flex flex-col items-center justify-center gap-2 ${t.textFaint}`}>
-          <ImageIcon size={22} />
-          <span className="font-mono text-[10px] tracking-widest uppercase">Photo soon</span>
-        </div>
-      )}
-      <figcaption
-        className={`absolute bottom-2 left-2 rounded-full px-2.5 py-1 font-mono text-[10px] tracking-wider ${
-          show ? "bg-black/60 text-white backdrop-blur" : `${isDark ? "bg-white/10" : "bg-slate-200"} ${t.textMuted}`
+      <div
+        className={`relative h-full w-full overflow-hidden rounded-2xl border-[3px] shadow-xl ${
+          isDark ? "border-neutral-800 bg-neutral-900" : "border-white bg-slate-100"
         }`}
+        style={{ filter: active ? "none" : `brightness(${isDark ? 0.7 : 0.92})`, transition: "filter 400ms ease" }}
       >
-        {photo.caption}
-      </figcaption>
-    </figure>
+        {show ? (
+          <img
+            src={src}
+            alt={active ? photo.caption : ""}
+            draggable={false}
+            onError={() => onBroken(photo.image)}
+            className="h-full w-full object-cover pointer-events-none"
+          />
+        ) : (
+          <div className={`absolute inset-0 flex flex-col items-center justify-center gap-2 ${isDark ? "text-neutral-500" : "text-slate-400"}`}>
+            <ImageIcon size={22} />
+            <span className="font-mono text-[10px] tracking-widest uppercase">Photo soon</span>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function PhotoStack({ photos, t, isDark }) {
+  const n = photos.length;
+  const [active, setActive] = useState(Math.min(2, n - 1));
+  const [broken, setBroken] = useState({});
+  const [dragging, setDragging] = useState(false);
+  const [dragX, setDragX] = useState(0);
+  const drag = useRef({ id: null, startX: 0, startY: 0, moved: false, offset: null });
+
+  const wrap = useCallback((i) => ((i % n) + n) % n, [n]);
+  const go = useCallback((i) => setActive(wrap(i)), [wrap]);
+  const half = Math.floor(n / 2);
+  const offsetOf = (i) => ((i - active + n + half) % n) - half;
+
+  const onPointerDown = (e) => {
+    if (e.pointerType === "mouse" && e.button !== 0) return;
+    const card = e.target.closest("[data-offset]");
+    drag.current = { id: e.pointerId, startX: e.clientX, startY: e.clientY, moved: false, offset: card ? Number(card.dataset.offset) : null };
+    e.currentTarget.setPointerCapture?.(e.pointerId);
+    setDragging(true);
+  };
+
+  const onPointerMove = (e) => {
+    const d = drag.current;
+    if (d.id !== e.pointerId) return;
+    const dx = e.clientX - d.startX;
+    if (Math.abs(dx) > 6) d.moved = true;
+    setDragX(dx * 0.6);
+  };
+
+  const finish = (e, cancelled) => {
+    const d = drag.current;
+    if (d.id !== e.pointerId) return;
+    const dx = e.clientX - d.startX;
+    drag.current = { ...d, id: null };
+    setDragging(false);
+    setDragX(0);
+    if (cancelled) return;
+    if (d.moved && Math.abs(dx) >= SWIPE_THRESHOLD) {
+      go(active + (dx < 0 ? 1 : -1));
+    } else if (!d.moved && d.offset !== null) {
+      go(d.offset === 0 ? active + 1 : active + d.offset);
+    }
+  };
+
+  const onKeyDown = (e) => {
+    if (e.key === "ArrowRight") { e.preventDefault(); go(active + 1); }
+    else if (e.key === "ArrowLeft") { e.preventDefault(); go(active - 1); }
+  };
+
+  if (!n) return null;
+
+  return (
+    <div>
+      <div
+        role="group"
+        aria-roledescription="carousel"
+        aria-label="Photos of me"
+        tabIndex={0}
+        onKeyDown={onKeyDown}
+        onPointerDown={onPointerDown}
+        onPointerMove={onPointerMove}
+        onPointerUp={(e) => finish(e, false)}
+        onPointerCancel={(e) => finish(e, true)}
+        className="relative w-full aspect-video overflow-x-clip rounded-2xl"
+        style={{ touchAction: "pan-y", "--drag": `${dragX}px` }}
+      >
+        <div className="absolute inset-0">
+          {photos.map((photo, i) => (
+            <StackCard
+              key={photo.image}
+              photo={photo}
+              offset={offsetOf(i)}
+              dragging={dragging}
+              isDark={isDark}
+              broken={!!broken[photo.image]}
+              onBroken={(k) => setBroken((b) => ({ ...b, [k]: true }))}
+            />
+          ))}
+        </div>
+      </div>
+
+      <div className="mt-4 flex flex-col items-center gap-2">
+        <div className="flex items-center gap-2" role="tablist" aria-label="Choose photo">
+          {photos.map((photo, i) => (
+            <button
+              key={photo.image}
+              role="tab"
+              aria-selected={i === active}
+              aria-label={`Show ${photo.caption}`}
+              onClick={() => go(i)}
+              className={`h-1.5 rounded-full transition-all duration-300 ${
+                i === active ? `w-6 ${t.accentBg}` : `w-1.5 ${isDark ? "bg-neutral-700 hover:bg-neutral-500" : "bg-slate-300 hover:bg-slate-400"}`
+              }`}
+            />
+          ))}
+        </div>
+        <p className={`font-mono text-[11px] ${t.textFaint}`}>Swipe or click the stack to shuffle</p>
+      </div>
+    </div>
   );
 }
 
@@ -1444,11 +1563,21 @@ function AboutMeSection({ t, isDark }) {
         <User size={13} /> MORE ABOUT ME
       </p>
       <h2 className="font-display font-bold text-4xl sm:text-5xl tracking-tight">About Me</h2>
-      <p className="font-display text-2xl sm:text-3xl font-medium leading-snug mt-6">
-        Hi, I'm <span className={t.accent}>RK</span>!
-      </p>
+      <div className="mt-8">
+        <p className={`font-mono text-[11px] tracking-widest uppercase ${t.accent}`}>Snapshots</p>
+        <h3 className="font-display font-semibold text-xl mt-1">A little more of me</h3>
+        <div className="mt-5">
+          <PhotoStack photos={ABOUT_PHOTOS} t={t} isDark={isDark} />
+        </div>
+      </div>
 
-      <div className="mt-6 max-w-2xl">
+      <div className="max-w-2xl mx-auto">
+        <p className="font-display text-2xl sm:text-3xl font-medium leading-snug mt-14">
+          Hi, I'm <span className={t.accent}>RK</span>!
+        </p>
+      </div>
+
+      <div className="mt-6 max-w-2xl mx-auto">
         {ABOUT_ME.map((block, i) => {
           if (block.startsWith("## ")) {
             return (
@@ -1461,7 +1590,8 @@ function AboutMeSection({ t, isDark }) {
           return (
             <p
               key={i}
-              className={`font-body text-base sm:text-[17px] leading-[1.8] mt-5 first:mt-0 ${
+              style={{ hyphens: "auto", WebkitHyphens: "auto" }}
+              className={`font-body text-base sm:text-[17px] leading-[1.8] mt-5 first:mt-0 text-justify ${
                 closing ? `border-l-2 border-red-400 pl-4 font-medium ${t.text}` : t.textMuted
               }`}
             >
@@ -1471,17 +1601,7 @@ function AboutMeSection({ t, isDark }) {
         })}
       </div>
 
-      <div className="mt-14">
-        <p className={`font-mono text-[11px] tracking-widest uppercase ${t.accent}`}>Snapshots</p>
-        <h3 className="font-display font-semibold text-xl mt-1">A little more of me</h3>
-        <div className="mt-5 grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4">
-          {ABOUT_PHOTOS.map((photo) => (
-            <PhotoTile key={photo.image} photo={photo} t={t} isDark={isDark} />
-          ))}
-        </div>
-      </div>
-
-      <div className="mt-14 max-w-2xl">
+      <div className="mt-14 max-w-2xl mx-auto">
         <p className={`font-mono text-[11px] tracking-widest uppercase ${t.accent}`}>Foundation</p>
         <h3 className="font-display font-semibold text-xl mt-1">Education</h3>
         <ul className={`mt-4 border-t ${t.border}`}>

@@ -194,3 +194,6 @@ html::-webkit-scrollbar {
 @keyframes bento-swap-in { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 .bento-swap-in { animation: bento-swap-in 0.45s ease-out both; }
 @media (prefers-reduced-motion: reduce) { .bento-swap-in { animation: none; } }
+/* Hide scrollbars but keep scrolling */
+html, body, #panel-scroll { scrollbar-width: none; -ms-overflow-style: none; }
+html::-webkit-scrollbar, body::-webkit-scrollbar, #panel-scroll::-webkit-scrollbar { display: none; width: 0; height: 0; }
