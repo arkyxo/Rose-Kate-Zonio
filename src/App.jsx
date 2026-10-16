@@ -52,6 +52,8 @@ const ArrowLeftRight = makeIcon(<><path d="M8 3 4 7l4 4" /><path d="M4 7h16" /><
 const ArrowRight = makeIcon(<><path d="M5 12h14" /><path d="m13 6 6 6-6 6" /></>);
 const User = makeIcon(<><circle cx="12" cy="8" r="5" /><path d="M20 21a8 8 0 0 0-16 0" /></>);
 const Trophy = makeIcon(<><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6" /><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18" /><path d="M4 22h16" /><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22" /><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22" /><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z" /></>);
+const BookOpen = makeIcon(<><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" /><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" /></>);
+const ArrowLeftIcon = makeIcon(<><path d="M19 12H5" /><path d="m11 6-6 6 6 6" /></>);
 const Users = makeIcon(<><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M22 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /></>);
 const Wrench = makeIcon(<path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" />);
 
@@ -84,7 +86,6 @@ const NAV_LINKS = [
   { id: "activities", label: "Activities" },
   { id: "labs", label: "Projects" },
   { id: "experience", label: "Experience" },
-  { id: "certifications", label: "Certs" },
   { id: "github-activity", label: "GitHub" },
 ];
 
@@ -391,13 +392,11 @@ const FEATURED_ACTIVITY = {
 };
 
 const EXPERIENCE_PATHWAYS = [
-  { id: "hackathon", label: "Hackathon", caption: "Competitions & builds" },
   { id: "internship", label: "Internship", caption: "Industry training" },
-  { id: "organization", label: "Organization", caption: "Student orgs" },
   { id: "work", label: "Work Experience", caption: "Jobs & programs" },
 ];
 
-const PATHWAY_ICONS = { hackathon: Trophy, internship: GraduationCap, organization: Users, work: Briefcase };
+const PATHWAY_ICONS = { internship: GraduationCap, work: Briefcase };
 
 const EXPERIENCE = [
   {
@@ -410,26 +409,6 @@ const EXPERIENCE = [
     description: "",
   },
   {
-    company: "AppBuilders PH Hackathon",
-    pathway: "hackathon",
-    position: "Hackathon",
-    logo: "appbuildersph-logo",
-    duration: "Oct 9 — 10, 2026",
-    type: "Software · Competition",
-    description:
-      "Built KuryenteWatch with my team in a 24-hour build and pitched it through a video — a local-first household electricity app (React PWA, Express, SQLite) that reads meter and appliance-label photos with OCR, estimates bills and appliance usage, flags unusual usage jumps, and answers questions through an Energy Assistant that runs on a local Ollama model or fully offline.",
-  },
-  {
-    company: "GCash Hackathon",
-    pathway: "hackathon",
-    position: "Hackathon",
-    logo: "asset-4ce99605",
-    duration: "Sept 2026",
-    type: "Software · Competition",
-    description:
-      "Built, designed and pitched an AI-powered concept that digitizes handwritten sales records for small business owners — extracting entries and producing basic profit/loss summaries — and presented a prototype to GCash judges with a team of classmates.",
-  },
-  {
     company: "Special Program for Employment of Students (DOLE)",
     pathway: "work",
     position: "SPES",
@@ -439,34 +418,78 @@ const EXPERIENCE = [
     description:
       "Provided IT support and hardware troubleshooting, and handled data entry and digital filing for the department — all while studying Computer Engineering full-time.",
   },
+];
+
+const AFFILIATIONS = [
   {
     company: "For Girls Who Build",
-    pathway: "organization",
+    abbr: "FGWB",
     position: "Member",
     logo: "forgirlswhobuild-logo",
     duration: "Oct 2026 — Present",
-    type: "Organization · Member",
     description: "Accepted into the For Girls Who Build community in October 2026.",
+    links: [
+      { label: "Facebook", url: "https://www.facebook.com/profile.php?id=61593721307476" },
+      { label: "LinkedIn", url: "https://www.linkedin.com/company/forgirlswhobuildph" },
+    ],
   },
   {
     company: "Cisco NetConnect PUP – Manila",
-    pathway: "organization",
+    abbr: "CNCP",
     position: "Enterprise Networking Cadet",
     logo: "cisco-netconnect-pup-logo",
     duration: "Oct 2026 — Present",
-    type: "Organization · Member",
     description: "Accepted member of the organization, recognized for dedication and potential in networking and technology.",
+    links: [
+      { label: "Facebook", url: "https://www.facebook.com/cisconetconnectpup" },
+      { label: "LinkedIn", url: "https://www.linkedin.com/company/cncp-mnl" },
+    ],
   },
   {
     company: "Association of Concerned Computer Engineering Students (ACCESS)",
-    pathway: "organization",
+    abbr: "ACCESS",
     position: "Technical Team",
     logo: "asset-77ad849f",
     duration: "2023 — 2024",
-    type: "Organization · Member",
     description: "Supported the technical operations and activities of the organization.",
+    links: [],
   },
 ];
+
+const BLOG_PAGE_SIZE = 6;
+
+const BLOGS = [
+  {
+    title: "Building KuryenteWatch at the AppBuilders PH Hackathon",
+    date: "Oct 9 — 10, 2026",
+    category: "Hackathon",
+    image: "appbuilders-hackathon-group",
+    position: "object-[center_75%]",
+    hero: true,
+    excerpt: FEATURED_ACTIVITY.description,
+    body: [
+      "Built KuryenteWatch with my team in a 24-hour build and pitched it through a video — a local-first household electricity app (React PWA, Express, SQLite) that reads meter and appliance-label photos with OCR, estimates bills and appliance usage, flags unusual usage jumps, and answers questions through an Energy Assistant that runs on a local Ollama model or fully offline.",
+    ],
+    links: FEATURED_ACTIVITY.links,
+  },
+  {
+    title: "Pitching an AI Sales Ledger to GCash Judges",
+    date: "Sept 2026",
+    category: "Hackathon",
+    image: "asset-4ce99605",
+    position: "object-center",
+    excerpt:
+      "An AI-powered concept that digitizes handwritten sales records for small business owners, presented to GCash judges.",
+    body: [
+      "Built, designed and pitched an AI-powered concept that digitizes handwritten sales records for small business owners — extracting entries and producing basic profit/loss summaries — and presented a prototype to GCash judges with a team of classmates.",
+    ],
+    links: [],
+  },
+];
+
+const blogSlug = (post) => slugOf(post.title);
+const BLOG_BY_SLUG = Object.fromEntries(BLOGS.map((b) => [blogSlug(b), b]));
+const readMinutes = (post) => Math.max(1, Math.ceil(post.body.join(" ").split(/\s+/).filter(Boolean).length / 200));
 
 const EDUCATION = [
   {
@@ -1295,6 +1318,338 @@ function ExperienceSplit({ t, isDark, openExp, setOpenExp }) {
   );
 }
 
+function CertificationSection({ t, isDark }) {
+  return (
+    <section id="certification">
+          <SectionHeading
+            eyebrow="CERTIFICATION · CREDENTIALS"
+            title="Certifications"
+            caption="Click Verify to confirm the credential."
+            icon={CheckCircle2}
+            t={t}
+          />
+          <div className={CERTIFICATIONS.length === 1 ? "max-w-xl mx-auto" : "grid md:grid-cols-2 gap-6"}>
+            {CERTIFICATIONS.map((cert, i) => {
+              const earned = !["In Progress", "Planned", "Upcoming"].includes(cert.status);
+              const StatusIcon = earned ? CheckCircle2 : Clock;
+              const pill = earned ? `border border-red-400/60 ${t.accent}` : "border border-amber-400/60 text-amber-500";
+              const notch = `absolute top-0 h-6 w-6 -translate-y-1/2 rounded-full border ${isDark ? "border-neutral-700" : "border-slate-300"} ${t.bg}`;
+              return (
+                <Reveal key={cert.name} delay={i * 80} className="h-full">
+                  <article className={`relative flex h-full flex-col overflow-hidden rounded-3xl border ${t.border} ${t.surface} transition-colors hover:border-red-400/40`}>
+                    <div className="flex-1 p-6 sm:p-8">
+                      <div className="flex items-start justify-between gap-4">
+                        <div className={`flex h-14 w-24 shrink-0 items-center justify-center rounded-xl border ${t.border} bg-white p-2.5`}>
+                          {cert.image ? (
+                            <img src={img(cert.image)} alt={`${cert.name} badge`} className="max-h-full max-w-full object-contain" />
+                          ) : (
+                            <StatusIcon size={24} className="text-slate-400" />
+                          )}
+                        </div>
+                        <span className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 font-mono text-[10px] font-medium tracking-widest uppercase ${pill}`}>
+                          <StatusIcon size={11} /> {cert.status}
+                        </span>
+                      </div>
+
+                      <p className={`font-mono text-[10px] tracking-widest uppercase ${t.textFaint} mt-7`}>
+                        {[cert.group, cert.category].filter(Boolean).join(" · ")}
+                      </p>
+                      <h3 className={`font-display font-semibold text-xl sm:text-2xl tracking-tight leading-snug ${t.text} mt-2`}>{cert.name}</h3>
+                      <p className={`font-body text-sm ${t.textMuted} mt-1`}>{cert.org}</p>
+                    </div>
+
+                    <div className={`relative border-t border-dashed ${isDark ? "border-neutral-700" : "border-slate-300"} px-6 sm:px-8 py-5 flex flex-wrap items-center justify-between gap-4`}>
+                      <span aria-hidden="true" className={`${notch} -left-3`} />
+                      <span aria-hidden="true" className={`${notch} -right-3`} />
+                      <div>
+                        <p className={`font-mono text-[10px] tracking-widest uppercase ${t.textFaint}`}>{earned ? "Issued" : "Status"}</p>
+                        <p className={`font-mono text-sm ${t.text} mt-1`}>{cert.date}</p>
+                        <p className={`font-mono text-[10px] tracking-wide ${t.textFaint} mt-1 ${cert.credentialId ? "" : "invisible"}`} aria-hidden={!cert.credentialId}>
+                          ID · {cert.credentialId || "—"}
+                        </p>
+                      </div>
+                      {hasLink(cert.verifyUrl) ? (
+                        <a
+                          href={cert.verifyUrl}
+                          target="_blank"
+                          rel="noreferrer"
+                          className={`inline-flex items-center gap-2 rounded-lg border border-red-400 px-4 py-2 font-mono text-xs ${t.accent} hover:bg-red-400/10 transition-colors`}
+                        >
+                          {cert.verifyLabel || "Verify"} <ExternalLink size={13} />
+                        </a>
+                      ) : (
+                        <span className={`font-mono text-xs ${t.textFaint}`}>Verification soon</span>
+                      )}
+                    </div>
+                  </article>
+                </Reveal>
+              );
+            })}
+          </div>
+    </section>
+  );
+}
+
+function SectionPanel({ t, onClose, listenEsc = true, children }) {
+  useEffect(() => {
+    if (!listenEsc) return;
+    const onKey = (e) => e.key === "Escape" && onClose();
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [onClose, listenEsc]);
+
+  return (
+    <div id="panel-scroll" className={`fixed inset-0 z-[60] overflow-y-auto ${t.bg} ${t.text}`}>
+      <div className="max-w-6xl mx-auto px-5 sm:px-8 pt-10 sm:pt-14 pb-20">
+        <button onClick={onClose} className={`inline-flex items-center gap-2 font-mono text-xs ${t.textMuted} hover:text-red-400 transition-colors`}>
+          <ArrowRight size={14} className="rotate-180" /> Back to portfolio
+        </button>
+        <div className="mt-10">{children}</div>
+      </div>
+    </div>
+  );
+}
+
+function AffiliationSection({ t, isDark }) {
+  const dot = isDark ? "rgba(255,255,255,0.22)" : "rgba(15,23,42,0.25)";
+  return (
+    <section id="affiliation" className="max-w-3xl mx-auto">
+      <h2 className="font-mono text-2xl sm:text-3xl tracking-tight">affiliations</h2>
+      <p className={`font-body text-sm sm:text-[15px] ${t.textMuted} mt-6 sm:mt-8`}>
+        Organizations and communities I'm part of.
+      </p>
+
+      <div className="mt-10 sm:mt-12 space-y-4">
+        {AFFILIATIONS.map((org, i) => (
+          <Reveal key={org.company} delay={i * 80}>
+            <article
+              className={`relative overflow-hidden rounded-2xl border ${t.border} ${isDark ? "bg-neutral-900/60" : "bg-white shadow-[0_8px_30px_rgba(15,23,42,0.07)]"} p-5 sm:p-7`}
+            >
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute right-3 top-3 h-12 w-20 opacity-60"
+                style={{ backgroundImage: `radial-gradient(${dot} 1px, transparent 1.2px)`, backgroundSize: "8px 8px" }}
+              />
+              <span
+                aria-hidden="true"
+                className={`pointer-events-none absolute -bottom-3 right-4 select-none font-display font-bold text-6xl sm:text-7xl leading-none tracking-tight ${isDark ? "text-white/[0.05]" : "text-slate-900/[0.06]"}`}
+              >
+                {org.abbr}
+              </span>
+
+              <div className="relative flex items-start gap-4 sm:gap-6">
+                <div className={`h-14 w-14 sm:h-16 sm:w-16 shrink-0 overflow-hidden rounded-xl border ${t.border} ${isDark ? "bg-black/40" : "bg-white shadow-sm"} flex items-center justify-center`}>
+                  {org.logo ? (
+                    <img src={img(org.logo)} alt={`${org.company} logo`} className="h-full w-full object-cover" />
+                  ) : (
+                    <span className="font-mono text-lg">{org.abbr}</span>
+                  )}
+                </div>
+                <div className="min-w-0 flex-1 pr-6">
+                  <span className={`inline-block rounded-full border ${t.border} px-2.5 py-0.5 font-mono text-[10px] uppercase tracking-wider ${t.textMuted}`}>
+                    {org.position}
+                  </span>
+                  <h3 className="font-display font-semibold text-lg sm:text-xl leading-snug mt-2.5">{org.company}</h3>
+                  <p className={`font-body text-sm leading-relaxed ${t.textMuted} mt-1.5 max-w-lg`}>{org.description}</p>
+                  <p className={`font-mono text-xs ${t.textFaint} mt-3`}>{org.duration}</p>
+                  {org.links.length > 0 && (
+                    <div className="mt-2 flex flex-wrap items-center gap-x-5 gap-y-1">
+                      {org.links.map((link) => (
+                        <a
+                          key={link.url}
+                          href={link.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className={`inline-flex items-center gap-1 font-mono text-xs ${t.textMuted} hover:text-red-400 transition-colors`}
+                        >
+                          {link.label} <ArrowUpRight size={12} />
+                        </a>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </div>
+            </article>
+          </Reveal>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function BlogAuthor({ t, size = 24 }) {
+  return (
+    <span className="inline-flex items-center gap-2">
+      <img src={img(PROFILE.photo)} alt="" style={{ width: size, height: size }} className="rounded-full object-cover" />
+      <span className={`font-body text-[13px] ${t.text}`}>{PROFILE.name}</span>
+    </span>
+  );
+}
+
+function BlogSection({ t, isDark }) {
+  const categories = ["All", ...Array.from(new Set(BLOGS.map((b) => b.category)))];
+  const [category, setCategory] = useState("All");
+  const [page, setPage] = useState(1);
+
+  const filtered = category === "All" ? BLOGS : BLOGS.filter((b) => b.category === category);
+  const totalPages = Math.max(1, Math.ceil(filtered.length / BLOG_PAGE_SIZE));
+  const current = Math.min(page, totalPages);
+  const visible = filtered.slice((current - 1) * BLOG_PAGE_SIZE, current * BLOG_PAGE_SIZE);
+
+  const pickCategory = (c) => {
+    setCategory(c);
+    setPage(1);
+  };
+  const goPage = (n) => {
+    setPage(n);
+    const el = document.getElementById("panel-scroll");
+    if (el) el.scrollTo({ top: 0, behavior: "smooth" });
+  };
+  const navBtn = (disabled) =>
+    `font-mono text-xs ${disabled ? `${t.textFaint} opacity-40 cursor-not-allowed` : `${t.textMuted} hover:text-red-400`} transition-colors`;
+
+  return (
+    <section id="blogs" className="max-w-3xl mx-auto">
+      <h2 className="font-display font-bold text-4xl sm:text-5xl tracking-tight">Blogs</h2>
+      <p className={`font-body text-base ${t.textMuted} mt-3`}>Stories and notes from the things I build and join.</p>
+
+      <div className={`mt-8 flex flex-wrap items-center gap-6 border-b ${t.border}`}>
+        {categories.map((c) => {
+          const on = category === c;
+          return (
+            <button
+              key={c}
+              type="button"
+              onClick={() => pickCategory(c)}
+              aria-pressed={on}
+              className={`-mb-px border-b pb-3 font-body text-sm transition-colors ${
+                on ? `${isDark ? "border-white text-white" : "border-slate-900 text-slate-900"}` : `border-transparent ${t.textMuted} hover:text-red-400`
+              }`}
+            >
+              {c}
+            </button>
+          );
+        })}
+      </div>
+
+      <div>
+        {visible.map((post) => (
+          <a
+            key={post.title}
+            href={`#blogs/${blogSlug(post)}`}
+            className={`group flex items-start justify-between gap-5 sm:gap-8 border-b ${t.border} py-8`}
+          >
+            <div className="min-w-0 flex-1">
+              <BlogAuthor t={t} size={22} />
+              <h3 className="font-display font-bold text-xl sm:text-[22px] leading-snug mt-3 group-hover:underline decoration-1 underline-offset-4">{post.title}</h3>
+              <p className={`font-body text-[15px] leading-relaxed ${t.textMuted} mt-2`}>{post.excerpt}</p>
+              <p className={`font-body text-[13px] ${t.textFaint} mt-4 flex flex-wrap items-center gap-x-3 gap-y-2`}>
+                <span>{post.date}</span>
+                <span className={`rounded-full ${isDark ? "bg-white/10" : "bg-slate-100"} px-2.5 py-0.5 ${t.textMuted}`}>{post.category}</span>
+                <span>{readMinutes(post)} min read</span>
+              </p>
+            </div>
+            <img
+              src={img(post.image)}
+              alt=""
+              loading="lazy"
+              className={`h-20 w-20 sm:h-28 sm:w-40 shrink-0 rounded-md object-cover ${post.position}`}
+            />
+          </a>
+        ))}
+        {visible.length === 0 && <p className={`py-10 text-center font-mono text-xs ${t.textFaint}`}>No posts yet.</p>}
+      </div>
+
+      {totalPages > 1 && (
+        <div className="mt-8 flex items-center justify-between">
+          <button type="button" disabled={current === 1} onClick={() => goPage(current - 1)} className={`inline-flex items-center gap-1.5 ${navBtn(current === 1)}`}>
+            <ArrowLeftIcon size={13} /> prev
+          </button>
+          <span className={`font-mono text-xs ${t.textMuted}`}>{current} / {totalPages}</span>
+          <button type="button" disabled={current === totalPages} onClick={() => goPage(current + 1)} className={`inline-flex items-center gap-1.5 ${navBtn(current === totalPages)}`}>
+            next <ArrowRight size={13} />
+          </button>
+        </div>
+      )}
+    </section>
+  );
+}
+
+function BlogArticle({ t, isDark, post, onBack }) {
+  const [copied, setCopied] = useState(false);
+  useEffect(() => {
+    const onKey = (e) => e.key === "Escape" && onBack();
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [onBack]);
+
+  const copyLink = () => {
+    try {
+      navigator.clipboard.writeText(window.location.href);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1800);
+    } catch {}
+  };
+
+  return (
+    <div id="panel-scroll" className={`fixed inset-0 z-[70] overflow-y-auto ${t.bg} ${t.text}`}>
+      <article className="mx-auto w-full max-w-[680px] px-5 pt-10 sm:pt-14 pb-24">
+        <button onClick={onBack} className={`inline-flex items-center gap-1.5 font-mono text-xs ${t.textMuted} hover:text-red-400 transition-colors`}>
+          <ArrowLeftIcon size={13} /> all posts
+        </button>
+
+        <h1 className="font-display font-bold text-[32px] sm:text-[42px] leading-[1.15] tracking-tight mt-10">{post.title}</h1>
+        <p className={`font-body text-lg sm:text-xl leading-relaxed ${t.textMuted} mt-4`}>{post.excerpt}</p>
+
+        <div className={`mt-8 flex items-center justify-between gap-4 border-y ${t.border} py-4`}>
+          <div className="flex items-center gap-3 min-w-0">
+            <img src={img(PROFILE.photo)} alt="" className="h-11 w-11 rounded-full object-cover" />
+            <div className="min-w-0">
+              <p className="font-body text-sm font-medium leading-tight">{PROFILE.name}</p>
+              <p className={`font-body text-[13px] ${t.textMuted} mt-0.5`}>
+                {readMinutes(post)} min read · {post.date}
+              </p>
+            </div>
+          </div>
+          <button
+            type="button"
+            onClick={copyLink}
+            className={`shrink-0 inline-flex items-center gap-1.5 font-body text-[13px] ${t.textMuted} hover:text-red-400 transition-colors`}
+          >
+            <ExternalLink size={14} /> {copied ? "Link copied" : "Share"}
+          </button>
+        </div>
+
+        {post.hero && (
+          <img src={img(post.image)} alt={post.title} className={`mt-8 aspect-[16/10] w-full rounded-lg object-cover ${post.position}`} />
+        )}
+
+        <div className="font-serif-read mt-10 text-[19px] sm:text-[21px] leading-[1.75]">
+          {post.body.map((block, i) =>
+            block.startsWith("## ") ? (
+              <h2 key={i} className="font-display font-bold text-2xl sm:text-[28px] leading-snug tracking-tight mt-12 mb-1">{block.slice(3)}</h2>
+            ) : (
+              <p key={i} className="mt-7 first:mt-0">{block}</p>
+            )
+          )}
+        </div>
+
+        {post.links.length > 0 && (
+          <div className="mt-12 flex flex-wrap items-center gap-x-6 gap-y-3">
+            {post.links.map((link) => (
+              <ActivityLink key={link.label} link={link} t={t} isDark={isDark} />
+            ))}
+          </div>
+        )}
+
+        <div className={`mt-12 pt-8 border-t ${t.border} flex flex-wrap items-center gap-3`}>
+          <span className={`rounded-full ${isDark ? "bg-white/10" : "bg-slate-100"} px-3.5 py-1.5 font-body text-[13px] ${t.textMuted}`}>{post.category}</span>
+        </div>
+      </article>
+    </div>
+  );
+}
+
 function EducationCard({ edu, t, isDark }) {
   const { done, total, elapsed, startY, endY } = eduProgress(edu.duration);
   const currentYear = Math.min(total, Math.floor(elapsed) + 1);
@@ -1382,7 +1737,7 @@ const SKILL_TOTAL = SKILL_GROUPS.reduce((n, g) => n + g.items.length, 0);
 const IMAGE_FIELDS = ["icon", "thumbnail", "thumbnailDark", "gallery", "galleryDark", "image", "inset", "logo"];
 export const IMAGE_SLOTS = (() => {
   const slots = { [PROFILE.photo]: ["Profile photo"] };
-  const sources = [...ALL_SKILL_ITEMS, ...AI_TOOLING, ...ALL_PROJECTS, ...CERTIFICATIONS, FEATURED_ACTIVITY, ...EXPERIENCE, ...EDUCATION];
+  const sources = [...ALL_SKILL_ITEMS, ...AI_TOOLING, ...ALL_PROJECTS, ...CERTIFICATIONS, FEATURED_ACTIVITY, ...EXPERIENCE, ...AFFILIATIONS, ...BLOGS, ...EDUCATION];
   for (const item of sources) {
     const name = item.name || item.title || item.company || item.institution || "Item";
     for (const field of IMAGE_FIELDS) {
@@ -1612,6 +1967,7 @@ const SIDEBAR_GROUPS = [
       { id: "about", label: "About", Icon: User },
       { id: "skills", label: "Skills", Icon: Layers, count: SKILL_TOTAL },
       { id: "activities", label: "Activities", Icon: Trophy },
+      { id: "blogs", label: "Blogs", Icon: BookOpen, count: BLOGS.length },
     ],
   },
   {
@@ -1619,7 +1975,8 @@ const SIDEBAR_GROUPS = [
     items: [
       { id: "labs", label: "Projects", Icon: LayoutGrid, count: ALL_PROJECTS.length },
       { id: "experience", label: "Experience", Icon: Briefcase, count: EXPERIENCE.length },
-      { id: "certifications", label: "Certs", Icon: Award, count: CERTIFICATIONS.length },
+      { id: "affiliation", label: "Affiliation", Icon: Users, count: AFFILIATIONS.length },
+      { id: "certification", label: "Certs", Icon: Award, count: CERTIFICATIONS.length },
     ],
   },
   {
@@ -1747,7 +2104,22 @@ function Sidebar({ t, isDark, collapsed: collapsedPref, onToggleCollapse, active
       </nav>
 
       <div className={`shrink-0 border-t ${t.border} ${collapsed ? "py-3 flex flex-col items-center gap-2" : "px-5 py-3 flex items-center justify-between"}`}>
-        {!collapsed && <span className={`font-mono text-[11px] tracking-wider ${t.textFaint}`}>GMT+8</span>}
+        {!collapsed && (
+          <div className="min-w-0 pr-3">
+            <p className={`font-body text-[11px] leading-snug ${t.textFaint}`}>
+              For work, collabs &amp; everything else, reach me at
+            </p>
+            <a
+              href={mailtoUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`mt-1.5 inline-flex max-w-full items-center gap-1.5 font-mono text-[11px] ${t.textMuted} hover:text-red-400 transition-colors`}
+            >
+              <Mail size={12} className="shrink-0" />
+              <span className="truncate">{PROFILE.email}</span>
+            </a>
+          </div>
+        )}
         <div className={collapsed ? "flex flex-col gap-2" : "flex items-center gap-2"}>
           <button aria-label="Toggle theme" title="Toggle theme" onClick={onToggleTheme} className={iconBtn}>
             <Contrast size={15} />
@@ -1888,6 +2260,44 @@ function App() {
     setArchiveOpen(false);
   }, []);
 
+  const [panel, setPanel] = useState(null);
+  const [postSlug, setPostSlug] = useState(null);
+  useEffect(() => {
+    const sync = () => {
+      const h = window.location.hash.slice(1);
+      if (h === "affiliation" || h === "blogs" || h === "certification") {
+        setPanel(h);
+        setPostSlug(null);
+      } else if (h.startsWith("blogs/") && BLOG_BY_SLUG[h.slice(6)]) {
+        setPanel("blogs");
+        setPostSlug(h.slice(6));
+      } else {
+        setPanel(null);
+        setPostSlug(null);
+      }
+    };
+    sync();
+    window.addEventListener("hashchange", sync);
+    return () => window.removeEventListener("hashchange", sync);
+  }, []);
+  const closePanel = useCallback(() => {
+    window.history.replaceState(null, "", window.location.pathname + window.location.search);
+    setPanel(null);
+    setPostSlug(null);
+  }, []);
+  const backToPosts = useCallback(() => { window.location.hash = "blogs"; }, []);
+  const navigateTo = useCallback(
+    (id) => {
+      if (id === "affiliation" || id === "blogs" || id === "certification") {
+        window.location.hash = id;
+        setMenuOpen(false);
+      } else {
+        scrollToId(id);
+      }
+    },
+    [scrollToId]
+  );
+
   const [skillsOpen, setSkillsOpen] = useState(false);
   useEffect(() => {
     const sync = () => setSkillsOpen(window.location.hash === "#all-skills");
@@ -1902,8 +2312,8 @@ function App() {
   }, []);
 
   useEffect(() => {
-    document.body.style.overflow = menuOpen || archiveOpen || skillsOpen || projectSlug ? "hidden" : "";
-  }, [menuOpen, archiveOpen, skillsOpen, projectSlug]);
+    document.body.style.overflow = menuOpen || archiveOpen || skillsOpen || projectSlug || panel ? "hidden" : "";
+  }, [menuOpen, archiveOpen, skillsOpen, projectSlug, panel]);
   useEffect(() => {
     if (!menuOpen) return;
     const onKey = (e) => e.key === "Escape" && setMenuOpen(false);
@@ -1989,7 +2399,7 @@ function App() {
         collapsed={sidebarCollapsed}
         onToggleCollapse={() => setSidebarCollapsed((c) => !c)}
         activeId={activeId}
-        onNavigate={scrollToId}
+        onNavigate={navigateTo}
         onToggleTheme={() => setIsDark((d) => !d)}
         mailtoUrl={mailtoUrl}
       />
@@ -2006,7 +2416,7 @@ function App() {
         t={t}
         isDark={isDark}
         activeId={activeId}
-        onNavigate={scrollToId}
+        onNavigate={navigateTo}
         onToggleTheme={() => setIsDark((d) => !d)}
         mailtoUrl={mailtoUrl}
       />
@@ -2104,7 +2514,7 @@ function App() {
 
       <section id="about" className="max-w-6xl mx-auto px-5 sm:px-8 py-24">
         <div className="grid lg:grid-cols-5 gap-10 lg:gap-14 items-start">
-          <Reveal className="lg:col-span-3">
+          <Reveal className="lg:col-span-5">
             <p className={`inline-flex items-center gap-2 font-mono text-xs tracking-widest ${t.accent} mb-3`}>
               <User size={13} /> 01 · WHO I AM
             </p>
@@ -2133,31 +2543,6 @@ function App() {
                 <span className={`font-body text-[11px] sm:text-sm font-medium leading-tight sm:whitespace-nowrap ${t.accent}`}>Looking for an internship</span>
               </div>
             </div>
-          </Reveal>
-
-          <Reveal delay={120} className="lg:col-span-2">
-            {(() => {
-              const hackathons = EXPERIENCE.filter((e) => e.pathway === "hackathon");
-              return (
-                <div className="grid grid-cols-2 gap-3 sm:gap-4">
-                  <div className={`group relative overflow-hidden rounded-[28px] p-5 sm:p-7 min-h-[200px] sm:min-h-[240px] flex flex-col justify-end text-white transition-all duration-500 hover:-translate-y-1 hover:shadow-2xl hover:shadow-red-500/20 ${isDark ? "bg-neutral-900 ring-1 ring-white/10" : "bg-slate-950"}`}>
-                    <div className="relative">
-                      <p className="font-display text-6xl sm:text-8xl font-bold leading-none tracking-tight">{ALL_PROJECTS.length}</p>
-                      <p className="font-body text-sm sm:text-base font-medium mt-3 text-white">Projects</p>
-                      <p className="font-body text-xs text-white/50 mt-0.5">Software &amp; Networking</p>
-                    </div>
-                  </div>
-
-                  <div className={`group relative overflow-hidden rounded-[28px] border ${t.border} p-5 sm:p-7 min-h-[200px] sm:min-h-[240px] flex flex-col justify-end transition-all duration-500 hover:-translate-y-1 hover:shadow-2xl hover:shadow-red-400/15 hover:border-red-400/40 ${isDark ? "bg-neutral-900" : "bg-white"}`}>
-                    <div className="relative">
-                      <p className="font-display text-6xl sm:text-8xl font-bold leading-none tracking-tight">{hackathons.length}</p>
-                      <p className="font-body text-sm sm:text-base font-medium mt-3">Hackathon</p>
-                      <p className={`font-body text-xs ${t.textMuted} mt-0.5`}>{hackathons.map((h) => h.company.replace(/ Hackathon$/, "")).join(", ") || "—"}</p>
-                    </div>
-                  </div>
-                </div>
-              );
-            })()}
           </Reveal>
         </div>
 
@@ -2336,7 +2721,7 @@ function App() {
         <SectionHeading
           eyebrow="05 · TIMELINE"
           title="Experience"
-          caption="Four pathways: hackathons, internships, organizations, and work experience."
+          caption="Two pathways: internships and work experience."
           icon={Briefcase}
           t={t}
         />
@@ -2461,76 +2846,6 @@ function App() {
         </div>
       </section>
 
-      <section id="certifications">
-        <div className="max-w-6xl mx-auto px-5 sm:px-8 py-24">
-          <SectionHeading
-            eyebrow="06 · CREDENTIALS"
-            title="Certifications"
-            caption="Click Verify to confirm the credential."
-            icon={CheckCircle2}
-            t={t}
-          />
-          <div className={CERTIFICATIONS.length === 1 ? "max-w-xl mx-auto" : "grid md:grid-cols-2 gap-6"}>
-            {CERTIFICATIONS.map((cert, i) => {
-              const earned = !["In Progress", "Planned", "Upcoming"].includes(cert.status);
-              const StatusIcon = earned ? CheckCircle2 : Clock;
-              const pill = earned ? `border border-red-400/60 ${t.accent}` : "border border-amber-400/60 text-amber-500";
-              const notch = `absolute top-0 h-6 w-6 -translate-y-1/2 rounded-full border ${isDark ? "border-neutral-700" : "border-slate-300"} ${t.bg}`;
-              return (
-                <Reveal key={cert.name} delay={i * 80} className="h-full">
-                  <article className={`relative flex h-full flex-col overflow-hidden rounded-3xl border ${t.border} ${t.surface} transition-colors hover:border-red-400/40`}>
-                    <div className="flex-1 p-6 sm:p-8">
-                      <div className="flex items-start justify-between gap-4">
-                        <div className={`flex h-14 w-24 shrink-0 items-center justify-center rounded-xl border ${t.border} bg-white p-2.5`}>
-                          {cert.image ? (
-                            <img src={img(cert.image)} alt={`${cert.name} badge`} className="max-h-full max-w-full object-contain" />
-                          ) : (
-                            <StatusIcon size={24} className="text-slate-400" />
-                          )}
-                        </div>
-                        <span className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 font-mono text-[10px] font-medium tracking-widest uppercase ${pill}`}>
-                          <StatusIcon size={11} /> {cert.status}
-                        </span>
-                      </div>
-
-                      <p className={`font-mono text-[10px] tracking-widest uppercase ${t.textFaint} mt-7`}>
-                        {[cert.group, cert.category].filter(Boolean).join(" · ")}
-                      </p>
-                      <h3 className={`font-display font-semibold text-xl sm:text-2xl tracking-tight leading-snug ${t.text} mt-2`}>{cert.name}</h3>
-                      <p className={`font-body text-sm ${t.textMuted} mt-1`}>{cert.org}</p>
-                    </div>
-
-                    <div className={`relative border-t border-dashed ${isDark ? "border-neutral-700" : "border-slate-300"} px-6 sm:px-8 py-5 flex flex-wrap items-center justify-between gap-4`}>
-                      <span aria-hidden="true" className={`${notch} -left-3`} />
-                      <span aria-hidden="true" className={`${notch} -right-3`} />
-                      <div>
-                        <p className={`font-mono text-[10px] tracking-widest uppercase ${t.textFaint}`}>{earned ? "Issued" : "Status"}</p>
-                        <p className={`font-mono text-sm ${t.text} mt-1`}>{cert.date}</p>
-                        <p className={`font-mono text-[10px] tracking-wide ${t.textFaint} mt-1 ${cert.credentialId ? "" : "invisible"}`} aria-hidden={!cert.credentialId}>
-                          ID · {cert.credentialId || "—"}
-                        </p>
-                      </div>
-                      {hasLink(cert.verifyUrl) ? (
-                        <a
-                          href={cert.verifyUrl}
-                          target="_blank"
-                          rel="noreferrer"
-                          className={`inline-flex items-center gap-2 rounded-lg border border-red-400 px-4 py-2 font-mono text-xs ${t.accent} hover:bg-red-400/10 transition-colors`}
-                        >
-                          {cert.verifyLabel || "Verify"} <ExternalLink size={13} />
-                        </a>
-                      ) : (
-                        <span className={`font-mono text-xs ${t.textFaint}`}>Verification soon</span>
-                      )}
-                    </div>
-                  </article>
-                </Reveal>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
       <GithubActivity t={t} isDark={isDark} />
 
       <footer className={`border-t ${t.border}`}>
@@ -2551,6 +2866,10 @@ function App() {
 
       {archiveOpen && <ProjectArchive t={t} isDark={isDark} onClose={closeArchive} />}
       {projectSlug && <ProjectDetail key={projectSlug} t={t} isDark={isDark} project={PROJECT_BY_SLUG[projectSlug]} onBack={closeProject} />}
+      {panel === "affiliation" && <SectionPanel t={t} onClose={closePanel}><AffiliationSection t={t} isDark={isDark} /></SectionPanel>}
+      {panel === "certification" && <SectionPanel t={t} onClose={closePanel}><CertificationSection t={t} isDark={isDark} /></SectionPanel>}
+      {panel === "blogs" && <SectionPanel t={t} onClose={closePanel} listenEsc={!postSlug}><BlogSection t={t} isDark={isDark} /></SectionPanel>}
+      {panel === "blogs" && postSlug && <BlogArticle key={postSlug} t={t} isDark={isDark} post={BLOG_BY_SLUG[postSlug]} onBack={backToPosts} />}
       {skillsOpen && <SkillsArchive t={t} onClose={closeSkills} isDark={isDark} />}
 
       {showTop && !menuOpen && (
