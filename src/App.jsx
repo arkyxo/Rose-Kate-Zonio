@@ -460,36 +460,37 @@ const BLOG_PAGE_SIZE = 6;
 
 const BLOGS = [
   {
-    title: "Building KuryenteWatch at the AppBuilders PH Hackathon",
+    title: "What I Learned Building a Local AI App with 1,000 Developers",
     date: "Oct 9 — 10, 2026",
     category: "Hackathon",
     image: "appbuilders-hackathon-group",
     position: "object-[center_75%]",
     hero: true,
-    excerpt: FEATURED_ACTIVITY.description,
+    excerpt: "24 hours at the AppBuilders PH Hackathon, a local LLM, and why losing taught me more than winning.",
     body: [
-      "Built KuryenteWatch with my team in a 24-hour build and pitched it through a video — a local-first household electricity app (React PWA, Express, SQLite) that reads meter and appliance-label photos with OCR, estimates bills and appliance usage, flags unusual usage jumps, and answers questions through an Energy Assistant that runs on a local Ollama model or fully offline.",
+      "Participating in hackathons is always an intense experience, but my time at the AppBuilders PH Hackathon felt very different.",
+      "At my first hackathon, the experience ended quietly. We built a project, sent in a pitch video from home, and got an email days later stating we didn't make the top 10.",
+      "There was no feedback.",
+      "This time was totally different.",
+      "Walking into the venue and seeing over 500+ builders, a mix of college students and pros with years of experience, changed everything. The room was full of energy. And even though our team didn't win, staying to watch the top 12 teams present their work live taught me things no online tutorial could ever show.",
+      "So yeah, maybe, it\u2019s not really a bad idea to go outside my comfort zone and do a side quest like this HAHAHAHAHHA",
     ],
     links: FEATURED_ACTIVITY.links,
-  },
-  {
-    title: "Pitching an AI Sales Ledger to GCash Judges",
-    date: "Sept 2026",
-    category: "Hackathon",
-    image: "asset-4ce99605",
-    position: "object-center",
-    excerpt:
-      "An AI-powered concept that digitizes handwritten sales records for small business owners, presented to GCash judges.",
-    body: [
-      "Built, designed and pitched an AI-powered concept that digitizes handwritten sales records for small business owners — extracting entries and producing basic profit/loss summaries — and presented a prototype to GCash judges with a team of classmates.",
-    ],
-    links: [],
   },
 ];
 
 const blogSlug = (post) => slugOf(post.title);
 const BLOG_BY_SLUG = Object.fromEntries(BLOGS.map((b) => [blogSlug(b), b]));
 const readMinutes = (post) => Math.max(1, Math.ceil(post.body.join(" ").split(/\s+/).filter(Boolean).length / 200));
+
+const ABOUT_PHOTOS = [
+  { name: "About me · Me", caption: "Me", image: "aboutme-photo-me" },
+  { name: "About me · Writing", caption: "Writing", image: "aboutme-photo-writing" },
+  { name: "About me · Cubing", caption: "Cubing", image: "aboutme-photo-cubing" },
+  { name: "About me · Jazz", caption: "Jazz", image: "aboutme-photo-jazz" },
+  { name: "About me · Plants", caption: "Plants", image: "aboutme-photo-plants" },
+  { name: "About me · Films", caption: "Films", image: "aboutme-photo-films" },
+];
 
 const EDUCATION = [
   {
@@ -1390,6 +1391,109 @@ function CertificationSection({ t, isDark }) {
   );
 }
 
+const ABOUT_ME = [
+  "I'm currently a fourth-year student exploring the world of technology, one line of code at a time. I'm still learning and figuring things out, but I'm enjoying the journey of becoming a better coder and, hopefully, a mamaw when it comes to understanding the networks and systems working behind the scenes. I'm curious about how things work, whether it's the code that brings an application to life or the network that keeps everything connected.",
+  "## But there's more to me than just code and cables!",
+  "Before I got caught up in the world of programming and networking, I spent some time writing stories on Wattpad. I used to be an author with three novels under my belt, covering thriller, mystery, and comedy. I may not write as often as I used to, but the writer in me never really left. Every now and then, whenever inspiration strikes or boredom kicks in, I find myself writing a little prose or short story just for fun.",
+  "I also have a thing for Rubik's Cubes. I own at least ten of them, each one waiting for its turn to be scrambled and solved. Am I a speedcuber? Not exactly. Am I fast? Well, let's just say I can solve one in under a minute HAHAHAHAHA. I'm more of a casual cuber who enjoys the challenge, the patterns, and the satisfaction of getting every piece back where it belongs.",
+  "Music is another thing I can never get enough of, especially jazz. There's something about putting on my headphones or earphones and getting completely immersed in the music. It feels like I'm right there beside the instruments, listening to every note as if the musicians were playing just for me. It's my little escape whenever I need to relax, focus, or simply enjoy the moment.",
+  "When I'm not coding, writing, cubing, or listening to music, you'll probably find me admiring plants or thinking about growing some of my own. I love planting, and one of my little dreams is to have a house with a backyard full of plants someday. I imagine a peaceful green space where I can take care of my plants, breathe some fresh air, and enjoy a slower pace of life.",
+  "There's another side of me that has always been fascinated by films and the art of storytelling. Becoming a filmmaker is one of my dreams, and sometimes I wonder what my life would look like if I weren't pursuing the engineering path. Maybe I'd be behind a camera, directing a film, bringing stories to life, and turning the ideas in my head into something people could watch and feel. Who knows? Maybe I would've been a director in another life. It's a dream I still hold close to my heart, even as I continue working toward my goals in technology. After all, whether it's through writing code or directing a film, I think there's something beautiful about creating something from nothing and sharing it with the world.",
+  "At the end of the day, I'm just someone with a curious mind and a lot of dreams. I'm a future tech professional, a former Wattpad author, a casual cuber, a jazz lover, a plant lover, and a filmmaker at heart. I may be taking the engineering path for now, but a part of me will always be drawn to stories, cameras, and the magic of bringing an idea to life. I'm still figuring things out, learning as I go, and discovering the many things I could become. And honestly, I think that's one of the most exciting parts of being me.",
+];
+
+function PhotoTile({ photo, t, isDark }) {
+  const [broken, setBroken] = useState(false);
+  const src = img(photo.image);
+  const show = src && !broken;
+  return (
+    <figure
+      className={`group relative aspect-[4/5] overflow-hidden rounded-xl ${
+        show ? `border ${t.border}` : `border border-dashed ${t.border} ${isDark ? "bg-white/[0.02]" : "bg-slate-50"}`
+      }`}
+    >
+      {show ? (
+        <img
+          src={src}
+          alt={photo.caption}
+          loading="lazy"
+          onError={() => setBroken(true)}
+          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+        />
+      ) : (
+        <div className={`absolute inset-0 flex flex-col items-center justify-center gap-2 ${t.textFaint}`}>
+          <ImageIcon size={22} />
+          <span className="font-mono text-[10px] tracking-widest uppercase">Photo soon</span>
+        </div>
+      )}
+      <figcaption
+        className={`absolute bottom-2 left-2 rounded-full px-2.5 py-1 font-mono text-[10px] tracking-wider ${
+          show ? "bg-black/60 text-white backdrop-blur" : `${isDark ? "bg-white/10" : "bg-slate-200"} ${t.textMuted}`
+        }`}
+      >
+        {photo.caption}
+      </figcaption>
+    </figure>
+  );
+}
+
+function AboutMeSection({ t, isDark }) {
+  return (
+    <section id="aboutme" className="max-w-4xl mx-auto">
+      <p className={`inline-flex items-center gap-2 font-mono text-xs tracking-widest ${t.accent} mb-3`}>
+        <User size={13} /> MORE ABOUT ME
+      </p>
+      <h2 className="font-display font-bold text-4xl sm:text-5xl tracking-tight">About Me</h2>
+      <p className="font-display text-2xl sm:text-3xl font-medium leading-snug mt-6">
+        Hi, I'm <span className={t.accent}>RK</span>!
+      </p>
+
+      <div className="mt-6 max-w-2xl">
+        {ABOUT_ME.map((block, i) => {
+          if (block.startsWith("## ")) {
+            return (
+              <h3 key={i} className="font-display font-semibold text-xl sm:text-2xl leading-snug tracking-tight mt-10">
+                {block.slice(3)}
+              </h3>
+            );
+          }
+          const closing = i === ABOUT_ME.length - 1;
+          return (
+            <p
+              key={i}
+              className={`font-body text-base sm:text-[17px] leading-[1.8] mt-5 first:mt-0 ${
+                closing ? `border-l-2 border-red-400 pl-4 font-medium ${t.text}` : t.textMuted
+              }`}
+            >
+              {block}
+            </p>
+          );
+        })}
+      </div>
+
+      <div className="mt-14">
+        <p className={`font-mono text-[11px] tracking-widest uppercase ${t.accent}`}>Snapshots</p>
+        <h3 className="font-display font-semibold text-xl mt-1">A little more of me</h3>
+        <div className="mt-5 grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4">
+          {ABOUT_PHOTOS.map((photo) => (
+            <PhotoTile key={photo.image} photo={photo} t={t} isDark={isDark} />
+          ))}
+        </div>
+      </div>
+
+      <div className="mt-14 max-w-2xl">
+        <p className={`font-mono text-[11px] tracking-widest uppercase ${t.accent}`}>Foundation</p>
+        <h3 className="font-display font-semibold text-xl mt-1">Education</h3>
+        <ul className={`mt-4 border-t ${t.border}`}>
+          {EDUCATION.map((edu) => (
+            <EducationRow key={edu.program} edu={edu} t={t} isDark={isDark} />
+          ))}
+        </ul>
+      </div>
+    </section>
+  );
+}
+
 function SectionPanel({ t, onClose, listenEsc = true, children }) {
   useEffect(() => {
     if (!listenEsc) return;
@@ -1650,69 +1754,29 @@ function BlogArticle({ t, isDark, post, onBack }) {
   );
 }
 
-function EducationCard({ edu, t, isDark }) {
-  const { done, total, elapsed, startY, endY } = eduProgress(edu.duration);
-  const currentYear = Math.min(total, Math.floor(elapsed) + 1);
+function EducationRow({ edu, t, isDark }) {
+  const { done, startY, endY } = eduProgress(edu.duration);
   return (
-    <div
-      className={`card-glow group relative overflow-hidden rounded-3xl border ${t.border} ${t.surface} p-7 sm:p-8 h-full flex flex-col hover:border-red-400/40`}
-    >
-      <span
-        aria-hidden="true"
-        className={`pointer-events-none select-none absolute -bottom-6 -right-2 font-display font-bold leading-none text-[8rem] sm:text-[9rem] ${isDark ? "text-white/[0.035]" : "text-slate-900/[0.04]"}`}
-      >
-        {endY}
-      </span>
-
-      <div className="relative flex items-start justify-between gap-4">
-        <div className="h-20 w-20 shrink-0 rounded-2xl bg-white shadow-lg shadow-black/10 ring-1 ring-black/5 flex items-center justify-center overflow-hidden p-2">
-          {edu.logo ? (
-            <img src={img(edu.logo)} alt={edu.institution} className="h-full w-full object-contain" />
-          ) : (
-            <span className="font-mono text-base font-bold tracking-wider text-red-500">{initialsOf(edu.institution)}</span>
-          )}
-        </div>
-        <span
-          className={`inline-flex items-center gap-2 rounded-full px-3 py-1.5 font-mono text-[10px] font-medium tracking-widest ${
-            done ? `${isDark ? "bg-neutral-800 text-neutral-400" : "bg-slate-100 text-slate-500"}` : "border border-red-400/60 text-red-400"
-          }`}
-        >
-          {done ? "GRADUATED" : "IN PROGRESS"}
-        </span>
+    <li className={`flex items-center gap-4 border-b ${t.border} py-4`}>
+      <div className="h-10 w-10 shrink-0 overflow-hidden rounded-lg bg-white p-1 ring-1 ring-black/10 flex items-center justify-center">
+        {edu.logo ? (
+          <img src={img(edu.logo)} alt={edu.institution} className="h-full w-full object-contain" />
+        ) : (
+          <span className="font-mono text-xs font-bold text-red-500">{initialsOf(edu.institution)}</span>
+        )}
       </div>
-
-      <div className="relative mt-7">
-        <span className={`inline-block rounded-md px-2 py-0.5 font-mono text-[10px] tracking-widest ${isDark ? "bg-neutral-800 text-neutral-300" : "bg-slate-100 text-slate-600"}`}>
-          {edu.level.toUpperCase()}
-        </span>
-        <h3 className="font-display font-bold text-2xl sm:text-[1.7rem] tracking-tight leading-tight mt-3">{edu.program}</h3>
-        <p className={`font-body text-sm sm:text-base ${t.textMuted} mt-2`}>{edu.institution}</p>
-        {edu.note && <p className={`font-body text-sm leading-relaxed ${t.textMuted} mt-4`}>{edu.note}</p>}
+      <div className="min-w-0 flex-1">
+        <p className="font-display font-semibold text-[15px] leading-snug">{edu.program}</p>
+        <p className={`font-body text-[13px] ${t.textMuted} mt-0.5`}>{edu.institution}</p>
       </div>
-
-      <div className="relative mt-auto pt-8">
-        <div className="flex items-end justify-between mb-3">
-          <p className={`font-display text-lg font-semibold ${t.text}`}>
-            {startY}
-            <span className={`mx-2 ${t.textFaint}`}>→</span>
-            {endY}
-          </p>
-          <span className={`font-mono text-[11px] tracking-wide ${t.textFaint}`}>
-            {done ? "Completed" : `Year ${currentYear} of ${total}`}
-          </span>
-        </div>
-        <div className="flex gap-1.5">
-          {Array.from({ length: total }).map((_, i) => {
-            const fill = Math.max(0, Math.min(1, elapsed - i)) * 100;
-            return (
-              <div key={i} className={`h-1.5 flex-1 rounded-full overflow-hidden ${isDark ? "bg-neutral-800" : "bg-slate-200"}`}>
-                <div className="h-full rounded-full bg-red-400" style={{ width: `${fill}%` }} />
-              </div>
-            );
-          })}
-        </div>
+      <div className="shrink-0 text-right">
+        <p className={`font-mono text-xs ${t.text}`}>{startY} — {endY}</p>
+        <p className={`mt-1 inline-flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-wider ${done ? t.textFaint : t.accent}`}>
+          {!done && <span className="h-1.5 w-1.5 rounded-full bg-red-400" />}
+          {done ? "Graduated" : "In progress"}
+        </p>
       </div>
-    </div>
+    </li>
   );
 }
 
@@ -1737,7 +1801,7 @@ const SKILL_TOTAL = SKILL_GROUPS.reduce((n, g) => n + g.items.length, 0);
 const IMAGE_FIELDS = ["icon", "thumbnail", "thumbnailDark", "gallery", "galleryDark", "image", "inset", "logo"];
 export const IMAGE_SLOTS = (() => {
   const slots = { [PROFILE.photo]: ["Profile photo"] };
-  const sources = [...ALL_SKILL_ITEMS, ...AI_TOOLING, ...ALL_PROJECTS, ...CERTIFICATIONS, FEATURED_ACTIVITY, ...EXPERIENCE, ...AFFILIATIONS, ...BLOGS, ...EDUCATION];
+  const sources = [...ALL_SKILL_ITEMS, ...AI_TOOLING, ...ALL_PROJECTS, ...CERTIFICATIONS, FEATURED_ACTIVITY, ...EXPERIENCE, ...AFFILIATIONS, ...BLOGS, ...ABOUT_PHOTOS, ...EDUCATION];
   for (const item of sources) {
     const name = item.name || item.title || item.company || item.institution || "Item";
     for (const field of IMAGE_FIELDS) {
@@ -2265,7 +2329,7 @@ function App() {
   useEffect(() => {
     const sync = () => {
       const h = window.location.hash.slice(1);
-      if (h === "affiliation" || h === "blogs" || h === "certification") {
+      if (h === "affiliation" || h === "blogs" || h === "certification" || h === "aboutme") {
         setPanel(h);
         setPostSlug(null);
       } else if (h.startsWith("blogs/") && BLOG_BY_SLUG[h.slice(6)]) {
@@ -2523,46 +2587,31 @@ function App() {
               Hi, I'm <span className={t.accent}>RK</span>. I'm a Computer Engineering student who builds
               software and understands the network it runs on.
             </p>
-            <p className={`font-body leading-relaxed ${t.textMuted} mt-5 max-w-xl`}>
-              I'm looking for an internship where both sides are useful.
-            </p>
-            <div className="mt-7 flex flex-nowrap items-stretch gap-2 sm:gap-2.5">
-              <div
-                className={`group inline-flex shrink-0 items-center gap-1.5 sm:gap-2.5 rounded-2xl sm:rounded-full border ${t.border} ${t.surface} py-1.5 pl-2 sm:pl-1.5 pr-2.5 sm:pr-4 shadow-sm backdrop-blur transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md`}
-              >
-                <span
-                  className={`flex h-6 w-6 sm:h-8 sm:w-8 shrink-0 items-center justify-center rounded-full ${
-                    isDark ? "bg-neutral-800" : "bg-slate-100"
-                  } ${t.accent}`}
+            <div className="mt-10 grid max-w-2xl grid-cols-3 gap-4 sm:gap-8">
+              {[
+                { big: "Rizal", label: "Philippines", href: "https://www.google.com/maps/search/Rizal,+Philippines", external: true },
+                { big: "Internship", label: "Currently looking", href: mailtoUrl, external: true },
+                { big: "More about me", label: "Education & more", href: "#aboutme", external: false },
+              ].map((item) => (
+                <a
+                  key={item.big}
+                  href={item.href}
+                  {...(item.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                  className="group relative block pr-5"
                 >
-                  <MapPin size={13} />
-                </span>
-                <span className="font-body text-[11px] sm:text-sm font-medium leading-tight sm:whitespace-nowrap">{PROFILE.location}</span>
-              </div>
-              <div className="inline-flex min-w-0 items-center gap-1.5 sm:gap-2.5 rounded-2xl sm:rounded-full border border-red-400/60 py-1.5 px-3 sm:px-4 transition-all duration-300 hover:-translate-y-0.5 hover:border-red-400">
-                <span className={`font-body text-[11px] sm:text-sm font-medium leading-tight sm:whitespace-nowrap ${t.accent}`}>Looking for an internship</span>
-              </div>
+                  <ArrowUpRight size={14} className={`absolute right-0 top-1 ${t.textFaint} transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-red-400`} />
+                  <p className={`font-display text-xl sm:text-[28px] font-medium leading-tight tracking-tight ${t.text} transition-colors group-hover:text-red-400`}>
+                    {item.big}
+                  </p>
+                  <p className={`font-body text-[12px] sm:text-sm ${t.textMuted} mt-1.5`}>{item.label}</p>
+                </a>
+              ))}
             </div>
+            <p className={`mt-10 flex items-center gap-2 font-body text-xs sm:text-[13px] ${t.textFaint}`}>
+              <PanelLeft size={14} className="shrink-0" />
+              <span>Check the sidebar/menu for more information — certifications, blogs, and affiliations.</span>
+            </p>
           </Reveal>
-        </div>
-
-        <div className="mt-20">
-          <Reveal>
-            <div className="flex items-center gap-4 mb-8">
-              <p className={`inline-flex items-center gap-2 font-mono text-xs tracking-widest ${t.accent}`}>
-                <GraduationCap size={14} /> FOUNDATION
-              </p>
-              <span className={`h-px flex-1 border-t ${t.border}`} />
-              <span className={`font-mono text-xs tracking-widest ${t.textFaint} hidden sm:inline`}>EDUCATION</span>
-            </div>
-          </Reveal>
-          <div className="-mx-5 -my-4 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 py-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:mx-0 sm:my-0 sm:grid sm:grid-cols-2 sm:gap-6 sm:overflow-visible sm:p-0">
-            {EDUCATION.map((edu, i) => (
-              <Reveal key={edu.program} delay={i * 100} className="w-[85%] shrink-0 snap-center sm:w-auto">
-                <EducationCard edu={edu} t={t} isDark={isDark} />
-              </Reveal>
-            ))}
-          </div>
         </div>
       </section>
 
@@ -2867,6 +2916,7 @@ function App() {
       {archiveOpen && <ProjectArchive t={t} isDark={isDark} onClose={closeArchive} />}
       {projectSlug && <ProjectDetail key={projectSlug} t={t} isDark={isDark} project={PROJECT_BY_SLUG[projectSlug]} onBack={closeProject} />}
       {panel === "affiliation" && <SectionPanel t={t} onClose={closePanel}><AffiliationSection t={t} isDark={isDark} /></SectionPanel>}
+      {panel === "aboutme" && <SectionPanel t={t} onClose={closePanel}><AboutMeSection t={t} isDark={isDark} /></SectionPanel>}
       {panel === "certification" && <SectionPanel t={t} onClose={closePanel}><CertificationSection t={t} isDark={isDark} /></SectionPanel>}
       {panel === "blogs" && <SectionPanel t={t} onClose={closePanel} listenEsc={!postSlug}><BlogSection t={t} isDark={isDark} /></SectionPanel>}
       {panel === "blogs" && postSlug && <BlogArticle key={postSlug} t={t} isDark={isDark} post={BLOG_BY_SLUG[postSlug]} onBack={backToPosts} />}
