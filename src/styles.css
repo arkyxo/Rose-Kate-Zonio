@@ -197,3 +197,10 @@ html::-webkit-scrollbar {
 /* Hide scrollbars but keep scrolling */
 html, body, #panel-scroll { scrollbar-width: none; -ms-overflow-style: none; }
 html::-webkit-scrollbar, body::-webkit-scrollbar, #panel-scroll::-webkit-scrollbar { display: none; width: 0; height: 0; }
+.hero-split { container-type: inline-size; }
+.hero-word { font-size: 17cqw; }
+.hero-tail { font-size: 7.5cqw; }
+@media (min-width: 768px) {
+  .hero-word { font-size: 8.2cqw; }
+  .hero-tail { font-size: 3.6cqw; }
+}

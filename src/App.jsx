@@ -24,6 +24,8 @@ function makeIcon(paths) {
   };
 }
 
+const CodeBrackets = makeIcon(<><path d="m16 18 6-6-6-6" /><path d="m8 6-6 6 6 6" /></>);
+const NetworkNodes = makeIcon(<><rect x="16" y="16" width="6" height="6" rx="1" /><rect x="2" y="16" width="6" height="6" rx="1" /><rect x="9" y="2" width="6" height="6" rx="1" /><path d="M5 16v-3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3" /><path d="M12 12V8" /></>);
 const Mail = makeIcon(<><rect width="20" height="16" x="2" y="4" rx="2" /><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" /></>);
 const Github = makeIcon(<path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 0 0-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21" />);
 const GithubIcon = Github;
@@ -516,6 +518,9 @@ const HERO_SIDES = [
     tail: "on One Side.",
     label: "Software",
     count: WEB_APPS.length,
+    blurb: "Web apps and interfaces, built end to end.",
+    chips: ["React", "Firebase", "Tailwind"],
+    Icon: CodeBrackets,
   },
   {
     id: "labs",
@@ -523,6 +528,9 @@ const HERO_SIDES = [
     tail: "on the Other.",
     label: "Networking",
     count: LABS.length,
+    blurb: "Topologies, routing and the infrastructure underneath.",
+    chips: ["Cisco", "VLANs", "Routing"],
+    Icon: NetworkNodes,
   },
 ];
 
@@ -2641,58 +2649,25 @@ function App() {
         <div className="relative max-w-6xl mx-auto px-5 sm:px-8 py-16 sm:py-24 w-full">
           <h1 className="sr-only">Websites on One Side. Networks on the Other.</h1>
 
-          <div className={`grid grid-cols-1 md:grid-cols-2 border-y ${t.border} md:divide-x ${isDark ? "divide-neutral-800" : "divide-slate-200"}`}>
+          <div className="hero-split group/hero grid grid-cols-1 md:grid-cols-2 gap-y-14 md:gap-x-8">
             {HERO_SIDES.map((side, i) => (
               <Reveal key={side.id} delay={110 + i * 60} className="min-w-0">
-                <div className={`py-10 md:py-14 ${i === 0 ? "md:pr-12" : `border-t ${t.border} md:border-t-0 md:pl-12`}`}>
-                  <p className={`font-mono text-[11px] tracking-widest ${t.textFaint}`}>
-                    {String(i + 1).padStart(2, "0")} / {side.label.toUpperCase()}
-                  </p>
-                  <h2 className="mt-5 font-display font-bold tracking-tight leading-[1.02] text-[clamp(2.75rem,6vw,4.5rem)]">
-                    <span className={t.accent}>{side.word}</span>
-                    <span className={`mt-1 block text-[0.5em] ${t.text}`}>
+                <div className="group/side block w-full text-left transition-opacity duration-500 md:group-hover/hero:opacity-30 md:hover:!opacity-100">
+                  <h2 className="font-display font-bold tracking-[-0.04em] leading-[0.88]">
+                    <span
+                      className={`hero-word block whitespace-nowrap ${t.accent} transition-transform duration-500 group-hover/side:translate-x-2`}
+                    >
+                      {side.word}
+                    </span>
+                    <span className={`hero-tail mt-3 block whitespace-nowrap font-semibold tracking-[-0.03em] ${t.text}`}>
                       {side.tail}
                     </span>
                   </h2>
-                  <button
-                    onClick={() => { switchProjectTab(side.id); scrollToId("labs"); }}
-                    className={`group mt-8 inline-flex items-center gap-2 font-mono text-xs uppercase tracking-widest ${t.text} transition-colors hover:text-red-400`}
-                  >
-                    {side.label} projects <span className={t.textFaint}>({String(side.count).padStart(2, "0")})</span>
-                    <span className="transition-transform duration-300 group-hover:translate-x-1"><ArrowRight size={14} /></span>
-                  </button>
+                  <span aria-hidden="true" className="mt-8 block h-[3px] w-12 rounded-full bg-red-400 transition-all duration-500 group-hover/side:w-full" />
                 </div>
               </Reveal>
             ))}
           </div>
-
-          <Reveal delay={240}>
-            <div className="mt-10 flex justify-center">
-              <div className="flex flex-nowrap items-center gap-2 sm:gap-3">
-                <button
-                  onClick={openResumes}
-                  className="inline-flex h-10 sm:h-11 shrink-0 items-center gap-1.5 sm:gap-2 whitespace-nowrap rounded-full border border-slate-200 bg-white px-4 sm:px-6 font-body text-xs sm:text-sm font-semibold text-slate-950 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:bg-slate-100"
-                >
-                  <Download size={15} /> Resume
-                </button>
-                {[
-                  { href: PROFILE.github, label: "GitHub", Icon: Github, ext: true },
-                  { href: PROFILE.linkedin, label: "LinkedIn", Icon: Linkedin, ext: true },
-                  { href: mailtoUrl, label: "Email", Icon: Mail, ext: false },
-                ].map(({ href, label, Icon, ext }) => (
-                  <a
-                    key={label}
-                    href={href}
-                    aria-label={label}
-                    {...(ext ? { target: "_blank", rel: "noreferrer" } : {})}
-                    className={`flex h-10 w-10 sm:h-11 sm:w-11 shrink-0 items-center justify-center rounded-2xl border ${t.border} ${t.surface} ${t.textMuted} backdrop-blur transition-all duration-300 hover:-translate-y-1 hover:border-red-400/60 hover:text-red-400 hover:shadow-lg hover:shadow-red-400/20`}
-                  >
-                    <Icon size={18} />
-                  </a>
-                ))}
-              </div>
-            </div>
-          </Reveal>
         </div>
       </section>
 
@@ -2705,27 +2680,46 @@ function App() {
             <h2 className={`font-display text-3xl sm:text-4xl font-bold ${t.text} mb-6`}>About Me</h2>
             <p className={`font-display text-xl sm:text-2xl font-medium leading-snug ${t.text}`}>
               Hi, I'm <span className={t.accent}>RK</span>. I'm a Computer Engineering student who builds
-              software and understands the network it runs on.
+              software and understands the network it runs on.{" "}
+              <a
+                href="#aboutme"
+                className={`group relative inline-block whitespace-nowrap pr-5 ${t.accent} transition-colors hover:text-red-300`}
+              >
+                More about me
+                <ArrowUpRight size={14} className="absolute right-0 top-1 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+              </a>
             </p>
-            <div className="mt-10 grid max-w-2xl grid-cols-3 gap-4 sm:gap-8">
+            <div className="mt-10 grid max-w-3xl grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-4 sm:gap-8">
               {[
-                { big: "Rizal", label: "Philippines", href: "https://www.google.com/maps/search/Rizal,+Philippines", external: true },
-                { big: "Internship", label: "Currently looking", href: mailtoUrl, external: true },
-                { big: "More about me", label: "Education & more", href: "#aboutme", external: false },
-              ].map((item) => (
-                <a
-                  key={item.big}
-                  href={item.href}
-                  {...(item.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-                  className="group relative block pr-5"
-                >
-                  <ArrowUpRight size={14} className={`absolute right-0 top-1 ${t.textFaint} transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-red-400`} />
-                  <p className={`font-display text-xl sm:text-[28px] font-medium leading-tight tracking-tight ${t.text} transition-colors group-hover:text-red-400`}>
-                    {item.big}
-                  </p>
-                  <p className={`font-body text-[12px] sm:text-sm ${t.textMuted} mt-1.5`}>{item.label}</p>
-                </a>
-              ))}
+                { big: "Resume", label: "Download CV", onClick: openResumes },
+                { big: "LinkedIn", label: "Let's connect", href: PROFILE.linkedin, external: true },
+                { big: "Email", label: "Get in touch", href: mailtoUrl, external: false },
+                { big: "GitHub", label: "See my code", href: PROFILE.github, external: true },
+              ].map((item) => {
+                const inner = (
+                  <>
+                    <ArrowUpRight size={14} className={`absolute right-0 top-1 ${t.textFaint} transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-red-400`} />
+                    <p className={`font-display text-xl sm:text-[28px] font-medium leading-tight tracking-tight ${t.text} transition-colors group-hover:text-red-400`}>
+                      {item.big}
+                    </p>
+                    <p className={`font-body text-[12px] sm:text-sm ${t.textMuted} mt-1.5`}>{item.label}</p>
+                  </>
+                );
+                return item.onClick ? (
+                  <button key={item.big} onClick={item.onClick} className="group relative block pr-5 text-left">
+                    {inner}
+                  </button>
+                ) : (
+                  <a
+                    key={item.big}
+                    href={item.href}
+                    {...(item.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                    className="group relative block pr-5"
+                  >
+                    {inner}
+                  </a>
+                );
+              })}
             </div>
             <p className={`mt-10 flex items-center gap-2 font-body text-xs sm:text-[13px] ${t.textFaint}`}>
               <PanelLeft size={14} className="shrink-0" />
