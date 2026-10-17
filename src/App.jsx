@@ -551,9 +551,9 @@ const theme = {
   },
   light: {
     bg: "bg-slate-50",
-    bgSoft: "bg-white",
-    surface: "bg-white",
-    surfaceSolid: "bg-white",
+    bgSoft: "bg-paper",
+    surface: "bg-paper",
+    surfaceSolid: "bg-paper",
     border: "border-slate-200",
     text: "text-slate-900",
     textMuted: "text-slate-600",
@@ -676,9 +676,9 @@ function NetworkCanvas({ isDark }) {
 
     function draw() {
       ctx.clearRect(0, 0, width, height);
-      const lineColor = isDark ? "45, 212, 191" : "100, 116, 139";
-      const nodeColor = isDark ? "163, 163, 163" : "100, 116, 139";
-      const packetColor = isDark ? "251, 191, 36" : "217, 119, 6";
+      const lineColor = isDark ? "178, 189, 126" : "106, 121, 93";
+      const nodeColor = isDark ? "200, 205, 160" : "106, 121, 93";
+      const packetColor = isDark ? "217, 210, 139" : "128, 132, 78";
 
       const edges = [];
       for (let i = 0; i < nodes.length; i++) {
@@ -871,7 +871,7 @@ function LatestActivities({ t, isDark }) {
 }
 
 const DOT_RADIUS_BY_LEVEL = [1.4, 2.2, 3, 3.8, 4.6];
-const DOT_COLOR_BY_LEVEL = ["#fecaca", "#fca5a5", "#f87171", "#dc2626", "#7f1d1d"];
+const DOT_COLOR_BY_LEVEL = ["#E8E4AC", "#D9D28B", "#B2BD7E", "#8E9162", "#6A795D"];
 
 function GithubActivity({ t, isDark }) {
   const [status, setStatus] = useState("loading");
@@ -940,7 +940,7 @@ function GithubActivity({ t, isDark }) {
   const topPad = 20;
   const width = weeks.length * cell;
   const height = topPad + 7 * cell;
-  const emptyFill = isDark ? "#262626" : "#e2e8f0";
+  const emptyFill = isDark ? "#2D3326" : "#E2DFC0";
 
   const monthLabels = [];
   let lastMonth = -1;
@@ -1054,7 +1054,7 @@ function GithubActivity({ t, isDark }) {
                           y={11}
                           fontSize="10"
                           fontFamily="Inter, system-ui, sans-serif"
-                          fill={isDark ? "#737373" : "#94a3b8"}
+                          fill={isDark ? "#7F846A" : "#878C6F"}
                         >
                           {m.label}
                         </text>
