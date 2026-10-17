@@ -1,42 +1,38 @@
-/**
- * Palette (from the chosen swatch):
- *   sunlit  #D9D28B   -> main accent (red-400)
- *   leaf    #B2BD7E   -> secondary accent (amber-400)
- *   olive   #8E9162   -> tertiary (blue-400)
- *   sage    #6A795D   -> deep green
- * Existing Tailwind scales (red / amber / blue / slate / neutral) are remapped
- * onto this palette so every component picks up the new look automatically.
- */
+
 export default {
   content: ["./index.html", "./src/**/*.{js,jsx}"],
   safelist: ["hover:text-red-400", "hover:text-red-600", "hover:text-slate-400", "hover:text-slate-600"],
   theme: {
     extend: {
       colors: {
-        black: "#141910",
-        paper: "#FCFBF2",
-        // accent
+        black: "#000000",
+        paper: "#FFFFFF",
+        onaccent: "rgb(var(--on-accent) / <alpha-value>)",
+        // main accent: white (dark mode) / black (light mode).
+        // 300 / 400 follow CSS variables so they flip with the theme (see styles.css)
         red: {
-          50: "#FAF9EC", 100: "#F2F0D0", 200: "#EBE8B0", 300: "#E4DF9E", 400: "#D9D28B",
-          500: "#B2BD7E", 600: "#5F6E50", 700: "#4D5A41", 800: "#3B4632", 900: "#2B3424", 950: "#1A2016",
+          50: "#FAFAFA", 100: "#F5F5F5", 200: "#E5E5E5", 300: "rgb(var(--accent-300) / <alpha-value>)", 400: "rgb(var(--accent-400) / <alpha-value>)",
+          500: "#171717", 600: "#000000", 700: "#0A0A0A", 800: "#171717", 900: "#262626", 950: "#000000",
         },
+        // secondary: light gray
         amber: {
-          50: "#F6F8EA", 100: "#ECF0D5", 200: "#DDE4B5", 300: "#C9D29E", 400: "#B2BD7E",
-          500: "#7F8E4F", 600: "#66733F", 700: "#515C33", 800: "#3F4829", 900: "#2F3620", 950: "#1B2012",
+          50: "#F7F7F7", 100: "#EDEDED", 200: "#DCDCDC", 300: "#CDCDCD", 400: "#BFBFBF",
+          500: "#595959", 600: "#404040", 700: "#333333", 800: "#262626", 900: "#1A1A1A", 950: "#0D0D0D",
         },
+        // tertiary: mid gray
         blue: {
-          50: "#F4F4EC", 100: "#E7E8D8", 200: "#D2D4B9", 300: "#B5B88F", 400: "#8E9162",
-          500: "#767A52", 600: "#5F6342", 700: "#4C4F36", 800: "#3A3D2B", 900: "#2B2D20", 950: "#1B1D14",
+          50: "#F5F5F5", 100: "#EBEBEB", 200: "#D9D9D9", 300: "#B3B3B3", 400: "#8C8C8C",
+          500: "#6B6B6B", 600: "#525252", 700: "#404040", 800: "#2E2E2E", 900: "#1F1F1F", 950: "#121212",
         },
-        // light-mode neutrals (warm cream -> deep green-black)
+        // light-mode neutrals
         slate: {
-          50: "#F7F5E4", 100: "#EDEACF", 200: "#DCD9B4", 300: "#C4C79B", 400: "#878C6F",
-          500: "#6F7660", 600: "#565F48", 700: "#434B38", 800: "#313828", 900: "#222819", 950: "#151A10",
+          50: "#F7F7F7", 100: "#EFEFEF", 200: "#E0E0E0", 300: "#CCCCCC", 400: "#8A8A8A",
+          500: "#666666", 600: "#4A4A4A", 700: "#333333", 800: "#1F1F1F", 900: "#000000", 950: "#000000",
         },
-        // dark-mode neutrals (green-tinted)
+        // dark-mode neutrals
         neutral: {
-          50: "#F7F6EA", 100: "#EEEDDC", 200: "#DAD9C4", 300: "#C0C2A8", 400: "#A3A78A",
-          500: "#7F846A", 600: "#5E6550", 700: "#444B3A", 800: "#2D3326", 900: "#1E241A", 950: "#141910",
+          50: "#FFFFFF", 100: "#F5F5F5", 200: "#E0E0E0", 300: "#C2C2C2", 400: "#A0A0A0",
+          500: "#7A7A7A", 600: "#555555", 700: "#3A3A3A", 800: "#262626", 900: "#121212", 950: "#000000",
         },
       },
     },

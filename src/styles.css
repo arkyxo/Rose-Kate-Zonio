@@ -1,3 +1,6 @@
+/* Accent colors flip with the theme. Default = dark; App adds .theme-light on <html>. */
+:root { --accent-300: 212 212 212; --accent-400: 255 255 255; --on-accent: 0 0 0; }
+:root.theme-light { --accent-300: 64 64 64; --accent-400: 0 0 0; --on-accent: 255 255 255; }
 html { scroll-behavior: smooth; }
 .font-display { font-family: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif; }
 .font-serif-read { font-family: 'Source Serif 4', Charter, Georgia, 'Times New Roman', serif; }
@@ -24,19 +27,19 @@ section[id] { scroll-margin-top: 88px; }
   transition: box-shadow 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
 }
 .card-glow:hover {
-  box-shadow: 0 0 0 1px rgba(217, 210, 139, 0.35), 0 0 20px rgba(217, 210, 139, 0.25), 0 0 44px rgba(217, 210, 139, 0.12);
+  box-shadow: 0 0 0 1px rgba(140, 140, 140, 0.35), 0 0 20px rgba(140, 140, 140, 0.25), 0 0 44px rgba(140, 140, 140, 0.12);
   transform: translateY(-2px);
 }
-.dot-glow-red { box-shadow: 0 0 5px 1px rgba(217, 210, 139, 0.9), 0 0 12px 3px rgba(217, 210, 139, 0.45); }
-.dot-glow-amber { box-shadow: 0 0 5px 1px rgba(178, 189, 126, 0.9), 0 0 12px 3px rgba(178, 189, 126, 0.45); }
-.dot-glow-blue { box-shadow: 0 0 5px 1px rgba(142, 145, 98, 0.9), 0 0 12px 3px rgba(142, 145, 98, 0.45); }
-.dot-glow-gray { box-shadow: 0 0 4px 1px rgba(106, 121, 93, 0.6), 0 0 8px 2px rgba(106, 121, 93, 0.25); }
+.dot-glow-red { box-shadow: 0 0 5px 1px rgba(140, 140, 140, 0.9), 0 0 12px 3px rgba(140, 140, 140, 0.45); }
+.dot-glow-amber { box-shadow: 0 0 5px 1px rgba(191, 191, 191, 0.9), 0 0 12px 3px rgba(191, 191, 191, 0.45); }
+.dot-glow-blue { box-shadow: 0 0 5px 1px rgba(140, 140, 140, 0.9), 0 0 12px 3px rgba(140, 140, 140, 0.45); }
+.dot-glow-gray { box-shadow: 0 0 4px 1px rgba(102, 102, 102, 0.6), 0 0 8px 2px rgba(102, 102, 102, 0.25); }
 @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.25; } }
 .animate-blink { animation: blink 1.4s ease-in-out infinite; }
 @keyframes floaty { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-8px); } }
 .animate-floaty { animation: floaty 5s ease-in-out infinite; }
-::selection { background: rgba(217, 210, 139, 0.35); }
-*:focus-visible { outline: 2px solid #D9D28B; outline-offset: 2px; }
+::selection { background: rgba(140, 140, 140, 0.35); }
+*:focus-visible { outline: 2px solid #808080; outline-offset: 2px; }
 @media (prefers-reduced-motion: reduce) {
   * { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
 }
@@ -80,15 +83,15 @@ section[id] { scroll-margin-top: 88px; }
   background-image:
     repeating-linear-gradient(
       90deg,
-      rgba(217, 210, 139, 0.16) 0px,
-      rgba(217, 210, 139, 0.16) 1px,
+      rgba(140, 140, 140, 0.16) 0px,
+      rgba(140, 140, 140, 0.16) 1px,
       transparent 1px,
       transparent 24px
     );
   background-size: 24px 100%;
   box-shadow:
-    inset 0 1px 0 rgba(217, 210, 139, 0.22),
-    inset 0 -1px 0 rgba(217, 210, 139, 0.22);
+    inset 0 1px 0 rgba(140, 140, 140, 0.22),
+    inset 0 -1px 0 rgba(140, 140, 140, 0.22);
   animation: ticker-rail-scroll 2.4s linear infinite;
 }
 
@@ -139,7 +142,7 @@ html, body {
   margin: 0;
   overflow-x: hidden;
   max-width: 100%;
-  background-color: #F7F5E4;
+  background-color: #F7F7F7;
 }
 
 html {

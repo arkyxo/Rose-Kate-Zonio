@@ -92,10 +92,10 @@ const NAV_LINKS = [
 ];
 
 const SKILL_LEVELS = {
-  core: { dot: "bg-red-400", glow: "dot-glow-red", text: "text-red-400", label: "Core competency", code: "CORE", chipBg: "bg-red-400", chipText: "text-slate-950", desc: "Comfortable using this independently in real projects and troubleshooting scenarios." },
+  core: { dot: "bg-red-400", glow: "dot-glow-red", text: "text-red-400", label: "Core competency", code: "CORE", chipBg: "bg-red-400", chipText: "text-onaccent", desc: "Comfortable using this independently in real projects and troubleshooting scenarios." },
   working: { dot: "bg-amber-400", glow: "dot-glow-amber", text: "text-amber-400", label: "Guided practice", code: "GUIDED", chipBg: "bg-amber-400", chipText: "text-slate-950", desc: "Can apply this with documentation, references, or guidance close at hand." },
   basic: { dot: "bg-blue-400", glow: "dot-glow-blue", text: "text-blue-400", label: "Basic familiarity", code: "BASIC", chipBg: "bg-blue-400", chipText: "text-slate-950", desc: "Understands the fundamentals through hands-on labs and coursework." },
-  learning: { dot: "bg-slate-500", glow: "dot-glow-gray", text: "text-slate-400", label: "Currently learning", code: "NEW", chipBg: "bg-slate-500", chipText: "text-white", desc: "Just getting started — actively studying this right now." },
+  learning: { dot: "bg-slate-500", glow: "dot-glow-gray", text: "text-slate-400", label: "Currently learning", code: "NEW", chipBg: "bg-slate-500", chipText: "text-white", desc: "Just getting started, actively studying this right now." },
 };
 
 const SKILLS = [
@@ -165,7 +165,7 @@ const RFID_PROJECT = {
     { hl: "RFID" },
     " cards to show real-time slot availability, alert attendants when a slot is chosen, and handle ",
     { hl: "automated billing" },
-    " — hardware, a VB.NET app, and a SQL database working as one flow.",
+    ": hardware, a VB.NET app, and a SQL database working as one flow.",
   ],
   highlights: [
     "RFID reader integrated with a custom VB.NET application",
@@ -225,7 +225,7 @@ const WEB_APPS_LIST = [
       { hl: "solo project" },
       " centered on ",
       { hl: "API integration" },
-      " — pulling live movie listings, details, and search results from an external data source instead of a static database.",
+      ": pulling live movie listings, details, and search results from an external data source instead of a static database.",
     ],
     highlights: [
       "Live movie data pulled from a third-party API",
@@ -278,7 +278,7 @@ const WEB_APPS_LIST = [
     description: [
       "A full Roblox game simulating a complete ",
       { hl: "university journey" },
-      " — quest system, player interactions, and education progression built in ",
+      ": quest system, player interactions, and education progression built in ",
       { hl: "Lua" },
       ". Published publicly and maintained with weekly bug-fix updates driven by player reports.",
     ],
@@ -322,7 +322,7 @@ const WEB_APPS_LIST = [
 const SOFTWARE_ORDER = ["URSAC Simulation Academy", "Salo Sa Antipolo", "KuryenteWatch", "CineLookUp"];
 const WEB_APPS = [...WEB_APPS_LIST].sort((a, b) => SOFTWARE_ORDER.indexOf(a.title) - SOFTWARE_ORDER.indexOf(b.title));
 
-const yearOf = (p) => (p.meta && (p.meta.match(/(\d{4})/) || [])[1]) || "—";
+const yearOf = (p) => (p.meta && (p.meta.match(/(\d{4})/) || [])[1]) || "-";
 const contextOf = (p) => (p.meta ? p.meta.split(" · ")[0] : p.category || "Lab");
 const chunk = (arr, size) => {
   const out = [];
@@ -380,7 +380,7 @@ const KURYENTE_GITHUB = "https://github.com/dioxaaa/Kuryente-Watch-AppBuilder-Ha
 
 const FEATURED_ACTIVITY = {
   label: "Latest",
-  date: "October 9 — 10, 2026",
+  date: "October 9 - 10, 2026",
   title: "AppBuilders PH Hackathon",
   location: "Cyberzone, SM Makati",
   description:
@@ -406,19 +406,25 @@ const EXPERIENCE = [
     pathway: "internship",
     position: "SOC Analyst Intern",
     logo: "techbizacademy-logo",
+    employment: "Internship · 240 hours",
+    location: "Remote",
+    period: "",
     duration: "Oct - Nov (240 Hours)",
     type: "Networking & IT · Internship",
     description: "",
   },
   {
-    company: "Special Program for Employment of Students (DOLE)",
+    company: "DOLE",
     pathway: "work",
-    position: "SPES",
+    position: "Special Program for Employment of Students",
     logo: "asset-11af5d6e",
+    employment: "May 2026",
+    location: "San Mateo, Rizal · On-site",
+    period: "",
     duration: "May 2026",
     type: "Networking & IT · Government Program",
     description:
-      "Provided IT support and hardware troubleshooting, and handled data entry and digital filing for the department — all while studying Computer Engineering full-time.",
+      "Provided IT support and hardware troubleshooting, and handled data entry and digital filing for the department, all while studying Computer Engineering full-time.",
   },
 ];
 
@@ -428,7 +434,7 @@ const AFFILIATIONS = [
     abbr: "FGWB",
     position: "Member",
     logo: "forgirlswhobuild-logo",
-    duration: "Oct 2026 — Present",
+    duration: "Oct 2026 - Present",
     description: "Accepted into the For Girls Who Build community in October 2026.",
     links: [
       { label: "Facebook", url: "https://www.facebook.com/profile.php?id=61593721307476" },
@@ -440,7 +446,7 @@ const AFFILIATIONS = [
     abbr: "CNCP",
     position: "Enterprise Networking Cadet",
     logo: "cisco-netconnect-pup-logo",
-    duration: "Oct 2026 — Present",
+    duration: "Oct 2026 - Present",
     description: "Accepted member of the organization, recognized for dedication and potential in networking and technology.",
     links: [
       { label: "Facebook", url: "https://www.facebook.com/cisconetconnectpup" },
@@ -452,7 +458,7 @@ const AFFILIATIONS = [
     abbr: "ACCESS",
     position: "Technical Team",
     logo: "asset-77ad849f",
-    duration: "2023 — 2024",
+    duration: "2023 - 2024",
     description: "Supported the technical operations and activities of the organization.",
     links: [],
   },
@@ -463,7 +469,7 @@ const BLOG_PAGE_SIZE = 6;
 const BLOGS = [
   {
     title: "What I Learned Building a Local AI App with 1,000 Developers",
-    date: "Oct 9 — 10, 2026",
+    date: "Oct 9 - 10, 2026",
     category: "Hackathon",
     image: "appbuilders-hackathon-group",
     position: "object-[center_75%]",
@@ -498,15 +504,15 @@ const EDUCATION = [
   {
     level: "Bachelor's Degree",
     program: "BS in Computer Engineering",
-    institution: "University of Rizal System — Antipolo Campus",
-    duration: "2023 — 2027",
+    institution: "University of Rizal System, Antipolo Campus",
+    duration: "2023 - 2027",
     logo: "asset-39871438",
   },
   {
     level: "Senior High School",
     program: "General Academic Strand (GAS)",
     institution: "San Juan National High School",
-    duration: "2021 — 2023",
+    duration: "2021 - 2023",
     logo: "asset-96851f8e",
   },
 ];
@@ -676,9 +682,9 @@ function NetworkCanvas({ isDark }) {
 
     function draw() {
       ctx.clearRect(0, 0, width, height);
-      const lineColor = isDark ? "178, 189, 126" : "106, 121, 93";
-      const nodeColor = isDark ? "200, 205, 160" : "106, 121, 93";
-      const packetColor = isDark ? "217, 210, 139" : "128, 132, 78";
+      const lineColor = isDark ? "160, 160, 160" : "90, 90, 90";
+      const nodeColor = isDark ? "200, 200, 200" : "90, 90, 90";
+      const packetColor = isDark ? "255, 255, 255" : "0, 0, 0";
 
       const edges = [];
       for (let i = 0; i < nodes.length; i++) {
@@ -871,7 +877,8 @@ function LatestActivities({ t, isDark }) {
 }
 
 const DOT_RADIUS_BY_LEVEL = [1.4, 2.2, 3, 3.8, 4.6];
-const DOT_COLOR_BY_LEVEL = ["#E8E4AC", "#D9D28B", "#B2BD7E", "#8E9162", "#6A795D"];
+const HEAT_LIGHT = ["#EBEDF0", "#9BE9A8", "#40C463", "#30A14E", "#216E39"];
+const HEAT_DARK = ["#161B22", "#0E4429", "#006D32", "#26A641", "#39D353"];
 
 function GithubActivity({ t, isDark }) {
   const [status, setStatus] = useState("loading");
@@ -936,11 +943,11 @@ function GithubActivity({ t, isDark }) {
     }
   }, [status]);
 
-  const cell = 14;
+  const cell = 13;
   const topPad = 20;
   const width = weeks.length * cell;
   const height = topPad + 7 * cell;
-  const emptyFill = isDark ? "#2D3326" : "#E2DFC0";
+  const heat = isDark ? HEAT_DARK : HEAT_LIGHT;
 
   const monthLabels = [];
   let lastMonth = -1;
@@ -956,147 +963,109 @@ function GithubActivity({ t, isDark }) {
     }
   });
 
-  const statTiles = [
-    { label: "Contributions", value: stats.total.toLocaleString() },
-    { label: "Active days", value: stats.activeDays.toLocaleString() },
-    { label: "Longest streak", value: `${stats.longest}d` },
-  ];
-
   return (
     <section id="github-activity" className="max-w-6xl mx-auto px-5 sm:px-8 py-24">
-      <Reveal>
-        <div className="text-center mb-8 sm:mb-10">
-          <p className={`inline-flex items-center gap-2 font-mono text-xs tracking-widest ${t.accent} mb-3`}>
-            <Github size={13} /> 07 · GITHUB
-          </p>
-          <h2 className={`font-display text-3xl sm:text-4xl font-bold ${t.text}`}>Github Activity</h2>
-          <p className={`font-body text-sm ${t.textFaint} mt-3`}>
-            Live contribution data pulled directly from GitHub.
-          </p>
-        </div>
-      </Reveal>
+      <SectionHeading
+        eyebrow="07 · GITHUB"
+        title="GitHub Activity"
+        caption="Live contribution data pulled directly from GitHub."
+        icon={Github}
+        t={t}
+      />
 
       <Reveal>
-        <div className={`relative overflow-hidden rounded-3xl border ${t.border} ${t.surface} p-5 sm:p-8 shadow-xl ${isDark ? "shadow-black/20" : "shadow-slate-200/70"}`}>
-          <div className="relative">
-            <div className="flex items-center justify-between gap-4">
-              <div className="flex min-w-0 items-center gap-3">
-                <img
-                  src={img(PROFILE.photo)}
-                  alt={`${PROFILE.githubUsername} avatar`}
-                  className={`h-11 w-11 shrink-0 rounded-2xl object-cover ring-1 ${isDark ? "ring-neutral-700" : "ring-slate-200"}`}
-                />
-                <div className="min-w-0">
-                  <p className={`font-display text-base sm:text-lg font-semibold leading-tight truncate ${t.text}`}>
-                    @{PROFILE.githubUsername}
-                  </p>
-                  <p className={`font-body text-xs ${t.textFaint} leading-tight mt-0.5`}>Last 12 months</p>
-                </div>
+        <div className="max-w-4xl mx-auto">
+          <div className="flex items-center justify-between gap-4">
+            <div className="flex min-w-0 items-center gap-3">
+              <img
+                src={img(PROFILE.photo)}
+                alt={`${PROFILE.githubUsername} avatar`}
+                className={`h-10 w-10 shrink-0 rounded-full object-cover border ${t.border}`}
+              />
+              <div className="min-w-0">
+                <p className="font-display text-base font-semibold leading-tight truncate">@{PROFILE.githubUsername}</p>
+                <p className={`text-xs ${t.textFaint} leading-tight mt-1`}>Last 12 months</p>
               </div>
-              <a
-                href={PROFILE.github}
-                target="_blank"
-                rel="noreferrer"
-                className={`shrink-0 inline-flex items-center gap-1.5 rounded-full border ${t.border} px-3.5 py-2 font-body text-xs font-medium ${t.text} transition-all duration-300 hover:border-red-400/50 hover:text-red-400 hover:-translate-y-0.5`}
-              >
-                <span className="hidden sm:inline">View profile</span>
-                <span className="sm:hidden">Profile</span>
-                <ExternalLink size={12} />
-              </a>
             </div>
-
-            {status === "loading" && (
-              <div className="mt-6 animate-pulse space-y-4" aria-label="Loading contribution data">
-                <div className="grid grid-cols-3 gap-3">
-                  {[0, 1, 2].map((i) => (
-                    <div key={i} className={`h-[74px] rounded-2xl ${isDark ? "bg-neutral-800/60" : "bg-slate-100"}`} />
-                  ))}
-                </div>
-                <div className={`h-36 rounded-2xl ${isDark ? "bg-neutral-800/60" : "bg-slate-100"}`} />
-              </div>
-            )}
-
-            {status === "error" && (
-              <p className={`mt-6 rounded-2xl border border-dashed ${t.border} px-4 py-6 text-center font-body text-sm ${t.textMuted}`}>
-                Couldn't load contribution data right now. You can view it directly on{" "}
-                <a href={PROFILE.github} target="_blank" rel="noreferrer" className="text-red-400 hover:underline">
-                  github.com
-                </a>
-                .
-              </p>
-            )}
-
-            {status === "ready" && (
-              <>
-                <div className="mt-6 grid grid-cols-3 gap-2.5 sm:gap-3">
-                  {statTiles.map((s) => (
-                    <div
-                      key={s.label}
-                      className={`rounded-2xl border ${t.border} ${isDark ? "bg-black/40" : "bg-slate-50/80"} px-3 py-3 sm:px-4 sm:py-4`}
-                    >
-                      <p className={`font-display text-xl sm:text-3xl font-bold leading-none ${t.text}`}>{s.value}</p>
-                      <p className={`font-body text-[10px] sm:text-xs ${t.textFaint} mt-1.5 sm:mt-2 leading-tight`}>{s.label}</p>
-                    </div>
-                  ))}
-                </div>
-
-                <div className={`mt-4 rounded-2xl border ${t.border} ${isDark ? "bg-black/40" : "bg-slate-50/80"} p-3 sm:p-5`}>
-                  <div ref={scrollRef} className="overflow-x-auto pb-1">
-                    <svg
-                      viewBox={`0 0 ${width} ${height}`}
-                      style={{ minWidth: `${width}px`, height: "auto" }}
-                      className="block"
-                    >
-                      {monthLabels.map((m) => (
-                        <text
-                          key={m.wi}
-                          x={m.wi * cell}
-                          y={11}
-                          fontSize="10"
-                          fontFamily="Inter, system-ui, sans-serif"
-                          fill={isDark ? "#7F846A" : "#878C6F"}
-                        >
-                          {m.label}
-                        </text>
-                      ))}
-                      {weeks.map((week, wi) =>
-                        week.map((day, di) => {
-                          if (!day) return null;
-                          const level = day.level ?? 0;
-                          const fill = level === 0 ? emptyFill : DOT_COLOR_BY_LEVEL[level];
-                          return (
-                            <rect
-                              key={`${wi}-${di}`}
-                              x={wi * cell + 1.5}
-                              y={topPad + di * cell + 1.5}
-                              width={cell - 3}
-                              height={cell - 3}
-                              rx={3.5}
-                              fill={fill}
-                              opacity={level === 0 ? 0.6 : 1}
-                            >
-                              <title>{`${day.count} contributions on ${day.date}`}</title>
-                            </rect>
-                          );
-                        })
-                      )}
-                    </svg>
-                  </div>
-
-                  <div className={`mt-3 flex items-center justify-between gap-3 font-body text-[11px] ${t.textFaint}`}>
-                    <span>{stats.current > 0 ? `${stats.current}-day current streak` : "Keep building"}</span>
-                    <span className="inline-flex items-center gap-1.5">
-                      Less
-                      {[emptyFill, ...DOT_COLOR_BY_LEVEL.slice(1)].map((c, i) => (
-                        <span key={i} className="h-2.5 w-2.5 rounded-[3px]" style={{ background: c }} />
-                      ))}
-                      More
-                    </span>
-                  </div>
-                </div>
-              </>
-            )}
+            <a
+              href={PROFILE.github}
+              target="_blank"
+              rel="noreferrer"
+              className={`shrink-0 inline-flex items-center gap-1.5 text-sm underline underline-offset-4 decoration-1 ${t.textMuted} hover:text-red-400 transition-colors`}
+            >
+              View profile <ArrowRight size={14} />
+            </a>
           </div>
+
+          {status === "loading" && (
+            <div className="mt-8 animate-pulse" aria-label="Loading contribution data">
+              <div className={`h-32 rounded-md ${isDark ? "bg-neutral-900" : "bg-slate-100"}`} />
+            </div>
+          )}
+
+          {status === "error" && (
+            <p className={`mt-8 border-y ${t.border} py-6 text-sm ${t.textMuted}`}>
+              Couldn't load contribution data right now. You can view it directly on{" "}
+              <a href={PROFILE.github} target="_blank" rel="noreferrer" className="underline underline-offset-4 hover:text-red-400">
+                github.com
+              </a>
+              .
+            </p>
+          )}
+
+          {status === "ready" && (
+            <>
+
+              <div className="mt-8">
+                <div ref={scrollRef} className="overflow-x-auto pb-1">
+                  <svg viewBox={`0 0 ${width} ${height}`} style={{ minWidth: `${width}px`, height: "auto" }} className="block">
+                    {monthLabels.map((m) => (
+                      <text
+                        key={m.wi}
+                        x={m.wi * cell}
+                        y={11}
+                        fontSize="10"
+                        fontFamily="Inter, system-ui, sans-serif"
+                        fill={isDark ? "#7A7A7A" : "#8A8A8A"}
+                      >
+                        {m.label}
+                      </text>
+                    ))}
+                    {weeks.map((week, wi) =>
+                      week.map((day, di) => {
+                        if (!day) return null;
+                        const level = day.level ?? 0;
+                        return (
+                          <rect
+                            key={`${wi}-${di}`}
+                            x={wi * cell + 1.5}
+                            y={topPad + di * cell + 1.5}
+                            width={cell - 3}
+                            height={cell - 3}
+                            rx={2}
+                            fill={heat[level]}
+                          >
+                            <title>{`${day.count} contributions on ${day.date}`}</title>
+                          </rect>
+                        );
+                      })
+                    )}
+                  </svg>
+                </div>
+
+                <div className={`mt-4 flex items-center justify-between gap-3 text-xs ${t.textFaint}`}>
+                  <span>{stats.current > 0 ? `${stats.current}-day current streak` : ""}</span>
+                  <span className="inline-flex items-center gap-1.5">
+                    Less
+                    {heat.map((c, i) => (
+                      <span key={i} className="h-2.5 w-2.5 rounded-[2px]" style={{ background: c }} />
+                    ))}
+                    More
+                  </span>
+                </div>
+              </div>
+            </>
+          )}
         </div>
       </Reveal>
     </section>
@@ -1115,286 +1084,95 @@ function eduProgress(duration) {
 const initialsOf = (name) =>
   name.replace(/[—–-].*$/, "").split(" ").filter((w) => /^[A-Z]/.test(w)).slice(0, 3).map((w) => w[0]).join("");
 
-function ExpDetails({ id, open, onToggle, description, t, light = false, onWhite = false }) {
+function ExperienceTimeline({ t, isDark }) {
+  const lineColor = isDark ? "bg-neutral-800" : "bg-slate-200";
   return (
-    <>
-      <button
-        type="button"
-        onClick={onToggle}
-        aria-expanded={open}
-        aria-controls={id}
-        className={`mt-3 inline-flex items-center gap-1.5 font-mono text-xs tracking-wide ${onWhite ? "text-red-600" : light ? "text-red-300" : t.accent} hover:opacity-80 transition-opacity`}
-      >
-        What did I do
-        <ChevronDown size={14} className={`transition-transform duration-300 ${open ? "rotate-180" : ""}`} />
-      </button>
-      <div id={id} className={`grid transition-[grid-template-rows] duration-300 ease-out ${open ? "grid-rows-[1fr]" : "grid-rows-[0fr]"}`}>
-        <div className="overflow-hidden">
-          <p className={`font-body text-sm leading-relaxed ${onWhite ? "text-slate-600" : light ? "text-white/70" : t.textMuted} pt-3`}>
-            {description || "Details coming soon."}
-          </p>
-        </div>
-      </div>
-    </>
-  );
-}
+    <ol className="max-w-3xl mx-auto">
+      {EXPERIENCE.map((exp, i) => {
+        const last = i === EXPERIENCE.length - 1;
+        const RoleIcon = PATHWAY_ICONS[exp.pathway] || Briefcase;
+        return (
+          <Reveal key={`${exp.company}-${i}`} delay={i * 80}>
+            <li className={`relative pl-16 sm:pl-[4.5rem] ${last ? "" : "pb-14"}`}>
+              {!last && <span aria-hidden="true" className={`absolute left-5 top-12 -bottom-0 w-px ${lineColor}`} />}
 
-function ExperienceSplit({ t, isDark, openExp, setOpenExp }) {
-  const latest = EXPERIENCE[0];
-  const firstPath = EXPERIENCE_PATHWAYS.some((p) => p.id === latest?.pathway) ? latest.pathway : EXPERIENCE_PATHWAYS[0].id;
-  const [openPath, setOpenPath] = useState(firstPath);
-  const [activePath, setActivePath] = useState(firstPath);
-  const [selected, setSelected] = useState({});
-
-  const active = EXPERIENCE_PATHWAYS.find((p) => p.id === activePath);
-  const ActiveIcon = PATHWAY_ICONS[active.id] || Briefcase;
-  const activeEntries = EXPERIENCE.filter((e) => e.pathway === active.id);
-  const mainIdx = Math.min(selected[active.id] || 0, Math.max(activeEntries.length - 1, 0));
-  const main = activeEntries[mainIdx];
-  const detailsKey = `split-${active.id}-${mainIdx}`;
-
-  const togglePath = (id) => {
-    if (openPath === id) {
-      setOpenPath(null);
-      return;
-    }
-    setOpenPath(id);
-    setActivePath(id);
-    setOpenExp(null);
-  };
-  const pickEntry = (pathId, idx) => {
-    setActivePath(pathId);
-    setSelected((prev) => ({ ...prev, [pathId]: idx }));
-    setOpenExp(null);
-  };
-
-  return (
-    <div className="hidden md:grid grid-cols-5 gap-5 lg:gap-6 items-start">
-      <div className="col-span-2 space-y-3">
-        {EXPERIENCE_PATHWAYS.map((path, pi) => {
-          const PathIcon = PATHWAY_ICONS[path.id] || Briefcase;
-          const entries = EXPERIENCE.filter((e) => e.pathway === path.id);
-          const isOpen = openPath === path.id;
-          const isActive = activePath === path.id;
-          return (
-            <Reveal key={path.id} delay={pi * 70}>
-              <div
-                className={`rounded-2xl border ${isActive ? "border-red-400/40" : t.border} ${t.surface} transition-colors duration-300`}
-              >
-                <button
-                  type="button"
-                  onClick={() => togglePath(path.id)}
-                  aria-expanded={isOpen}
-                  aria-controls={`exp-split-${path.id}`}
-                  className="w-full text-left p-4 flex items-center gap-3 rounded-2xl focus:outline-none focus-visible:ring-2 focus-visible:ring-red-400/60"
-                >
-                  <div
-                    className={`h-10 w-10 shrink-0 rounded-xl border flex items-center justify-center transition-colors ${
-                      isActive ? `border-red-400 ${t.accent}` : `${t.border} ${t.textMuted}`
-                    }`}
-                  >
-                    <PathIcon size={18} />
-                  </div>
-                  <div className="min-w-0 flex-1">
-                    <p className={`font-mono text-[10px] tracking-[0.2em] uppercase ${t.accent}`}>{path.caption}</p>
-                    <h3 className="font-display font-semibold text-base leading-tight">{path.label}</h3>
-                  </div>
-                  <span className={`shrink-0 rounded-full border ${t.border} px-2 py-0.5 font-mono text-[10px] ${t.textMuted}`}>
-                    {String(entries.length).padStart(2, "0")}
-                  </span>
-                  <ChevronDown size={18} className={`shrink-0 ${t.textMuted} transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`} />
-                </button>
-
-                <div
-                  id={`exp-split-${path.id}`}
-                  className={`grid transition-[grid-template-rows] duration-300 ease-out ${isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"}`}
-                >
-                  <div className="overflow-hidden">
-                    <div className="px-3 pb-3 space-y-1">
-                      {entries.length === 0 && (
-                        <p className={`mx-1 rounded-xl border border-dashed ${t.border} p-3 font-mono text-xs ${t.textFaint}`}>
-                          Next stop — coming soon.
-                        </p>
-                      )}
-                      {entries.map((exp, idx) => {
-                        const current = isActive && idx === mainIdx;
-                        return (
-                          <button
-                            key={`${exp.company}-${idx}`}
-                            type="button"
-                            onClick={() => pickEntry(path.id, idx)}
-                            aria-current={current ? "true" : undefined}
-                            className={`relative w-full text-left flex items-center gap-3 rounded-xl px-3 py-2.5 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-red-400/60 ${
-                              current ? (isDark ? "bg-neutral-900" : "bg-slate-100") : isDark ? "hover:bg-white/5" : "hover:bg-slate-50"
-                            }`}
-                          >
-                            <span className={`absolute left-0 top-2 bottom-2 w-0.5 rounded-full transition-colors ${current ? "bg-red-400" : "bg-transparent"}`} />
-                            <span className={`h-9 w-9 shrink-0 overflow-hidden rounded-lg border ${t.border} ${isDark ? "bg-black/40" : "bg-white"} ${t.accent} flex items-center justify-center`}>
-                              {exp.logo ? (
-                                <img src={img(exp.logo)} alt="" className="h-full w-full object-cover" />
-                              ) : (
-                                <PathIcon size={14} />
-                              )}
-                            </span>
-                            <span className="min-w-0 flex-1">
-                              <span className="block font-body text-sm font-medium leading-snug truncate">{exp.company}</span>
-                              <span className={`block font-mono text-[11px] ${t.textFaint} truncate`}>
-                                {exp.position} · {exp.duration}
-                              </span>
-                            </span>
-                          </button>
-                        );
-                      })}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </Reveal>
-          );
-        })}
-      </div>
-
-      <Reveal delay={120} className="col-span-3 md:sticky md:top-24">
-        <div
-          className={`relative overflow-hidden rounded-[28px] p-7 lg:p-10 flex flex-col transition-shadow duration-500 hover:shadow-2xl hover:shadow-red-500/20 ${
-            `border ${t.border} ${t.surface} ${isDark ? "text-white" : "text-slate-900 shadow-xl shadow-slate-200/60"}`
-          }`}
-        >
-          <ActiveIcon size={220} className={`pointer-events-none absolute -right-14 -bottom-16 ${!isDark ? "text-slate-900/[0.05]" : "text-white/[0.04]"}`} />
-
-          <div className="relative flex flex-wrap items-center gap-3">
-            {main && main === latest && (
-              <span className={`inline-flex items-center gap-2 rounded-full border px-3 py-1 font-mono text-[11px] tracking-[0.18em] uppercase ${!isDark ? "border-red-500/60 text-red-600" : "border-red-400/60 text-red-400"}`}>
-                Latest
-              </span>
-            )}
-            <span className={`inline-flex items-center gap-1.5 font-mono text-[11px] tracking-[0.18em] uppercase ${!isDark ? "text-slate-500" : "text-white/50"}`}>
-              <ActiveIcon size={13} /> {active.label}
-            </span>
-            {activeEntries.length > 1 && (
-              <span className={`ml-auto font-mono text-[11px] ${!isDark ? "text-slate-400" : "text-white/40"}`}>
-                {String(mainIdx + 1).padStart(2, "0")} / {String(activeEntries.length).padStart(2, "0")}
-              </span>
-            )}
-          </div>
-
-          {!main ? (
-            <div key={active.id} className="bento-swap-in relative mt-6">
-              <h3 className="font-display text-3xl lg:text-4xl font-bold leading-tight tracking-tight">{active.label}</h3>
-              <p className={`mt-3 font-mono text-sm ${!isDark ? "text-slate-500" : "text-white/50"}`}>Next stop — coming soon.</p>
-            </div>
-          ) : (
-            <div key={detailsKey} className="bento-swap-in relative mt-6">
-              <div className={`h-16 w-16 lg:h-20 lg:w-20 overflow-hidden rounded-2xl border flex items-center justify-center ${!isDark ? "border-slate-200 bg-slate-50" : "border-white/10 bg-white/5"}`}>
-                {main.logo ? (
-                  <img src={img(main.logo)} alt={`${main.company} logo`} className="h-full w-full object-cover" />
+              <div className={`absolute left-0 top-0 h-10 w-10 sm:h-11 sm:w-11 overflow-hidden rounded-lg border ${t.border} ${isDark ? "bg-neutral-950" : "bg-white"} flex items-center justify-center ${t.textMuted}`}>
+                {exp.logo ? (
+                  <img src={img(exp.logo)} alt={`${exp.company} logo`} className="h-full w-full object-cover" />
                 ) : (
-                  <ActiveIcon size={28} />
+                  <RoleIcon size={18} />
                 )}
               </div>
-              <p className={`mt-6 font-mono text-xs tracking-wider ${!isDark ? "text-slate-500" : "text-white/50"}`}>{main.duration}</p>
-              <h3
-                className={`mt-2 max-w-xl font-display font-bold leading-tight tracking-tight ${
-                  main.company.length > 32 ? "text-xl lg:text-[1.75rem]" : "text-2xl lg:text-4xl"
-                }`}
-              >
-                {main.company}
-              </h3>
-              <p className={`mt-2 font-body text-base ${!isDark ? "text-slate-600" : "text-white/80"}`}>{main.position}</p>
-              {main.type && (
-                <div className="mt-4 flex flex-wrap gap-2">
-                  {main.type.split("·").map((tag) => (
-                    <span key={tag} className={`rounded-full border px-3 py-1 font-mono text-[11px] ${!isDark ? "border-slate-200 bg-slate-100 text-slate-600" : "border-white/10 bg-white/5 text-white/60"}`}>
-                      {tag.trim()}
-                    </span>
-                  ))}
-                </div>
+
+              <h3 className="font-display font-semibold text-lg leading-snug">{exp.company}</h3>
+              {(exp.location || exp.employment) && (
+                <p className={`font-mono text-xs ${t.textMuted} mt-1`}>
+                  {[exp.location, exp.employment].filter(Boolean).join(" · ")}
+                </p>
               )}
-              <ExpDetails
-                id={`exp-${detailsKey}`}
-                open={openExp === detailsKey}
-                onToggle={() => setOpenExp(openExp === detailsKey ? null : detailsKey)}
-                description={main.description}
-                t={t}
-                light={isDark}
-                onWhite={!isDark}
-              />
-            </div>
-          )}
-        </div>
-      </Reveal>
-    </div>
+
+              <h4 className="font-display font-medium text-base mt-6">{exp.position}</h4>
+              {exp.period && <p className={`font-mono text-[11px] uppercase tracking-wider ${t.textFaint} mt-1.5`}>{exp.period}</p>}
+              {exp.description && (
+                <p className={`text-sm leading-relaxed ${t.textMuted} mt-4 max-w-xl`}>{exp.description}</p>
+              )}
+            </li>
+          </Reveal>
+        );
+      })}
+    </ol>
   );
 }
 
 function CertificationSection({ t, isDark }) {
   return (
     <section id="certification">
-          <SectionHeading
-            eyebrow="CERTIFICATION · CREDENTIALS"
-            title="Certifications"
-            caption="Click Verify to confirm the credential."
-            icon={CheckCircle2}
-            t={t}
-          />
-          <div className={CERTIFICATIONS.length === 1 ? "max-w-xl mx-auto" : "grid md:grid-cols-2 gap-6"}>
-            {CERTIFICATIONS.map((cert, i) => {
-              const earned = !["In Progress", "Planned", "Upcoming"].includes(cert.status);
-              const StatusIcon = earned ? CheckCircle2 : Clock;
-              const pill = earned ? `border border-red-400/60 ${t.accent}` : "border border-amber-400/60 text-amber-500";
-              const notch = `absolute top-0 h-6 w-6 -translate-y-1/2 rounded-full border ${isDark ? "border-neutral-700" : "border-slate-300"} ${t.bg}`;
-              return (
-                <Reveal key={cert.name} delay={i * 80} className="h-full">
-                  <article className={`relative flex h-full flex-col overflow-hidden rounded-3xl border ${t.border} ${t.surface} transition-colors hover:border-red-400/40`}>
-                    <div className="flex-1 p-6 sm:p-8">
-                      <div className="flex items-start justify-between gap-4">
-                        <div className={`flex h-14 w-24 shrink-0 items-center justify-center rounded-xl border ${t.border} bg-white p-2.5`}>
-                          {cert.image ? (
-                            <img src={img(cert.image)} alt={`${cert.name} badge`} className="max-h-full max-w-full object-contain" />
-                          ) : (
-                            <StatusIcon size={24} className="text-slate-400" />
-                          )}
-                        </div>
-                        <span className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 font-mono text-[10px] font-medium tracking-widest uppercase ${pill}`}>
-                          <StatusIcon size={11} /> {cert.status}
-                        </span>
-                      </div>
+      <h1 className="font-display font-bold text-3xl sm:text-5xl">Certifications</h1>
+      <p className={`text-sm sm:text-base ${t.textMuted} mt-3`}>Credentials I've earned and the ones I'm working toward.</p>
 
-                      <p className={`font-mono text-[10px] tracking-widest uppercase ${t.textFaint} mt-7`}>
-                        {[cert.group, cert.category].filter(Boolean).join(" · ")}
-                      </p>
-                      <h3 className={`font-display font-semibold text-xl sm:text-2xl tracking-tight leading-snug ${t.text} mt-2`}>{cert.name}</h3>
-                      <p className={`font-body text-sm ${t.textMuted} mt-1`}>{cert.org}</p>
-                    </div>
-
-                    <div className={`relative border-t border-dashed ${isDark ? "border-neutral-700" : "border-slate-300"} px-6 sm:px-8 py-5 flex flex-wrap items-center justify-between gap-4`}>
-                      <span aria-hidden="true" className={`${notch} -left-3`} />
-                      <span aria-hidden="true" className={`${notch} -right-3`} />
-                      <div>
-                        <p className={`font-mono text-[10px] tracking-widest uppercase ${t.textFaint}`}>{earned ? "Issued" : "Status"}</p>
-                        <p className={`font-mono text-sm ${t.text} mt-1`}>{cert.date}</p>
-                        <p className={`font-mono text-[10px] tracking-wide ${t.textFaint} mt-1 ${cert.credentialId ? "" : "invisible"}`} aria-hidden={!cert.credentialId}>
-                          ID · {cert.credentialId || "—"}
-                        </p>
-                      </div>
-                      {hasLink(cert.verifyUrl) ? (
-                        <a
-                          href={cert.verifyUrl}
-                          target="_blank"
-                          rel="noreferrer"
-                          className={`inline-flex items-center gap-2 rounded-lg border border-red-400 px-4 py-2 font-mono text-xs ${t.accent} hover:bg-red-400/10 transition-colors`}
-                        >
-                          {cert.verifyLabel || "Verify"} <ExternalLink size={13} />
-                        </a>
-                      ) : (
-                        <span className={`font-mono text-xs ${t.textFaint}`}>Verification soon</span>
-                      )}
-                    </div>
-                  </article>
-                </Reveal>
-              );
-            })}
-          </div>
+      <ul className={`mt-10 border-t ${t.border}`}>
+        {CERTIFICATIONS.map((cert) => {
+          const earned = !["In Progress", "Planned", "Upcoming"].includes(cert.status);
+          const StatusIcon = earned ? CheckCircle2 : Clock;
+          return (
+            <li key={cert.name} className={`border-b ${t.border}`}>
+              <div className="flex items-center gap-4 sm:gap-5 py-4 sm:py-5">
+                <div className={`shrink-0 w-16 h-11 sm:w-20 sm:h-14 rounded-lg border ${t.border} overflow-hidden bg-white p-1.5 flex items-center justify-center`}>
+                  {cert.image ? (
+                    <img src={img(cert.image)} alt={`${cert.name} badge`} className="max-h-full max-w-full object-contain" />
+                  ) : (
+                    <StatusIcon size={20} className="text-slate-400" />
+                  )}
+                </div>
+                <div className="min-w-0 flex-1">
+                  <span className="font-display font-semibold">{cert.name}</span>
+                  <p className={`text-sm ${t.textMuted} mt-1 leading-snug`}>{cert.org}</p>
+                  <div className={`mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm ${t.textFaint}`}>
+                    <span className={`inline-flex items-center gap-1.5 ${earned ? t.text : ""}`}>
+                      <StatusIcon size={13} /> {cert.status}
+                    </span>
+                    <span>{cert.date}</span>
+                    {cert.credentialId && <span>ID · {cert.credentialId}</span>}
+                    {hasLink(cert.verifyUrl) ? (
+                      <a
+                        href={cert.verifyUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        className={`inline-flex items-center gap-1 underline underline-offset-4 decoration-1 ${t.textMuted} hover:text-red-400 transition-colors`}
+                      >
+                        {cert.verifyLabel || "Verify"} <ExternalLink size={12} />
+                      </a>
+                    ) : (
+                      <span>Verification soon</span>
+                    )}
+                  </div>
+                </div>
+                <span className={`hidden sm:block shrink-0 text-sm ${t.textFaint}`}>{cert.category}</span>
+              </div>
+            </li>
+          );
+        })}
+      </ul>
     </section>
   );
 }
@@ -1622,7 +1400,7 @@ function AboutMeSection({ t, isDark }) {
   );
 }
 
-function SectionPanel({ t, onClose, listenEsc = true, children }) {
+function SectionPanel({ t, onClose, listenEsc = true, width = "max-w-6xl", children }) {
   useEffect(() => {
     if (!listenEsc) return;
     const onKey = (e) => e.key === "Escape" && onClose();
@@ -1632,8 +1410,8 @@ function SectionPanel({ t, onClose, listenEsc = true, children }) {
 
   return (
     <div id="panel-scroll" className={`fixed inset-0 z-[60] overflow-y-auto ${t.bg} ${t.text}`}>
-      <div className="max-w-6xl mx-auto px-5 sm:px-8 pt-10 sm:pt-14 pb-20">
-        <button onClick={onClose} className={`inline-flex items-center gap-2 font-mono text-xs ${t.textMuted} hover:text-red-400 transition-colors`}>
+      <div className={`${width} mx-auto px-5 sm:px-8 pt-10 sm:pt-14 pb-20`}>
+        <button onClick={onClose} className={`inline-flex items-center gap-2 text-sm ${t.textMuted} hover:text-red-400 transition-colors`}>
           <ArrowRight size={14} className="rotate-180" /> Back to portfolio
         </button>
         <div className="mt-10">{children}</div>
@@ -1643,68 +1421,46 @@ function SectionPanel({ t, onClose, listenEsc = true, children }) {
 }
 
 function AffiliationSection({ t, isDark }) {
-  const dot = isDark ? "rgba(255,255,255,0.22)" : "rgba(15,23,42,0.25)";
   return (
-    <section id="affiliation" className="max-w-3xl mx-auto">
-      <h2 className="font-mono text-2xl sm:text-3xl tracking-tight">affiliations</h2>
-      <p className={`font-body text-sm sm:text-[15px] ${t.textMuted} mt-6 sm:mt-8`}>
-        Organizations and communities I'm part of.
-      </p>
+    <section id="affiliation">
+      <h1 className="font-display font-bold text-3xl sm:text-5xl">Affiliations</h1>
+      <p className={`text-sm sm:text-base ${t.textMuted} mt-3`}>Organizations and communities I'm part of.</p>
 
-      <div className="mt-10 sm:mt-12 space-y-4">
-        {AFFILIATIONS.map((org, i) => (
-          <Reveal key={org.company} delay={i * 80}>
-            <article
-              className={`relative overflow-hidden rounded-2xl border ${t.border} ${isDark ? "bg-neutral-900/60" : "bg-white shadow-[0_8px_30px_rgba(15,23,42,0.07)]"} p-5 sm:p-7`}
-            >
-              <div
-                aria-hidden="true"
-                className="pointer-events-none absolute right-3 top-3 h-12 w-20 opacity-60"
-                style={{ backgroundImage: `radial-gradient(${dot} 1px, transparent 1.2px)`, backgroundSize: "8px 8px" }}
-              />
-              <span
-                aria-hidden="true"
-                className={`pointer-events-none absolute -bottom-3 right-4 select-none font-display font-bold text-6xl sm:text-7xl leading-none tracking-tight ${isDark ? "text-white/[0.05]" : "text-slate-900/[0.06]"}`}
-              >
-                {org.abbr}
-              </span>
-
-              <div className="relative flex items-start gap-4 sm:gap-6">
-                <div className={`h-14 w-14 sm:h-16 sm:w-16 shrink-0 overflow-hidden rounded-xl border ${t.border} ${isDark ? "bg-black/40" : "bg-white shadow-sm"} flex items-center justify-center`}>
-                  {org.logo ? (
-                    <img src={img(org.logo)} alt={`${org.company} logo`} className="h-full w-full object-cover" />
-                  ) : (
-                    <span className="font-mono text-lg">{org.abbr}</span>
-                  )}
-                </div>
-                <div className="min-w-0 flex-1 pr-6">
-                  <span className={`inline-block rounded-full border ${t.border} px-2.5 py-0.5 font-mono text-[10px] uppercase tracking-wider ${t.textMuted}`}>
-                    {org.position}
-                  </span>
-                  <h3 className="font-display font-semibold text-lg sm:text-xl leading-snug mt-2.5">{org.company}</h3>
-                  <p className={`font-body text-sm leading-relaxed ${t.textMuted} mt-1.5 max-w-lg`}>{org.description}</p>
-                  <p className={`font-mono text-xs ${t.textFaint} mt-3`}>{org.duration}</p>
-                  {org.links.length > 0 && (
-                    <div className="mt-2 flex flex-wrap items-center gap-x-5 gap-y-1">
-                      {org.links.map((link) => (
-                        <a
-                          key={link.url}
-                          href={link.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className={`inline-flex items-center gap-1 font-mono text-xs ${t.textMuted} hover:text-red-400 transition-colors`}
-                        >
-                          {link.label} <ArrowUpRight size={12} />
-                        </a>
-                      ))}
-                    </div>
-                  )}
-                </div>
+      <ul className={`mt-10 border-t ${t.border}`}>
+        {AFFILIATIONS.map((org) => (
+          <li key={org.company} className={`border-b ${t.border}`}>
+            <div className="flex items-center gap-4 sm:gap-5 py-4 sm:py-5">
+              <div className={`shrink-0 aspect-square w-14 sm:w-16 rounded-lg border ${t.border} overflow-hidden bg-white p-1.5 flex items-center justify-center`}>
+                {org.logo ? (
+                  <img src={img(org.logo)} alt={`${org.company} logo`} className="max-h-full max-w-full object-contain" />
+                ) : (
+                  <span className="font-display font-semibold text-sm text-slate-900">{org.abbr}</span>
+                )}
               </div>
-            </article>
-          </Reveal>
+              <div className="min-w-0 flex-1">
+                <span className="font-display font-semibold">{org.company}</span>
+                <p className={`text-sm ${t.textMuted} mt-1 leading-snug`}>{org.position}</p>
+                {org.links.length > 0 && (
+                  <div className="mt-1.5 flex flex-wrap items-center gap-x-5 gap-y-1">
+                    {org.links.map((link) => (
+                      <a
+                        key={link.url}
+                        href={link.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={`inline-flex items-center gap-1 text-sm underline underline-offset-4 decoration-1 ${t.textMuted} hover:text-red-400 transition-colors`}
+                      >
+                        {link.label} <ArrowUpRight size={12} />
+                      </a>
+                    ))}
+                  </div>
+                )}
+              </div>
+              <span className={`hidden sm:block shrink-0 text-sm ${t.textFaint}`}>{org.duration}</span>
+            </div>
+          </li>
         ))}
-      </div>
+      </ul>
     </section>
   );
 }
@@ -1898,7 +1654,7 @@ function EducationRow({ edu, t, isDark }) {
         <p className={`font-body text-[13px] ${t.textMuted} mt-0.5`}>{edu.institution}</p>
       </div>
       <div className="shrink-0 text-right">
-        <p className={`font-mono text-xs ${t.text}`}>{startY} — {endY}</p>
+        <p className={`font-mono text-xs ${t.text}`}>{startY} - {endY}</p>
         <p className={`mt-1 inline-flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-wider ${done ? t.textFaint : t.accent}`}>
           {!done && <span className="h-1.5 w-1.5 rounded-full bg-red-400" />}
           {done ? "Graduated" : "In progress"}
@@ -2323,7 +2079,12 @@ function Sidebar({ t, isDark, collapsed: collapsedPref, onToggleCollapse, active
 }
 
 function App() {
-  const [isDark, setIsDark] = useState(true);
+  const [isDark, setIsDark] = useState(false);
+  useEffect(() => {
+    const root = document.documentElement;
+    root.classList.toggle("theme-light", !isDark);
+    return () => root.classList.remove("theme-light");
+  }, [isDark]);
   useRemoteImages();
   const [menuOpen, setMenuOpen] = useState(false);
   const [projectTab, setProjectTab] = useState("webapps");
@@ -2336,8 +2097,6 @@ function App() {
   const [bootScreenMounted, setBootScreenMounted] = useState(true);
   const [bootBar, setBootBar] = useState(0);
   const [bootPct, setBootPct] = useState(0);
-  const [openPath, setOpenPath] = useState(() => EXPERIENCE[0]?.pathway || EXPERIENCE_PATHWAYS[0].id);
-  const [openExp, setOpenExp] = useState(null);
   const [sidebarCollapsed, setSidebarCollapsed] = useState(() => {
     try {
       return localStorage.getItem("sidebar-collapsed") === "1";
@@ -2409,7 +2168,7 @@ function App() {
   }, [booting]);
 
   const mailtoUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${PROFILE.email}&su=${encodeURIComponent(
-    "Let's connect — Internship Opportunity"
+    "Let's connect: Internship Opportunity"
   )}`;
 
   const filteredProjects = useMemo(() => {
@@ -2683,10 +2442,10 @@ function App() {
               software and understands the network it runs on.{" "}
               <a
                 href="#aboutme"
-                className={`group relative inline-block whitespace-nowrap pr-5 ${t.accent} transition-colors hover:text-red-300`}
+                className={`group relative inline-block whitespace-nowrap pr-6 underline decoration-1 underline-offset-4 transition-colors ${isDark ? "text-neutral-300 hover:text-white" : "text-slate-600 hover:text-black"}`}
               >
                 More about me
-                <ArrowUpRight size={14} className="absolute right-0 top-1 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                <ArrowRight size={14} className="absolute right-0 top-1.5 transition-transform duration-300 group-hover:translate-x-1" />
               </a>
             </p>
             <div className="mt-10 grid max-w-3xl grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-4 sm:gap-8">
@@ -2723,7 +2482,7 @@ function App() {
             </div>
             <p className={`mt-10 flex items-center gap-2 font-body text-xs sm:text-[13px] ${t.textFaint}`}>
               <PanelLeft size={14} className="shrink-0" />
-              <span>Check the sidebar/menu for more information — certifications, blogs, and affiliations.</span>
+              <span>Check the sidebar/menu for more information: certifications, blogs, and affiliations.</span>
             </p>
           </Reveal>
         </div>
@@ -2884,129 +2643,12 @@ function App() {
         <SectionHeading
           eyebrow="05 · TIMELINE"
           title="Experience"
-          caption="Two pathways: internships and work experience."
+          caption="Internships and work experience."
           icon={Briefcase}
           t={t}
         />
 
-        <ExperienceSplit t={t} isDark={isDark} openExp={openExp} setOpenExp={setOpenExp} />
-
-        <div className="relative md:hidden">
-          <div className="grid gap-4">
-            {EXPERIENCE_PATHWAYS.map((path, pi) => {
-              const PathIcon = PATHWAY_ICONS[path.id] || Briefcase;
-              const entries = EXPERIENCE.filter((e) => e.pathway === path.id);
-              const pathOpen = openPath === path.id;
-              return (
-                <Reveal key={path.id} delay={pi * 80} className="relative flex flex-col">
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setOpenPath(pathOpen ? null : path.id);
-                      setOpenExp(null);
-                    }}
-                    aria-expanded={pathOpen}
-                    aria-controls={`exp-path-${path.id}`}
-                    className={`relative w-full text-left rounded-2xl border ${pathOpen ? "border-red-400/40" : t.border} ${t.surface} p-4 flex items-center gap-3 transition-colors hover:border-red-400/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-400/60`}
-                  >
-                    <div className={`h-10 w-10 shrink-0 rounded-xl border flex items-center justify-center transition-colors ${pathOpen ? `border-red-400 ${t.accent}` : `${t.border} ${t.textMuted}`}`}>
-                      <PathIcon size={18} />
-                    </div>
-                    <div className="min-w-0 flex-1">
-                      <p className={`font-mono text-[10px] tracking-[0.2em] uppercase ${t.accent}`}>
-                        Path {String(pi + 1).padStart(2, "0")}
-                      </p>
-                      <h3 className="font-display font-semibold text-base leading-tight">{path.label}</h3>
-                      <p className={`font-body text-xs ${t.textFaint}`}>{path.caption}</p>
-                    </div>
-                    <span
-                      className={`shrink-0 rounded-full border ${t.border} px-2 py-0.5 font-mono text-[10px] ${t.textMuted}`}
-                      aria-label={`${entries.length} ${entries.length === 1 ? "entry" : "entries"}`}
-                    >
-                      {String(entries.length).padStart(2, "0")}
-                    </span>
-                    <ChevronDown size={18} className={`shrink-0 ${t.textMuted} transition-transform duration-300 ${pathOpen ? "rotate-180" : ""}`} />
-                  </button>
-
-                  <div
-                    id={`exp-path-${path.id}`}
-                    className={`grid transition-[grid-template-rows] duration-300 ease-out ${pathOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"}`}
-                  >
-                  <div className="overflow-hidden">
-                  <div className="relative pt-4 pb-1">
-                    <div className="space-y-4">
-                      {entries.length === 0 && (
-                        <div>
-                          <div className={`rounded-2xl border border-dashed ${t.border} p-4`}>
-                            <p className={`font-mono text-xs ${t.textFaint}`}>Next stop — coming soon.</p>
-                          </div>
-                        </div>
-                      )}
-
-                      {entries.map((exp, i) => {
-                        const key = `${path.id}-${i}`;
-                        const open = openExp === key;
-                        const RoleIcon = /software/i.test(exp.type) ? Code2 : /network/i.test(exp.type) ? Network : User;
-                        const latest = EXPERIENCE.indexOf(exp) === 0;
-                        return (
-                          <div key={key}>
-                            <div className={`card-glow rounded-2xl border ${t.border} ${t.surface} p-4 hover:border-red-400/40`}>
-                              <div className="flex items-center gap-3">
-                                <div className={`h-10 w-10 shrink-0 overflow-hidden rounded-xl border ${t.border} ${isDark ? "bg-black/40" : "bg-slate-50"} ${t.accent} flex items-center justify-center`}>
-                                  {exp.logo ? (
-                                    <img src={img(exp.logo)} alt={`${exp.company} logo`} className="h-full w-full object-cover" />
-                                  ) : (
-                                    <RoleIcon size={16} />
-                                  )}
-                                </div>
-                                <div className="min-w-0 flex-1">
-                                  <span className={`block font-mono text-[11px] tracking-wider ${t.textMuted}`}>
-                                    {exp.duration}
-                                  </span>
-                                  {latest && (
-                                    <span className={`inline-flex items-center gap-1.5 font-mono text-[11px] ${t.accent}`}>
-                                      Latest
-                                    </span>
-                                  )}
-                                </div>
-                              </div>
-                              <h4 className="font-display font-semibold text-sm leading-snug mt-3">{exp.company}</h4>
-                              <p className={`font-body text-xs ${t.textMuted} mt-0.5`}>{exp.position}</p>
-
-                              <button
-                                type="button"
-                                onClick={() => setOpenExp(open ? null : key)}
-                                aria-expanded={open}
-                                aria-controls={`exp-details-${key}`}
-                                className={`mt-3 inline-flex items-center gap-1.5 font-mono text-xs tracking-wide ${t.accent} hover:opacity-80 transition-opacity`}
-                              >
-                                What did I do
-                                <ChevronDown size={14} className={`transition-transform duration-300 ${open ? "rotate-180" : ""}`} />
-                              </button>
-
-                              <div
-                                id={`exp-details-${key}`}
-                                className={`grid transition-[grid-template-rows] duration-300 ease-out ${open ? "grid-rows-[1fr]" : "grid-rows-[0fr]"}`}
-                              >
-                                <div className="overflow-hidden">
-                                  <p className={`font-body text-sm leading-relaxed ${t.textMuted} pt-3`}>
-                                    {exp.description || "Details coming soon."}
-                                  </p>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        );
-                      })}
-                    </div>
-                  </div>
-                  </div>
-                  </div>
-                </Reveal>
-              );
-            })}
-          </div>
-        </div>
+        <ExperienceTimeline t={t} isDark={isDark} />
       </section>
 
       <GithubActivity t={t} isDark={isDark} />
@@ -3029,9 +2671,9 @@ function App() {
 
       {archiveOpen && <ProjectArchive t={t} isDark={isDark} onClose={closeArchive} />}
       {projectSlug && <ProjectDetail key={projectSlug} t={t} isDark={isDark} project={PROJECT_BY_SLUG[projectSlug]} onBack={closeProject} />}
-      {panel === "affiliation" && <SectionPanel t={t} onClose={closePanel}><AffiliationSection t={t} isDark={isDark} /></SectionPanel>}
+      {panel === "affiliation" && <SectionPanel t={t} onClose={closePanel} width="max-w-3xl"><AffiliationSection t={t} isDark={isDark} /></SectionPanel>}
       {panel === "aboutme" && <SectionPanel t={t} onClose={closePanel}><AboutMeSection t={t} isDark={isDark} /></SectionPanel>}
-      {panel === "certification" && <SectionPanel t={t} onClose={closePanel}><CertificationSection t={t} isDark={isDark} /></SectionPanel>}
+      {panel === "certification" && <SectionPanel t={t} onClose={closePanel} width="max-w-3xl"><CertificationSection t={t} isDark={isDark} /></SectionPanel>}
       {panel === "blogs" && <SectionPanel t={t} onClose={closePanel} listenEsc={!postSlug}><BlogSection t={t} isDark={isDark} /></SectionPanel>}
       {panel === "blogs" && postSlug && <BlogArticle key={postSlug} t={t} isDark={isDark} post={BLOG_BY_SLUG[postSlug]} onBack={backToPosts} />}
       {skillsOpen && <SkillsArchive t={t} onClose={closeSkills} isDark={isDark} />}
